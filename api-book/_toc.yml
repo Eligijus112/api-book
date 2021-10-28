@@ -3,6 +3,6 @@
 #
 - file: intro
 
-- part: Overview of the problem of production
+- part: Machine Learning
   chapters:
-      - file: chapter-1-intro/problem-overview.md
+      - file: chapter-1-intro/machine-learning-model.ipynb

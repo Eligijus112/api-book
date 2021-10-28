@@ -16,6 +16,14 @@ To add the virtual environment to Jupyter notebooks use the command:
 python -m ipykernel install --user --name=api_book
 ```
 
+# Creating and editing notebooks 
+
+One of the main types of pages in this book are jupyter notebooks. To start a jupyter notebook session use the command:
+
+```
+jupyter notebook
+```
+
 # Rendering the book 
 
 ```
