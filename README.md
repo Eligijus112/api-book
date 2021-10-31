@@ -26,6 +26,14 @@ jupyter notebook
 
 # Rendering the book 
 
+Before rendering the book be sure to activate the virtual environment! 
+
+```
+source api_book/bin/activate
+```
+
+Building of the book:
+
 ```
 jupyter-book build api-book
 ```
