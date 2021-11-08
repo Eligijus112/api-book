@@ -2,7 +2,9 @@
 
 This book is intended to explain various web development and programming terms in a simple way for a mathematician who is creating machine learning (here and throughout - **ML**) models. 
 
-The term **serving** refers to the process of transfering user requests to the model, get the outputs from the model and return the outputs to the user as a response. 
+The term **serving** refers to the process of transfering user requests to the model, get the outputs from the model and return the outputs to the user as a response. Imagine a waiter and a client at the restaurant. What an ML engineer tries to do is to program the waiter to be as efficient as possible in writting down the order, rushing to the kitchen and then returning the ordered meal back. 
+
+![waiter](media/waiter.jpg)
 
 This book's emphasis will not be on machine learning parts but more on the programming side. 
 
