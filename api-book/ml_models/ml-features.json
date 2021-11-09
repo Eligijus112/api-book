@@ -1,1 +1,1 @@
-{"bomb_planted": "int64", "ct_health_share": "float64", "ct_armor_per_player": "float64", "ct_money_share": "float64", "ct_players_alive_diff": "float64", "ct_defuse_kit_present": "int64"}
+{"bomb_planted": "int64", "ct_health_share": "float64", "ct_money_share": "float64", "ct_players_alive": "float64", "t_players_alive": "float64", "ct_defuse_kit_present": "int64", "ct_helmets": "float64", "t_helmets": "float64", "ct_score": "float64", "t_score": "float64"}

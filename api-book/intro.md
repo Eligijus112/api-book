@@ -1,4 +1,4 @@
-# Serving machine learning models
+# Introduction
 
 The phrase *serving machine learning models* can be split into three definitions: 
 
