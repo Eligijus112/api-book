@@ -1,8 +1,12 @@
-# Table of contents
+format: jb-book
+root: intro
 
-- file: intro
+parts:
+  - caption: Machine learning model creation 
+    chapters:
+    - file: chapter-1-intro/machine-learning-model.ipynb
+    - file: chapter-1-intro/machine-learning-model-serving.ipynb
 
-- part: Machine Learning
-  chapters:
-      - file: chapter-1-intro/machine-learning-model.ipynb
-      - file: chapter-1-intro/machine-learning-model-serving-intro.ipynb
+  - caption: Bibliography
+    chapters:
+    - file: references/references.md
