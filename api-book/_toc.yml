@@ -7,7 +7,7 @@ parts:
     - file: chapter-1-intro/machine-learning-model.ipynb
     - file: chapter-1-intro/machine-learning-model-serving.ipynb
 
-  - caption: Computers and Servers 
+  - caption: Hardware and Software
     chapters: 
     - file: chapter-2-computer/computer-specs.ipynb
 
