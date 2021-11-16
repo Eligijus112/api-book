@@ -87,3 +87,12 @@ To create the container with the access to the book use:
 ```
 docker run -p 4000:80 eligijusbujokas/ml-serving-book
 ```
+
+## Accessing the book via the Digital Ocean server
+
+The container is built in my custom server and can be reached via: 
+
+
+http://eligijus.me:4000
+
+
