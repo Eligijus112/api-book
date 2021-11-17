@@ -10,6 +10,7 @@ parts:
   - caption: Hardware and Software
     chapters: 
     - file: chapter-2-computer/computer-specs.ipynb
+    - file: chapter-2-computer/computer-OS.ipynb
 
   - caption: Bibliography
     chapters:
