@@ -2,3 +2,4 @@ api_book/
 .ipynb_checkpoints/
 _build/
 api_book_serving/
+ramen_env/
