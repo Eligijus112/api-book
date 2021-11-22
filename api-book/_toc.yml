@@ -7,10 +7,15 @@ parts:
     - file: chapter-1-intro/machine-learning-model.ipynb
     - file: chapter-1-intro/machine-learning-model-serving.ipynb
 
-  - caption: Hardware and Software
+  - caption: Hardware and Linux OS
     chapters: 
     - file: chapter-2-computer/computer-specs.ipynb
     - file: chapter-2-computer/computer-OS.ipynb
+
+  - caption: Starting Software for an ML developer
+    chapters:
+    - file: chapter-3-software/python-intro.ipynb
+    - file: chapter-3-software/virtual-envs.ipynb
 
   - caption: Bibliography
     chapters:
