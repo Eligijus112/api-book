@@ -16,6 +16,7 @@ parts:
     chapters:
     - file: chapter-3-software/python-intro.ipynb
     - file: chapter-3-software/virtual-envs.ipynb
+    - file: chapter-3-software/docker.ipynb
 
   - caption: Bibliography
     chapters:
