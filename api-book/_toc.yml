@@ -18,6 +18,10 @@ parts:
     - file: chapter-3-software/virtual-envs.ipynb
     - file: chapter-3-software/docker.ipynb
 
+  - caption: Python Programming
+    chapters:
+    - file: chapter-4-python/data-structures.ipynb
+
   - caption: Bibliography
     chapters:
     - file: references/references.md
