@@ -20,6 +20,7 @@ parts:
 
   - caption: Python Programming
     chapters:
+    - file: chapter-4-python/object-oriented-programming.ipynb
     - file: chapter-4-python/data-types.ipynb
     - file: chapter-4-python/data-structures.ipynb
 
