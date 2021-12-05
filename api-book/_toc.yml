@@ -24,6 +24,10 @@ parts:
     - file: chapter-4-ML/machine-learning-model.ipynb
     - file: chapter-4-ML/machine-learning-model-serving.ipynb
 
+  - caption: API
+    chapters: 
+    - file: chapter-5-API/API-intro.ipynb
+
   - caption: Bibliography
     chapters:
     - file: references/references.md
