@@ -2,27 +2,27 @@ format: jb-book
 root: intro
 
 parts:
-  - caption: Machine learning model creation 
-    chapters:
-    - file: chapter-1-intro/machine-learning-model.ipynb
-    - file: chapter-1-intro/machine-learning-model-serving.ipynb
-
   - caption: Hardware and Linux OS
     chapters: 
-    - file: chapter-2-computer/computer-specs.ipynb
-    - file: chapter-2-computer/computer-OS.ipynb
+    - file: chapter-1-computer/computer-specs.ipynb
+    - file: chapter-1-computer/computer-OS.ipynb
 
   - caption: Starting Software for an ML developer
     chapters:
-    - file: chapter-3-software/python-intro.ipynb
-    - file: chapter-3-software/virtual-envs.ipynb
-    - file: chapter-3-software/docker.ipynb
+    - file: chapter-2-software/python-intro.ipynb
+    - file: chapter-2-software/virtual-envs.ipynb
+    - file: chapter-2-software/docker.ipynb
 
   - caption: Python Programming
     chapters:
-    - file: chapter-4-python/object-oriented-programming.ipynb
-    - file: chapter-4-python/data-types.ipynb
-    - file: chapter-4-python/data-structures.ipynb
+    - file: chapter-3-python/object-oriented-programming.ipynb
+    - file: chapter-3-python/data-types.ipynb
+    - file: chapter-3-python/data-structures.ipynb
+
+  - caption: Machine learning
+    chapters:
+    - file: chapter-4-ML/machine-learning-model.ipynb
+    - file: chapter-4-ML/machine-learning-model-serving.ipynb
 
   - caption: Bibliography
     chapters:
