@@ -28,6 +28,7 @@ parts:
     chapters: 
     - file: chapter-5-API/API-intro.ipynb
     - file: chapter-5-API/API-server.ipynb
+    - file: chapter-5-API/API-DB.ipynb
 
   - caption: Bibliography
     chapters:
