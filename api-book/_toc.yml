@@ -7,7 +7,7 @@ parts:
     - file: chapter-1-computer/computer-specs.ipynb
     - file: chapter-1-computer/computer-OS.ipynb
 
-  - caption: Starting Software for an ML developer
+  - caption: Software for an ML developer
     chapters:
     - file: chapter-2-software/python-intro.ipynb
     - file: chapter-2-software/virtual-envs.ipynb
