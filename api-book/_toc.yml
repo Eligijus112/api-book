@@ -31,6 +31,10 @@ parts:
     - file: chapter-5-API/API-DB.ipynb
     - file: chapter-5-API/API-example.ipynb
 
+  - caption: Production Tools
+    chapters:
+    - file: chapter-6-production-tools/gunicorn.ipynb
+
   - caption: Bibliography
     chapters:
     - file: references/references.md
