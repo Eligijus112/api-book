@@ -72,6 +72,12 @@ And the book should be rendered.
 
 ## Using DockerHub 
 
+After the building of the image, you can push it to DockerHub. The command to push the image to DockerHub is:
+
+```
+docker push eligijusbujokas/ml-serving-book[:<tag>]
+```
+
 The book is publicly available as an image in DockerHub. The address of the repository is: 
 
 https://hub.docker.com/repository/docker/eligijusbujokas/ml-serving-book/general
