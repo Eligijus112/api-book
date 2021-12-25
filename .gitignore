@@ -6,3 +6,5 @@ ramen_env/
 __pycache__/
 api-book/chapter-5-API/api-full-example/data/
 api-book/chapter-5-API/psql-docker/data/
+.vscode/
+api-book/chapter-6-production-tools/jwt-token-example/data/db/
