@@ -31,9 +31,10 @@ parts:
     - file: chapter-5-API/API-DB.ipynb
     - file: chapter-5-API/API-example.ipynb
 
-  - caption: Production Tools
+  - caption: Production Tools and Concepts
     chapters:
     - file: chapter-6-production-tools/gunicorn.ipynb
+    - file: chapter-6-production-tools/docker.ipynb
 
   - caption: Bibliography
     chapters:
