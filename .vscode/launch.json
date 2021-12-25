@@ -10,8 +10,9 @@
             "request": "launch",
             "module": "uvicorn",
             "args": [
-                "api-book.chapter-6-production-tools.jwt-token-example.app:app"
+                "app:app"
             ],
+            "cwd": "/home/eligijus/api-book/api-book/chapter-6-production-tools/jwt-token-example",
             "jinja": true
         }
     ]
