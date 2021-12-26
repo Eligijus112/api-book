@@ -9,12 +9,14 @@ app = FastAPI()
 def root_of_number(number: float, n: float):
     """
     The function returns the n-th root of the number.
+
     Parameters
     ----------
     number : float
         The number to find the n-th root of.
     n : float
         The n-th root to find.
+
     Returns
     -------
     float

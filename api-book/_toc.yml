@@ -35,6 +35,7 @@ parts:
     chapters:
     - file: chapter-6-production-tools/gunicorn.ipynb
     - file: chapter-6-production-tools/docker.ipynb
+    - file: chapter-6-production-tools/JWT.ipynb
 
   - caption: Bibliography
     chapters:
