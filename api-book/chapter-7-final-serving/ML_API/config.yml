@@ -1,0 +1,8 @@
+jwt: 
+  secret: 2134szczxc578214zxc~!?sad2
+  algorithm: HS256
+  expiration_time: 60
+
+secrets: 
+  key: 47821312ads12!@#@+)$2s
+  salt: 478213xzc345!
