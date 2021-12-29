@@ -36,6 +36,11 @@ parts:
     - file: chapter-6-production-tools/gunicorn.ipynb
     - file: chapter-6-production-tools/docker.ipynb
     - file: chapter-6-production-tools/JWT.ipynb
+    - file: chapter-6-production-tools/migrations.ipynb
+
+  - caption: ML serving API 
+    chapters:
+    - file: chapter-7-final-serving/users.ipynb
 
   - caption: Bibliography
     chapters:
