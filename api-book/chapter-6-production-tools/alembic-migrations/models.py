@@ -21,12 +21,10 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String)
     password = Column(String)
-    email = Column(String)
     create_datetime = Column(DateTime)
     
 
-    def __init__(self, username: str, password: str, email: str):
+    def __init__(self, username: str, password: str):
         self.username = username 
         self.password = password
-        self.email = email
         self.create_datetime = datetime.datetime.now()
