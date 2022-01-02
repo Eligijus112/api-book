@@ -2,7 +2,7 @@
 from sqlalchemy.orm import declarative_base
 
 # Model creation 
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, Boolean
 
 # Farnet package for password encription 
 from cryptography.fernet import Fernet
@@ -13,13 +13,19 @@ import yaml
 # Dates and times
 import datetime
 
+# OS traversal 
+import os 
+
 # Initiating the Base class
 Base = declarative_base()
 
+# Defining the path of the file 
+_path = os.path.dirname(os.path.abspath(__file__))
+
 # Reading the secrets 
-with open('conf.yml', 'r') as f:
-    secrets = yaml.load(f.read()).get("secrets")
-    secret_key = secrets.get("key")
+with open(os.path.join(_path, "config.yml"), 'r') as f:
+    secrets = yaml.safe_load(f.read()).get("secrets")
+    secret_key = secrets.get("key").encode()
     secret_salt = secrets.get("salt")
 
 
@@ -35,7 +41,7 @@ class User(Base):
     username = Column(String)
     password = Column(String)
     email = Column(String)
-    enabled = True
+    enabled = Column(Boolean)
     created_datetime = Column(DateTime)
     updated_datetime = Column(DateTime)
 
@@ -85,13 +91,16 @@ class User(Base):
         """
         Method to check if the given password matches up with the one stored in object
         """
-        # Decrypting the password 
+        # Decrypting the password of the current user object in the database
         _fernet = Fernet(secret_key)
         _decrypted_password = _fernet.decrypt(self.password.encode())
         _decrypted_password = _decrypted_password.decode()
 
+        # Adding the salt to the sent password
+        _password_sent = f"{password}{secret_salt}"
+
         # Checking if the password matches
-        if _decrypted_password == self.encrypt_string(password):
+        if _decrypted_password == _password_sent:
             return True
         else:
             return False

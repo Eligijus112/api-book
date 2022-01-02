@@ -4,5 +4,12 @@ jwt:
   expiration_time: 60
 
 secrets: 
-  key: 47821312ads12!@#@+)$2s
+  key: tsdNFxCWtMNx48Z33oj_Q1cSsVmgQofqIB2gCrzur10=
   salt: 478213xzc345!
+
+connection: 
+  username: user
+  password: password
+  port: 5439
+  database: postgres
+  host: localhost

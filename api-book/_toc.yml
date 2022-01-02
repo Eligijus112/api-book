@@ -41,6 +41,7 @@ parts:
   - caption: ML serving API 
     chapters:
     - file: chapter-7-final-serving/users.ipynb
+    - file: chapter-7-final-serving/authentification.ipynb
 
   - caption: Bibliography
     chapters:
