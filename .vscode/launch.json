@@ -12,7 +12,7 @@
             "args": [
                 "app:app"
             ],
-            "cwd": "/home/eligijus/api-book/api-book/chapter-6-production-tools/jwt-token-example",
+            "cwd": "${workspaceFolder}/api-book/chapter-6-production-tools/jwt-token-example",
             "jinja": true
         },
         {
@@ -23,7 +23,7 @@
             "args": [
                 "app:app"
             ],
-            "cwd": "/home/eligijus/api-book/api-book/chapter-7-final-serving/ML_API",
+            "cwd": "${workspaceFolder}/api-book/chapter-7-final-serving/ML_API",
             "jinja": true
         }
     ]
