@@ -14,7 +14,7 @@ from Users import User
 Base = declarative_base()
 
 
-class Requests(Base):
+class MLRequests(Base):
     # Table name in database
     __tablename__ = 'requests'
     
@@ -43,7 +43,7 @@ class Requests(Base):
         self.updated_datetime = _cur_time
 
 
-class Response(Base):
+class MLResponses(Base):
     # Table name in database
     __tablename__ = 'responses'
     

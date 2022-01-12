@@ -43,6 +43,7 @@ parts:
     - file: chapter-7-final-serving/users.ipynb
     - file: chapter-7-final-serving/authentification.ipynb
     - file: chapter-7-final-serving/machine_learning_model.ipynb
+    - file: chapter-7-final-serving/machine_learning_db_models.ipynb
 
   - caption: Bibliography
     chapters:

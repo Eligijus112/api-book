@@ -1,12 +1,51 @@
 # FastAPI 
 from fastapi import FastAPI, status, Response, Request
 
+# Importing the current session from DB 
+from database import session
+
+# Importing the DB models 
+from Users import User
+from MLDB import MLRequests, MLResponses
+
 # Views 
 from users import register_user_view, remove_user_view, toggle_user_permission_view
 from jwt_tokens import authenticate_token_view, authenticate_user_view, create_token_view
 
+# ML functionalities 
+from machine_learning_utils import load_ml_model, predict
+
+# Input and output wrangling 
+import json
+
 # Creating the application object 
 app = FastAPI()
+
+# Loading the machine learning objects to memory 
+ml_model, type_dict, ml_feature_list = load_ml_model()
+
+# Endpoint for ML model prediction 
+@app.get('/predict')
+async def predict_ml(request: Request):
+    """
+    Endpoint for the ML model prediction
+    """
+    # Extracting the token from the header
+    token = request.headers.get('Authorization')
+    if token:
+        # Authenticating the token
+        user = authenticate_token_view(token)
+        if user:
+            # Extracting the features from the request
+            features = request.query_params
+            features = {k: v for k, v in features.items()}
+            # Predicting the output
+            prediction = predict(ml_model, features, type_dict, ml_feature_list)
+            # Returning the prediction
+            return Response(status_code=status.HTTP_200_OK, content=json.dumps(prediction))
+        else:
+            # Returning a 401 Unauthorized error
+            return Response(status_code=status.HTTP_401_UNAUTHORIZED, content=json.dumps({'error': 'Unauthorized'}))
 
 # Adding the endpoint for user registration 
 @app.post("/register-user")
