@@ -8,7 +8,7 @@ from sqlalchemy import Column, Integer, DateTime, JSON, ForeignKey
 import datetime
 
 # Users
-from Users import User
+from ML_API.Users import User
 
 # Initiating the Base class
 Base = declarative_base()

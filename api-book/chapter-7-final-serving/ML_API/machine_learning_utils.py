@@ -22,10 +22,15 @@ def load_ml_model(model_dir='ml_model'):
     _model_path = os.path.join(model_dir, 'model.pkl')
     _input_schema_path = os.path.join(model_dir, 'input_schema.json')
 
+    # Default empty input schema 
+    input_schema = {}
+
     # Checking if the files exists and reading them 
     if os.path.exists(_model_path) and os.path.exists(_input_schema_path):
+        
         with open(_model_path, 'rb') as f:
             model = pickle.load(f)
+
         with open(_input_schema_path, 'r') as f:
             input_schema = json.load(f)
     
@@ -50,38 +55,44 @@ def load_ml_model(model_dir='ml_model'):
     # Returning the model, type dictionary and the feature order
     return model, type_dict, feature_list
 
-def predict(model, feature_dict: dict, X: pd.DataFrame) -> list:
+def predict(model, feature_dict: dict, X: dict) -> list:
     """
     Function that converts the feature_dict into a predictable format for the ml model
 
     Args:
         model: the machine learning model
         feature_dict: the dictionary of features
-        X: the features used in prediction
+        X: dictionary with (feature -> feature value) pairs
 
     Returns:
         A list of predictions
     """
-    # Converting the dictionary into a list of lists
-    feature_list = list(feature_dict.values())
+    try:
+        # Converting the dictionary into a list of lists
+        feature_list = list(feature_dict.keys())
 
-    # Ensuring that no columns are missing 
-    if len(feature_list) != X.shape[1]:
+        # Converting the dictionary to a dataframe 
+        X = pd.DataFrame(X, index=[0])
+
+        # Ensuring that no columns are missing 
+        if len(feature_list) != X.shape[1]:
+            for col in X.columns:
+                if col not in feature_list:
+                    X[col] = np.nan
+
+        # Converting the X columns to correct types 
         for col in X.columns:
-            if col not in feature_list:
-                X[col] = np.nan
+            if col in feature_list:
+                try:
+                    X[col] = X[col].astype(feature_dict.get(col))
+                except: 
+                    print(f"Cannot convert {col} to {feature_dict.get(col)}")
+                    # If we cannot convert it, we will set it to null. 
+                    return None 
 
-    # Converting the X columns to correct types 
-    for col in X.columns:
-        if col in feature_list:
-            try:
-                X[col] = X[col].astype(feature_dict.get(col))
-            except: 
-                print(f"Cannot convert {col} to {feature_dict.get(col)}")
-                # If we cannot convert it, we will set it to null. 
-                X[col] = np.nan
+        # Predicting the output
+        prediction = model.predict_proba(X[feature_list])[0]
 
-    # Predicting the output
-    prediction = model.predict(X[feature_list])
-
-    return prediction
+        return prediction
+    except:
+        return None

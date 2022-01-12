@@ -2,17 +2,24 @@
 import jwt
 
 # The Users model 
-from Users import User
+from ML_API.Users import User
 
 # Importing the session 
-from database import session
+from ML_API.database import session
 
 # Datetime functionality
 import datetime
 
 # Reading the configuration file 
 import yaml 
-conf = yaml.safe_load(open("config.yml"))
+
+# OS functionalities
+import os 
+
+# Infering the file path 
+_file_dir = os.path.dirname(os.path.abspath(__file__))
+
+conf = yaml.safe_load(open(os.path.join(_file_dir, "config.yml")))
 
 # JWT constants
 _SECRET = conf["jwt"]["secret"]
@@ -102,9 +109,9 @@ def authenticate_token_view(jwt_token: str) -> bool:
         # Checking if the user exists in the database
         user = session.query(User).filter(User.id == user_id).first()
         if user:
-            return True
+            return user
         else:
-            return False
+            return None
     except:
         # If the token is invalid, return False
-        return False
+        return None 

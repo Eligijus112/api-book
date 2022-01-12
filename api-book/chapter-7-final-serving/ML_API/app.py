@@ -2,21 +2,23 @@
 from fastapi import FastAPI, status, Response, Request
 
 # Importing the current session from DB 
-from database import session
+from ML_API.database import session
 
 # Importing the DB models 
-from Users import User
-from MLDB import MLRequests, MLResponses
+from ML_API.MLDB import MLRequests, MLResponses
 
 # Views 
-from users import register_user_view, remove_user_view, toggle_user_permission_view
-from jwt_tokens import authenticate_token_view, authenticate_user_view, create_token_view
+from ML_API.users import register_user_view, remove_user_view, toggle_user_permission_view
+from ML_API.jwt_tokens import authenticate_token_view, authenticate_user_view, create_token_view
 
 # ML functionalities 
-from machine_learning_utils import load_ml_model, predict
+from ML_API.machine_learning_utils import load_ml_model, predict
 
 # Input and output wrangling 
 import json
+
+# Array wrangling
+import numpy as np
 
 # Creating the application object 
 app = FastAPI()
@@ -25,7 +27,7 @@ app = FastAPI()
 ml_model, type_dict, ml_feature_list = load_ml_model()
 
 # Endpoint for ML model prediction 
-@app.get('/predict')
+@app.post('/predict')
 async def predict_ml(request: Request):
     """
     Endpoint for the ML model prediction
@@ -37,12 +39,33 @@ async def predict_ml(request: Request):
         user = authenticate_token_view(token)
         if user:
             # Extracting the features from the request
-            features = request.query_params
-            features = {k: v for k, v in features.items()}
-            # Predicting the output
-            prediction = predict(ml_model, features, type_dict, ml_feature_list)
-            # Returning the prediction
-            return Response(status_code=status.HTTP_200_OK, content=json.dumps(prediction))
+            input_dict = await request.json()
+            
+            # Creating the request object in database
+            ml_request = MLRequests(user_id=user.id, input=json.dumps(input_dict))
+            session.add(ml_request)
+            session.commit()
+
+            # Getting the prediction 
+            prediction = predict(ml_model, type_dict, input_dict)
+
+            if prediction is not None:
+                # Creating the response dictionary 
+                response_dict = {
+                    'yhat_prob': str(prediction[1]),
+                    'yhat': str(np.sum(prediction[1] > 0.5))
+                }
+
+                # Creating the response object in database
+                ml_response = MLResponses(request_id=ml_request.id, output=json.dumps(response_dict))
+                session.add(ml_response)
+                session.commit()
+
+                # Returning the prediction
+                return Response(status_code=status.HTTP_200_OK, content=json.dumps(response_dict))
+            else:
+                # Returning the message with the bad request status code
+                return Response(status_code=status.HTTP_400_BAD_REQUEST, content=json.dumps({'message': 'Bad request'}))
         else:
             # Returning a 401 Unauthorized error
             return Response(status_code=status.HTTP_401_UNAUTHORIZED, content=json.dumps({'error': 'Unauthorized'}))

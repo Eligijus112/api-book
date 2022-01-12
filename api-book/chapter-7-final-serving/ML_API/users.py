@@ -1,11 +1,11 @@
 # Importing the Users model 
-from Users import User
+from ML_API.Users import User
 
 # Datewrangling 
 import datetime
 
 # Importing the current session
-from database import session
+from ML_API.database import session
 
 def register_user_view(username: str, password: str, email: str):
     """

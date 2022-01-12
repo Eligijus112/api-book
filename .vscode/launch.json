@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "name": "Python: FastAPI JWT",
             "type": "python",
@@ -21,10 +22,10 @@
             "request": "launch",
             "module": "uvicorn",
             "args": [
-                "app:app"
+                "app:app", "--port", "8081"
             ],
             "cwd": "${workspaceFolder}/api-book/chapter-7-final-serving/ML_API",
             "jinja": true
-        }
+        },
     ]
 }
