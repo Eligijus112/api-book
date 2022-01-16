@@ -387,3 +387,9 @@ tree.print_tree()
 # 5) Is 7 == 7? YES => Node with the element found.
 # 
 # You can imagine that if we would had thousands of numbers, the difference between the comparisons would be even more apparent. 
+
+# # Contributions 
+# 
+# If you enjoyed the book so far and feel like donating, feel free to do so. The link to do a one time donation is [via Stripe](https://buy.stripe.com/14k17A6lQ8lAat2aEI). 
+# 
+# Additionaly, if you want me to add another chapter or to expand an existing one, please create an issue on [Github](https://github.com/Eligijus112/api-book).

@@ -392,6 +392,11 @@
    Whats next?
   </a>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contributions">
+   Contributions
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -672,7 +677,7 @@ def root_of_number(number: float, n: float):
     <span class="n">number</span><span class="p">,</span> <span class="n">root</span> <span class="o">=</span> <span class="n">number_and_root</span>
 
     <span class="c1"># Creating the request</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;http://localhost:8000/root?number=</span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s1">&amp;n=</span><span class="si">{</span><span class="n">root</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;http://localhost:7999/root?number=</span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s1">&amp;n=</span><span class="si">{</span><span class="n">root</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
     <span class="c1"># Checking the response status code</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Root </span><span class="si">{</span><span class="n">root</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;root&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -680,14 +685,11 @@ def root_of_number(number: float, n: float):
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_15221</span><span class="o">/</span><span class="mf">3307253417.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> 
-<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="c1"># Checking the response status code</span>
-<span class="ne">---&gt; </span><span class="mi">19</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Root </span><span class="si">{</span><span class="n">root</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;root&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="ne">KeyError</span>: &#39;root&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Root 0.5 of 1: 1.0
+Root 0.4 of 2: 1.3195079107728942
+Root 0.3 of 3: 1.3903891703159093
+Root 0.2 of 4: 1.3195079107728942
+Root 0.1 of 5: 1.174618943088019
 </pre></div>
 </div>
 </div>
@@ -707,6 +709,9 @@ def root_of_number(number: float, n: float):
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Database root_db already exists
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -733,123 +738,39 @@ def root_of_number(number: float, n: float):
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2.0</td>
-      <td>0.5</td>
-      <td>2021-12-18 21:50:44.777516</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>2.0</td>
-      <td>0.5</td>
-      <td>2021-12-18 21:51:45.772294</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>1.0</td>
-      <td>5.0</td>
-      <td>2021-12-18 22:00:18.423275</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>2.0</td>
-      <td>4.0</td>
-      <td>2021-12-18 22:00:18.440065</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>3.0</td>
-      <td>3.0</td>
-      <td>2021-12-18 22:00:18.459637</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>6</td>
-      <td>4.0</td>
-      <td>2.0</td>
-      <td>2021-12-18 22:00:18.470827</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>7</td>
-      <td>5.0</td>
-      <td>1.0</td>
-      <td>2021-12-18 22:00:18.480565</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>8</td>
-      <td>1.0</td>
-      <td>5.0</td>
-      <td>2021-12-18 22:00:26.677578</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>9</td>
-      <td>2.0</td>
-      <td>4.0</td>
-      <td>2021-12-18 22:00:26.694791</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>10</td>
-      <td>3.0</td>
-      <td>3.0</td>
-      <td>2021-12-18 22:00:26.707167</td>
-    </tr>
-    <tr>
       <th>10</th>
       <td>11</td>
-      <td>4.0</td>
-      <td>2.0</td>
-      <td>2021-12-18 22:00:26.717885</td>
+      <td>1.0</td>
+      <td>0.5</td>
+      <td>2022-01-16 14:53:17.122443</td>
     </tr>
     <tr>
       <th>11</th>
       <td>12</td>
-      <td>5.0</td>
-      <td>1.0</td>
-      <td>2021-12-18 22:00:26.728095</td>
+      <td>2.0</td>
+      <td>0.4</td>
+      <td>2022-01-16 14:53:17.130910</td>
     </tr>
     <tr>
       <th>12</th>
       <td>13</td>
-      <td>1.0</td>
-      <td>0.5</td>
-      <td>2021-12-18 22:00:55.086192</td>
+      <td>3.0</td>
+      <td>0.3</td>
+      <td>2022-01-16 14:53:17.138962</td>
     </tr>
     <tr>
       <th>13</th>
       <td>14</td>
-      <td>2.0</td>
-      <td>0.4</td>
-      <td>2021-12-18 22:00:55.106254</td>
+      <td>4.0</td>
+      <td>0.2</td>
+      <td>2022-01-16 14:53:17.147189</td>
     </tr>
     <tr>
       <th>14</th>
       <td>15</td>
-      <td>3.0</td>
-      <td>0.3</td>
-      <td>2021-12-18 22:00:55.119458</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>16</td>
-      <td>4.0</td>
-      <td>0.2</td>
-      <td>2021-12-18 22:00:55.130152</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>17</td>
       <td>5.0</td>
       <td>0.1</td>
-      <td>2021-12-18 22:00:55.140244</td>
+      <td>2022-01-16 14:53:17.155207</td>
     </tr>
   </tbody>
 </table>
@@ -890,12 +811,28 @@ def root_of_number(number: float, n: float):
   </thead>
   <tbody>
     <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>11</td>
+      <td>1.000000</td>
+      <td>200</td>
+      <td>2022-01-16 14:53:17.126297</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>12</td>
+      <td>1.319508</td>
+      <td>200</td>
+      <td>2022-01-16 14:53:17.133782</td>
+    </tr>
+    <tr>
       <th>12</th>
       <td>13</td>
       <td>13</td>
-      <td>1.000000</td>
+      <td>1.390389</td>
       <td>200</td>
-      <td>2021-12-18 22:00:55.095257</td>
+      <td>2022-01-16 14:53:17.142163</td>
     </tr>
     <tr>
       <th>13</th>
@@ -903,31 +840,15 @@ def root_of_number(number: float, n: float):
       <td>14</td>
       <td>1.319508</td>
       <td>200</td>
-      <td>2021-12-18 22:00:55.112294</td>
+      <td>2022-01-16 14:53:17.150194</td>
     </tr>
     <tr>
       <th>14</th>
       <td>15</td>
       <td>15</td>
-      <td>1.390389</td>
-      <td>200</td>
-      <td>2021-12-18 22:00:55.123979</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>16</td>
-      <td>16</td>
-      <td>1.319508</td>
-      <td>200</td>
-      <td>2021-12-18 22:00:55.134586</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>17</td>
-      <td>17</td>
       <td>1.174619</td>
       <td>200</td>
-      <td>2021-12-18 22:00:55.144250</td>
+      <td>2022-01-16 14:53:17.158217</td>
     </tr>
   </tbody>
 </table>
@@ -939,6 +860,11 @@ def root_of_number(number: float, n: float):
 <h1>Whats next?<a class="headerlink" href="#whats-next" title="Permalink to this headline">¶</a></h1>
 <p>We have created an API that receives a request, calculates something, sends the reponse back to the client and logs some information to the database.</p>
 <p>In the next chapter of the book we will containerize the API and deploy it using Docker. Additionally, we will talk about technologies of Gunicorn and Nginx which will complete the full puzzle of deploying the API.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="contributions">
+<h1>Contributions<a class="headerlink" href="#contributions" title="Permalink to this headline">¶</a></h1>
+<p>If you enjoyed the book so far and feel like donating, feel free to do so. The link to do a one time donation is <a class="reference external" href="https://buy.stripe.com/14k17A6lQ8lAat2aEI">via Stripe</a>.</p>
+<p>Additionaly, if you want me to add another chapter or to expand an existing one, please create an issue on <a class="reference external" href="https://github.com/Eligijus112/api-book">Github</a>.</p>
 </div>
 
     <script type="text/x-thebe-config">

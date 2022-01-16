@@ -100,7 +100,7 @@ for number_and_root in numbers_and_roots:
     number, root = number_and_root
 
     # Creating the request
-    response = requests.get(f'http://localhost:8000/root?number={number}&n={root}')
+    response = requests.get(f'http://localhost:7999/root?number={number}&n={root}')
 
     # Checking the response status code
     print(f"Root {root} of {number}: {response.json()['root']}")
@@ -114,7 +114,7 @@ for number_and_root in numbers_and_roots:
 # 
 # The contents of the `requests` and `responses` tables: 
 
-# In[22]:
+# In[5]:
 
 
 import pandas as pd 
@@ -124,7 +124,7 @@ from api_full_example.db import engine
 pd.read_sql("select * from requests", engine).tail(5)
 
 
-# In[24]:
+# In[6]:
 
 
 # Listing last 5 responses
@@ -138,3 +138,11 @@ pd.read_sql("select * from responses", engine).tail(5)
 # We have created an API that receives a request, calculates something, sends the reponse back to the client and logs some information to the database. 
 # 
 # In the next chapter of the book we will containerize the API and deploy it using Docker. Additionally, we will talk about technologies of Gunicorn and Nginx which will complete the full puzzle of deploying the API. 
+
+# # Contributions 
+# 
+# If you enjoyed the book so far and feel like donating, feel free to do so. The link to do a one time donation is [via Stripe](https://buy.stripe.com/14k17A6lQ8lAat2aEI). 
+# 
+# Additionaly, if you want me to add another chapter or to expand an existing one, please create an issue on [Github](https://github.com/Eligijus112/api-book).
+
+# 

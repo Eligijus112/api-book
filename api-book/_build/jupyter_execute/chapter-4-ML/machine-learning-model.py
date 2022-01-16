@@ -1052,3 +1052,11 @@ with open(_feature_path, 'w') as f:
 # * How to know, how many times and what kind of inputs were given to the created model? 
 # 
 # And much more. 
+
+# # Contributions 
+# 
+# If you enjoyed the book so far and feel like donating, feel free to do so. The link to do a one time donation is [via Stripe](https://buy.stripe.com/14k17A6lQ8lAat2aEI). 
+# 
+# Additionaly, if you want me to add another chapter or to expand an existing one, please create an issue on [Github](https://github.com/Eligijus112/api-book).
+
+# 

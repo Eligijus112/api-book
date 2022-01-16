@@ -220,3 +220,11 @@ get_ipython().system('cat alembic-migrations/alembic-migrations/versions/cd1911e
 # * In the database, the latest version of the migrations is saved in the table called **alembic_version**.  
 # 
 # When managing a database with Alembic we can always review the history of migrations, rollback to previous versions and very easily apply changes to the database.
+
+# # Contributions 
+# 
+# If you enjoyed the book so far and feel like donating, feel free to do so. The link to do a one time donation is [via Stripe](https://buy.stripe.com/14k17A6lQ8lAat2aEI). 
+# 
+# Additionaly, if you want me to add another chapter or to expand an existing one, please create an issue on [Github](https://github.com/Eligijus112/api-book).
+
+# 
