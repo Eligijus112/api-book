@@ -1,0 +1,1325 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Databases and Python &#8212; Machine Learning serving</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API and PSQL integration example" href="API-example.html" />
+    <link rel="prev" title="API server" href="API-server.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning serving</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Hardware and Linux OS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-specs.html">
+   Building blocks of a computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-OS.html">
+   Linux operating system
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Software for an ML developer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/python-intro.html">
+   Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/virtual-envs.html">
+   Virtual environments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/docker.html">
+   Docker
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/object-oriented-programming.html">
+   Classes and objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-types.html">
+   Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-structures.html">
+   Data structures
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model.html">
+   Creating machine learning models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model-serving.html">
+   Basic ML serving
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  API
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="API-intro.html">
+   Application Programming Interface basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="API-server.html">
+   API server
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Databases and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="API-example.html">
+   API and PSQL integration example
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Production Tools and Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/gunicorn.html">
+   Gunicorn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/docker.html">
+   Docker in production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/JWT.html">
+   JWT based authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/migrations.html">
+   Migrations
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  ML serving API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/users.html">
+   ML users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/authentification.html">
+   ML users authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_model.html">
+   Machine learning model
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Bibliography
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references/references.html">
+   Links and references
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chapter-5-API/API-DB.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Eligijus112/api-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Eligijus112/api-book/issues/new?title=Issue%20on%20page%20%2Fchapter-5-API/API-DB.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Eligijus112/api-book/master?urlpath=tree/docs/chapter-5-API/API-DB.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Databases and Python
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#database-managment-systems-dbms">
+   Database managment systems (DBMS)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#psql-docker-image">
+   PSQL docker image
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sqlalchemy">
+   SQLAlchemy
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-database">
+     Creating a database
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-table">
+     Creating a table
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#updating-tables">
+     Updating tables
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#querying-the-database">
+     Querying the database
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#closing-thoughts">
+   Closing thoughts
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="databases-and-python">
+<h1>Databases and Python<a class="headerlink" href="#databases-and-python" title="Permalink to this headline">¶</a></h1>
+<p>Alot of modern application can be modeled in the follwowing way:</p>
+<p><img alt="modern-apps" src="../_images/modern-apps.png" /></p>
+<p>When a user opens an application frontend, either on a desktop or a mobile device, the code on the frontend starts calling the backed via APIs for various data. The backend then queries the database for all the necessary data, does all the computations with it, and sends the data back to the frontend for a nice visualization. One of the modern choices of an application backend is Python and Python has alot of functionalities for connecting and querying databases.</p>
+<p>The most common way how does backend interact with frontend and backend is through APIs. Often, the whole API server is just refered to as backend. The backend ussualy does hundreds and thousands calls to the database. But what is a database?</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">database</span></code> is a collection of data organized in a structured way. The data is, in most cases, stored electronicaly on a computer. The way that data is stored on a database is managed by a <code class="docutils literal notranslate"><span class="pre">database</span> <span class="pre">management</span> <span class="pre">system</span></code> (DBMS). This means that ‘running a database’ refers to a process which is responsible for storing and retrieving data from a database. As the the database grows in data, so does the size of the database files on computer. To have a good intuitive understanding of a database, think of it as an extension and generalization of a spreadsheet.</p>
+<p>Databases and spreadsheets (such as Microsoft Excel) are both convenient ways to store information. The primary differences between the two are:</p>
+<ul class="simple">
+<li><p>How the data is stored and manipulated.</p></li>
+<li><p>Who can access the data.</p></li>
+<li><p>How much data can be stored.</p></li>
+</ul>
+<p>Spreadsheets were originally designed for one user, and their characteristics reflect that. They’re great for a single user or small number of users who don’t need to do a lot of incredibly complicated data manipulation. Databases, on the other hand, are designed to hold much larger collections of organized information—massive amounts. Databases allow multiple users at the same time to quickly and  securely access and query the data using highly complex logic and language.</p>
+<p>One of the main advantages of databases is that they can be queried and updated. A database query is a request for data from a given database. The standart way to quety data is to use the <code class="docutils literal notranslate"><span class="pre">Structured</span> <span class="pre">Query</span> <span class="pre">Language</span></code> or <code class="docutils literal notranslate"><span class="pre">SQL</span></code> for short.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="database-managment-systems-dbms">
+<h1>Database managment systems (DBMS)<a class="headerlink" href="#database-managment-systems-dbms" title="Permalink to this headline">¶</a></h1>
+<p>There are several very popular DBMS in the industry today. The most popular ones are:</p>
+<ul class="simple">
+<li><p>MySQL</p></li>
+<li><p>PostgreSQL</p></li>
+<li><p>MongoDB</p></li>
+<li><p>SQLite</p></li>
+<li><p>Oracle</p></li>
+<li><p>Microsoft SQL Server</p></li>
+</ul>
+<p>Every DBMS has its own set of features and a slight variation of the SQL language. In this book, we will be using the open-sourced PostgreSQL DBMS <a class="reference external" href="https://www.postgresql.org/about/">https://www.postgresql.org/about/</a>.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="psql-docker-image">
+<h1>PSQL docker image<a class="headerlink" href="#psql-docker-image" title="Permalink to this headline">¶</a></h1>
+<p>We will run the PostgreSQL (PSQL for short) database from a docker container. By using docker, we will skip all the headaches of installing various dependencies and setting up the environment. We will just use the official docker image of psql: <a class="reference external" href="https://hub.docker.com/_/postgres">https://hub.docker.com/_/postgres</a>.</p>
+<p>The docker-compose file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat psql-docker/docker-compose.yml
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>version: &#39;3.1&#39;
+
+services:
+
+  db:
+    image: postgres:14.1
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user 
+    ports:
+      - &quot;5432:5432&quot;
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will use the version 14.1 of PostgreSQL. The container will be listening on port 5432 on the local machine and will transfer data to port 5432 in the container. The 5432 is the default port for PostgreSQL.</p>
+<p>Any data added to the container will be stored in the local machine in the directory where the docker-compose file is: <code class="docutils literal notranslate"><span class="pre">./data/db</span></code>.</p>
+<p>To spin up the PSQL database, run the command (from the directory where the file is):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">up</span> 
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">ps</span></code> command should show that the container is running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CONTAINER</span> <span class="n">ID</span>   <span class="n">IMAGE</span>                              <span class="n">COMMAND</span>                  <span class="n">CREATED</span>              <span class="n">STATUS</span>                 <span class="n">PORTS</span>                                                 <span class="n">NAMES</span>
+<span class="n">e812f56fd0e7</span>   <span class="n">postgres</span><span class="p">:</span><span class="mf">14.1</span>                      <span class="s2">&quot;docker-entrypoint.s…&quot;</span>   <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">About</span> <span class="n">a</span> <span class="n">minute</span>      <span class="mf">0.0.0.0</span><span class="p">:</span><span class="mi">5432</span><span class="o">-&gt;</span><span class="mi">5432</span><span class="o">/</span><span class="n">tcp</span><span class="p">,</span> <span class="p">:::</span><span class="mi">5432</span><span class="o">-&gt;</span><span class="mi">5432</span><span class="o">/</span><span class="n">tcp</span>             <span class="n">psql</span><span class="o">-</span><span class="n">docker_db_1</span>
+</pre></div>
+</div>
+<p>Now we can access the database using any software we like and start putting data in it.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="sqlalchemy">
+<h1>SQLAlchemy<a class="headerlink" href="#sqlalchemy" title="Permalink to this headline">¶</a></h1>
+<p>One of the most popular libraries to connect and use databases with Python is SQLAlchemy. SQLAlchemy is a Python library that provides a high-level abstraction layer on top of many popular databases.
+To read the extensive documentation visit <a class="reference external" href="https://docs.sqlalchemy.org/en/14/">https://docs.sqlalchemy.org/en/14/</a></p>
+<p>To connect to most of the databases, we need to know its <code class="docutils literal notranslate"><span class="pre">URI</span></code>: Uniform Resource Identifier. The URI is a string that contains all the information needed to connect to the database. The URI has the following form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">dialect</span><span class="o">+</span><span class="n">driver</span><span class="o">&gt;</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">username</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">password</span><span class="o">&gt;@&lt;</span><span class="n">host</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;/&lt;</span><span class="n">database</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>For example, to connect to the PostgreSQL database, we need to use the following URI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">postgresql</span><span class="p">:</span><span class="o">//</span><span class="n">user</span><span class="p">:</span><span class="n">password</span><span class="nd">@localhost</span><span class="p">:</span><span class="mi">5432</span><span class="o">/</span><span class="n">postgres</span>
+</pre></div>
+</div>
+<p>Make sure that the docker container is running before trying out the bellow code snippet.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing the sqlalchemy library</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+
+<span class="c1"># Query making </span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="c1"># Creating the engine</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://user:password@localhost:5432/postgres&#39;</span><span class="p">)</span>
+
+<span class="c1"># Making a query with pandas and the created engine</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM pg_catalog.pg_tables;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>schemaname</th>
+      <th>tablename</th>
+      <th>tableowner</th>
+      <th>tablespace</th>
+      <th>hasindexes</th>
+      <th>hasrules</th>
+      <th>hastriggers</th>
+      <th>rowsecurity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>pg_catalog</td>
+      <td>pg_statistic</td>
+      <td>user</td>
+      <td>None</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>pg_catalog</td>
+      <td>pg_type</td>
+      <td>user</td>
+      <td>None</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>pg_catalog</td>
+      <td>pg_foreign_table</td>
+      <td>user</td>
+      <td>None</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>pg_catalog</td>
+      <td>pg_authid</td>
+      <td>user</td>
+      <td>pg_global</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>pg_catalog</td>
+      <td>pg_statistic_ext_data</td>
+      <td>user</td>
+      <td>None</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>pg_catalog</td>
+      <td>pg_largeobject</td>
+      <td>user</td>
+      <td>None</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>information_schema</td>
+      <td>sql_parts</td>
+      <td>user</td>
+      <td>None</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>63</th>
+      <td>information_schema</td>
+      <td>sql_implementation_info</td>
+      <td>user</td>
+      <td>None</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>information_schema</td>
+      <td>sql_features</td>
+      <td>user</td>
+      <td>None</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>information_schema</td>
+      <td>sql_sizing</td>
+      <td>user</td>
+      <td>None</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+<p>66 rows × 8 columns</p>
+</div></div></div>
+</div>
+<p>The engine object has all the methods and attributes that you need to interact with the database. As we can see from the query results, PSQL has a lot of default tables that are ready to be used.</p>
+<div class="section" id="creating-a-database">
+<h2>Creating a database<a class="headerlink" href="#creating-a-database" title="Permalink to this headline">¶</a></h2>
+<p>We can use SQLAlchemy to fully manage database creation and deletion, table managment and data manipulation in a given database management system. The created SQLAlchemy engine object is stored in the variable <code class="docutils literal notranslate"><span class="pre">engine</span></code>. It has a method called connect() which returns a connection object. The connection object has a method called execute() which executes a given SQL query.</p>
+<p>Lets start by creating a database:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiating the connection object from the created engine </span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+<span class="c1"># When initiated, the connection object is in a state of an active transation. We need to commit it in order to make the changes permanent.</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;commit&quot;</span><span class="p">)</span>
+
+<span class="c1"># Giving the database a name </span>
+<span class="n">db_name</span> <span class="o">=</span> <span class="s1">&#39;testdb&#39;</span>
+
+<span class="c1"># Getting all the database names </span>
+<span class="n">databases</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT datname FROM pg_database;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)[</span><span class="s2">&quot;datname&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">db_name</span> <span class="ow">in</span> <span class="n">databases</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Database </span><span class="si">{</span><span class="n">db_name</span><span class="si">}</span><span class="s1"> already exists&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Database does not exist; Creating it&#39;</span><span class="p">)</span>
+    <span class="c1"># Creating the database</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;CREATE DATABASE testdb&quot;</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="c1"># Listing the databases</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Databases available in PSQL:&quot;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT datname FROM pg_database;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)[</span><span class="s2">&quot;datname&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Database testdb already exists
+
+Databases available in PSQL:
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;postgres&#39;, &#39;db&#39;, &#39;template1&#39;, &#39;template0&#39;, &#39;test_db&#39;, &#39;testdb&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-a-table">
+<h2>Creating a table<a class="headerlink" href="#creating-a-table" title="Permalink to this headline">¶</a></h2>
+<p>When working with databases, there are some key definitions that one must know:</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">database</span> <span class="pre">schema</span></code> defines the structure of a database (tables and relationships).</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">database</span> <span class="pre">model</span></code> is a class that represents a table in a database (a table in a database).</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">schema</span></code> defines the structure of a database model (column types and relationships in a table).</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">database</span> <span class="pre">migration</span></code> is a set of instructions that tell a database management system how to create or alter a database schema.</p>
+<p>When we are creating new tables in SQL, we are first defining a new model schema and then creating a migration to apply the model schema to the database.</p>
+<p>To put it simply, we define the collumn names, types and relationships with other tables and then tell psql to create the table. This process is simplified by using SQLAlchemy.</p>
+<p>The term <strong>ORM</strong> is short for Object Relational Mapping. It is a way to map Python classes to tables in a database. SQLAlchemy provides a way to create ORM classes for a given database. We inherit all the methods and attributes from the SQLAlchemy base class <code class="docutils literal notranslate"><span class="pre">Base</span></code> and then we define the table name and the columns. Internally, the <code class="docutils literal notranslate"><span class="pre">Base</span></code> class has all the functionalities needed to command the PSQL system to create the table.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing the Table, Metadata and Column objects from the sqlalchemy library</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">Column</span>
+
+<span class="c1"># Importing the declarative_base class from the sqlalchemy library which is used to create </span>
+<span class="c1"># the base class for all the custom made classes</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">declarative_base</span>
+
+<span class="c1"># Importing the column types </span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">String</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">DateTime</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When a developer creates new functionalities or changes existing ones, the first place where the changes happen is in the database tables.</p>
+<p>For example, lets create a table called <code class="docutils literal notranslate"><span class="pre">users</span></code> using a class <code class="docutils literal notranslate"><span class="pre">Users</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Connecting to the newly created testdb database </span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;postgresql://user:password@localhost:5432/testdb&#39;</span><span class="p">)</span>
+
+<span class="c1"># Defining the declarative base class which we will use as a template for all the custom made classes</span>
+<span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Users</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="c1"># The __tablename__ attribute is used to name the table in the database</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;users&#39;</span>
+
+    <span class="c1"># Listing out all the columns in the table</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">surname</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">)</span>
+    <span class="n">updated_at</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">created_at</span><span class="p">,</span> <span class="n">updated_at</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor to initialize the class. </span>
+
+<span class="sd">        Every object created is a ROW in the database</span>
+
+<span class="sd">        The collumn ID will automatically be created as the primary key and will increase by 1 with each new row created.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">surname</span> <span class="o">=</span> <span class="n">surname</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">created_at</span> <span class="o">=</span> <span class="n">created_at</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">updated_at</span> <span class="o">=</span> <span class="n">updated_at</span>
+
+    <span class="k">def</span> <span class="nf">get_full_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to get the full name of the user</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">surname</span><span class="si">}</span><span class="s2">&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">get_create_datetime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to get the exact time when the user was created</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">created_at</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+
+<span class="c1"># Listing the tables available in the database</span>
+<span class="n">tables</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM pg_catalog.pg_tables;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)[</span><span class="s2">&quot;tablename&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="k">if</span> <span class="s1">&#39;users&#39;</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Table users already exists&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># To create the table in SQLAlchemy we will use the Base.metadata.create_all() method</span>
+    <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Table users already exists
+</pre></div>
+</div>
+</div>
+</div>
+<p>The class <code class="docutils literal notranslate"><span class="pre">Users</span></code> inherits everything from the <code class="docutils literal notranslate"><span class="pre">Base</span></code> class. That is why SQLAlchemy nows how to deal with it and manage it. To create the object user, we use the class constructor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing the package for date wrangling </span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="c1"># Creating the user </span>
+<span class="n">eligijus</span> <span class="o">=</span> <span class="n">Users</span><span class="p">(</span><span class="s1">&#39;Eligijus&#39;</span><span class="p">,</span> <span class="s1">&#39;Bujokas&#39;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+
+<span class="c1"># Getting the full name </span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Full name of user: </span><span class="si">{</span><span class="n">eligijus</span><span class="o">.</span><span class="n">get_full_name</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Getting the exact time when the user was created</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time of user creation: </span><span class="si">{</span><span class="n">eligijus</span><span class="o">.</span><span class="n">get_create_datetime</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Full name of user: Eligijus Bujokas
+Time of user creation: 2022-01-05 06:44:33
+</pre></div>
+</div>
+</div>
+</div>
+<p>So far, the object <code class="docutils literal notranslate"><span class="pre">eligijus</span></code> only lives in the computer memory. The database has no record of such user. In order to insert a new row to the table Users, we need to create a new session and then add the user to the session.</p>
+</div>
+<div class="section" id="updating-tables">
+<h2>Updating tables<a class="headerlink" href="#updating-tables" title="Permalink to this headline">¶</a></h2>
+<p>To transfer objects from computer memory to the database, we can use SQLAlchemy’s session object. The session object has a method called <code class="docutils literal notranslate"><span class="pre">add()</span></code> which adds an object to the session. The session object has a method called <code class="docutils literal notranslate"><span class="pre">commit()</span></code> which actually writes the changes to the database.</p>
+<p>We can open and close the sessions as many times as we want and in many code places. Altough the best practise is to use the same session object for all the code in a given code block.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing the session object from the sqlalchemy library</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span>
+
+<span class="c1"># Creating the session class and &quot;linking it&quot; with our connection</span>
+<span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="c1"># Creating the session objects with the needed methods </span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+
+<span class="c1"># Adding the user eligijus to the session</span>
+<span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">eligijus</span><span class="p">)</span>
+
+<span class="c1"># Uploading to database</span>
+<span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Under the hood, SQLAlchemy handles all the data type checks and data conversion from Python to PSQL and vice versa. To see our created user in the database, we can use the <code class="docutils literal notranslate"><span class="pre">query()</span></code> method of the session object (or just plain Pandas).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Listing all the users in the database (using Pandas)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>surname</th>
+      <th>created_at</th>
+      <th>updated_at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2021-12-18 18:03:07.252155</td>
+      <td>2021-12-18 18:03:07.252156</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2021-12-18 18:24:53.184050</td>
+      <td>2021-12-18 18:24:53.184051</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>Eligijus</td>
+      <td>Kazlauskas</td>
+      <td>2021-12-18 17:49:52.135190</td>
+      <td>2021-12-18 18:24:53.197163</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5</td>
+      <td>Eligijus</td>
+      <td>Bujokas</td>
+      <td>2021-12-18 22:14:30.569273</td>
+      <td>2021-12-18 22:14:30.569274</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2021-12-18 22:14:30.594212</td>
+      <td>2021-12-18 22:14:30.594213</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>3</td>
+      <td>Eligijus</td>
+      <td>Kazlauskas</td>
+      <td>2021-12-18 18:24:53.153895</td>
+      <td>2021-12-18 22:14:30.611188</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>Eligijus</td>
+      <td>Bujokas</td>
+      <td>2022-01-05 06:44:33.996557</td>
+      <td>2022-01-05 06:44:33.996559</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Listing all the users in the database (using query())</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Users</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="p">[(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">surname</span><span class="p">)</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(2, &#39;Bligijus&#39;, &#39;Eujokas&#39;),
+ (4, &#39;Bligijus&#39;, &#39;Eujokas&#39;),
+ (1, &#39;Eligijus&#39;, &#39;Kazlauskas&#39;),
+ (5, &#39;Eligijus&#39;, &#39;Bujokas&#39;),
+ (6, &#39;Bligijus&#39;, &#39;Eujokas&#39;),
+ (3, &#39;Eligijus&#39;, &#39;Kazlauskas&#39;),
+ (7, &#39;Eligijus&#39;, &#39;Bujokas&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can create even more users and add them to the database.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating and uploading</span>
+<span class="n">bligijus</span> <span class="o">=</span> <span class="n">Users</span><span class="p">(</span><span class="s1">&#39;Bligijus&#39;</span><span class="p">,</span> <span class="s1">&#39;Eujokas&#39;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+<span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">bligijus</span><span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="c1"># Listing all the users in the database (using Pandas)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>surname</th>
+      <th>created_at</th>
+      <th>updated_at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2021-12-18 18:03:07.252155</td>
+      <td>2021-12-18 18:03:07.252156</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2021-12-18 18:24:53.184050</td>
+      <td>2021-12-18 18:24:53.184051</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>Eligijus</td>
+      <td>Kazlauskas</td>
+      <td>2021-12-18 17:49:52.135190</td>
+      <td>2021-12-18 18:24:53.197163</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5</td>
+      <td>Eligijus</td>
+      <td>Bujokas</td>
+      <td>2021-12-18 22:14:30.569273</td>
+      <td>2021-12-18 22:14:30.569274</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2021-12-18 22:14:30.594212</td>
+      <td>2021-12-18 22:14:30.594213</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>3</td>
+      <td>Eligijus</td>
+      <td>Kazlauskas</td>
+      <td>2021-12-18 18:24:53.153895</td>
+      <td>2021-12-18 22:14:30.611188</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>Eligijus</td>
+      <td>Bujokas</td>
+      <td>2022-01-05 06:44:33.996557</td>
+      <td>2022-01-05 06:44:33.996559</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2022-01-05 06:44:34.017676</td>
+      <td>2022-01-05 06:44:34.017677</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="querying-the-database">
+<h2>Querying the database<a class="headerlink" href="#querying-the-database" title="Permalink to this headline">¶</a></h2>
+<p>A big feature of SQLAlchemy is the seemless transition between records in database and objects in computer memory. To query the database, we use the <code class="docutils literal notranslate"><span class="pre">query()</span></code> method of the session object. The query method takes a SQL <strong>like</strong> query as an argument and returns a list of objects that mathces the query. For example, lets search for all the users with the name <code class="docutils literal notranslate"><span class="pre">eligijus</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Listing all the users with the name eligijus in the database using session.query()</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Users</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Users</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Eligijus&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+<span class="c1"># We can then interact with the object in the same way as with any Python method</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">users</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No users found&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">users</span><span class="p">)</span><span class="si">}</span><span class="s1"> users with the name Eligijus&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">([(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">surname</span><span class="p">)</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">])</span>
+
+    <span class="c1"># Extracting the first one</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">users</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Getting the full name</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Full name of user: </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">get_full_name</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Getting the exact time when the user was created</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time of user creation: </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">get_create_datetime</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 4 users with the name Eligijus
+[(1, &#39;Eligijus&#39;, &#39;Kazlauskas&#39;), (5, &#39;Eligijus&#39;, &#39;Bujokas&#39;), (3, &#39;Eligijus&#39;, &#39;Kazlauskas&#39;), (7, &#39;Eligijus&#39;, &#39;Bujokas&#39;)]
+Full name of user: Eligijus Kazlauskas
+Time of user creation: 2021-12-18 17:49:52
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can very simply update the user information. Because the user is an object, we can directly change the attributes using the <code class="docutils literal notranslate"><span class="pre">.</span></code> operator. Lets change the surname of Eligijus to the most typical surname in Lithunia: <code class="docutils literal notranslate"><span class="pre">Kazlauskas</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Changing the attributes of the user</span>
+<span class="n">user</span><span class="o">.</span><span class="n">surname</span> <span class="o">=</span> <span class="s1">&#39;Kazlauskas&#39;</span>
+
+<span class="c1"># Specifying the exact time when the user was updated</span>
+<span class="n">user</span><span class="o">.</span><span class="n">updated_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+<span class="c1"># Uploading the changes to the database</span>
+<span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What is neat here, is that the session object tracks all the changes that is made in the memory and we do not need to specify which user was changed: the <code class="docutils literal notranslate"><span class="pre">commit()</span></code> method will automatically update the database. To see the final database, we can list all the rows using pandas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Getting all the rows in the database</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>surname</th>
+      <th>created_at</th>
+      <th>updated_at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2021-12-18 18:03:07.252155</td>
+      <td>2021-12-18 18:03:07.252156</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2021-12-18 18:24:53.184050</td>
+      <td>2021-12-18 18:24:53.184051</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>Eligijus</td>
+      <td>Bujokas</td>
+      <td>2021-12-18 22:14:30.569273</td>
+      <td>2021-12-18 22:14:30.569274</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2021-12-18 22:14:30.594212</td>
+      <td>2021-12-18 22:14:30.594213</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3</td>
+      <td>Eligijus</td>
+      <td>Kazlauskas</td>
+      <td>2021-12-18 18:24:53.153895</td>
+      <td>2021-12-18 22:14:30.611188</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>7</td>
+      <td>Eligijus</td>
+      <td>Bujokas</td>
+      <td>2022-01-05 06:44:33.996557</td>
+      <td>2022-01-05 06:44:33.996559</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>8</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2022-01-05 06:44:34.017676</td>
+      <td>2022-01-05 06:44:34.017677</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1</td>
+      <td>Eligijus</td>
+      <td>Kazlauskas</td>
+      <td>2021-12-18 17:49:52.135190</td>
+      <td>2022-01-05 06:44:34.030981</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="closing-thoughts">
+<h1>Closing thoughts<a class="headerlink" href="#closing-thoughts" title="Permalink to this headline">¶</a></h1>
+<p>A modern API cannot be imagined without a corresponding database that holds all the request and response data. Additionally, an API would not give responses without all the necessary tables in the database. Python is a very flexible tool to create and manage databases. The object orianted programming paradigm is a great way to manage records in a database, because we can view each <code class="docutils literal notranslate"><span class="pre">row</span></code> in a database table as an <code class="docutils literal notranslate"><span class="pre">object</span></code> with each collumn values as the object attributes.</p>
+<p>Additionally, we can specify complex functionalities in the table classes using Python and use them with each individual row.</p>
+<p>In the next chapter, we will connect the API of the root calculation to the database.</p>
+<div class="section" id="id1">
+<h2><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter-5-API"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="API-server.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">API server</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="API-example.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">API and PSQL integration example</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Eligijus Bujokas<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

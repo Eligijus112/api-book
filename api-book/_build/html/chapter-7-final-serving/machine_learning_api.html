@@ -1,0 +1,1031 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Machine learning API &#8212; Machine Learning serving</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Wrapping the API into a production container" href="machine_learning_api_production.html" />
+    <link rel="prev" title="ML database models" href="machine_learning_db_models.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning serving</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Hardware and Linux OS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-specs.html">
+   Building blocks of a computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-OS.html">
+   Linux operating system
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Software for an ML developer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/python-intro.html">
+   Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/virtual-envs.html">
+   Virtual environments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/docker.html">
+   Docker
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/object-oriented-programming.html">
+   Classes and objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-types.html">
+   Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-structures.html">
+   Data structures
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model.html">
+   Creating machine learning models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model-serving.html">
+   Basic ML serving
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-intro.html">
+   Application Programming Interface basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-server.html">
+   API server
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-DB.html">
+   Databases and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-example.html">
+   API and PSQL integration example
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Production Tools and Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/gunicorn.html">
+   Gunicorn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/docker.html">
+   Docker in production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/JWT.html">
+   JWT based authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/migrations.html">
+   Migrations
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  ML serving API
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="users.html">
+   ML users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="authentification.html">
+   ML users authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_model.html">
+   ML model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_db_models.html">
+   ML database models
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Machine learning API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_api_production.html">
+   Wrapping the API into a production container
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Bibliography
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references/references.html">
+   Links and references
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chapter-7-final-serving/machine_learning_api.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Eligijus112/api-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Eligijus112/api-book/issues/new?title=Issue%20on%20page%20%2Fchapter-7-final-serving/machine_learning_api.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Eligijus112/api-book/master?urlpath=tree/docs/chapter-7-final-serving/machine_learning_api.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Machine learning API
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-the-ml-model-to-memory">
+   Loading the ML model to memory
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#api-usage-flowchart">
+   API usage flowchart
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#api-usage">
+   API usage
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-user">
+     Creating a user
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#getting-the-token">
+     Getting the token
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#getting-the-predictions">
+     Getting the predictions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inspecting-the-results">
+   Inspecting the results
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="machine-learning-api">
+<h1>Machine learning API<a class="headerlink" href="#machine-learning-api" title="Permalink to this headline">¶</a></h1>
+<p>Right now we have 3 database tables:</p>
+<ul class="simple">
+<li><p>Users</p></li>
+<li><p>Requests</p></li>
+<li><p>Responses</p></li>
+</ul>
+<p>Additionaly, we have created a machine learning model along with the input schema. It is time to create a working API using FastAPI to serve predictions.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="loading-the-ml-model-to-memory">
+<h1>Loading the ML model to memory<a class="headerlink" href="#loading-the-ml-model-to-memory" title="Permalink to this headline">¶</a></h1>
+<p>The most efficient way to load an ML model to memory is to save it during the initiation of the FastAPI application. It is a common mistake to read the model file and the schema file everytime a new request comes in and then apply it.</p>
+<p>We should import the model objects and create any additional objects at the top of the main <strong><a class="reference external" href="http://app.py">app.py</a></strong> script where the API object is beeing created.</p>
+<p>The necessary utilities:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat ML_API/machine_learning_utils.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Pickle object reading 
+import pickle 
+
+# JSON object reading 
+import json 
+
+# OS traversal 
+import os 
+
+# Input dataframe
+import pandas as pd 
+
+# Array math 
+import numpy as np 
+
+def load_ml_model(model_dir=&#39;ml_model&#39;):
+    &quot;&quot;&quot;
+    Loads the model and the schema from the given path
+    &quot;&quot;&quot;
+    model, type_dict, feature_list = {}, {}, []
+    
+    _model_path = os.path.join(model_dir, &#39;model.pkl&#39;)
+    _input_schema_path = os.path.join(model_dir, &#39;input_schema.json&#39;)
+
+    # Default empty input schema 
+    input_schema = {}
+
+    # Checking if the files exists and reading them 
+    if os.path.exists(_model_path) and os.path.exists(_input_schema_path):
+        
+        with open(_model_path, &#39;rb&#39;) as f:
+            model = pickle.load(f)
+
+        with open(_input_schema_path, &#39;r&#39;) as f:
+            input_schema = json.load(f)
+    
+    # Extracting the features
+    features = input_schema.get(&#39;input_schema&#39;, {})
+    features = features.get(&#39;columns&#39;, [])
+
+    # Iterating over the list of dictionaries and changing the types.
+    # numeric -&gt; float 
+    # boolean -&gt; bool
+    # The resulting dictionary will have a key value of the feature name and the value will be the type
+    for feature in features:
+        if feature.get(&#39;type&#39;) == &#39;numeric&#39;:
+            feature[&#39;type&#39;] = float
+        elif feature.get(&#39;type&#39;) == &#39;boolean&#39;:
+            feature[&#39;type&#39;] = bool
+        type_dict.update({feature.get(&#39;name&#39;): feature.get(&#39;type&#39;)})
+    
+    # Extracting the correct ordering of the features for the ML input 
+    feature_list = [x.get(&#39;name&#39;) for x in features]
+
+    # Returning the model, type dictionary and the feature order
+    return model, type_dict, feature_list
+
+def predict(model, feature_dict: dict, X: dict) -&gt; list:
+    &quot;&quot;&quot;
+    Function that converts the feature_dict into a predictable format for the ml model
+
+    Args:
+        model: the machine learning model
+        feature_dict: the dictionary of features
+        X: dictionary with (feature -&gt; feature value) pairs
+
+    Returns:
+        A list of predictions
+    &quot;&quot;&quot;
+    try:
+        # Converting the dictionary into a list of lists
+        feature_list = list(feature_dict.keys())
+
+        # Converting the dictionary to a dataframe 
+        X = pd.DataFrame(X, index=[0])
+
+        # Ensuring that no columns are missing 
+        if len(feature_list) != X.shape[1]:
+            for col in X.columns:
+                if col not in feature_list:
+                    X[col] = np.nan
+
+        # Converting the X columns to correct types 
+        for col in X.columns:
+            if col in feature_list:
+                try:
+                    X[col] = X[col].astype(feature_dict.get(col))
+                except: 
+                    print(f&quot;Cannot convert {col} to {feature_dict.get(col)}&quot;)
+                    # If we cannot convert it, we will set it to null. 
+                    return None 
+
+        # Predicting the output
+        prediction = model.predict_proba(X[feature_list])[0]
+
+        return prediction
+    except:
+        return None
+</pre></div>
+</div>
+</div>
+</div>
+<p>The loading of the model occurs right before defining the endpoints:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+
+<span class="c1"># Creating the application object </span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+<span class="c1"># Loading the machine learning objects to memory </span>
+<span class="n">ml_model</span><span class="p">,</span> <span class="n">type_dict</span><span class="p">,</span> <span class="n">ml_feature_list</span> <span class="o">=</span> <span class="n">load_ml_model</span><span class="p">()</span>
+
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>By loading the objects in the following way, the objects are saved in runtime memory and are not loaded from disk everytime a new request comes in. This makes the application much faster.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="api-usage-flowchart">
+<h1>API usage flowchart<a class="headerlink" href="#api-usage-flowchart" title="Permalink to this headline">¶</a></h1>
+<p>A typical flow of the API is the following:</p>
+<ul class="simple">
+<li><p>Register a user:</p></li>
+</ul>
+<p><img alt="registration" src="../_images/registration.png" /></p>
+<p>The output of the registration logic is a JWT token which we attach in each of the requests to our API.</p>
+<ul class="simple">
+<li><p>Prediction flow:</p></li>
+</ul>
+<p><img alt="api-flow" src="../_images/API-flow.png" /></p>
+<p>Each request to the API needs to have the JWT token attached to it. Then, along with the token, the data for the API is sent ant the following flow starts:</p>
+<ol class="simple">
+<li><p>The user is beeing authenticated.</p></li>
+<li><p>If the user is authenticated, then the request data is beeing validated for the ML model.</p></li>
+<li><p>If the data is good, then the prediction is beeing made.</p></li>
+<li><p>The final response is sent.</p></li>
+</ol>
+<p>Along the way, the information is logged to the <strong>Requests</strong> and <strong>Responses</strong> tables.</p>
+<p>All the code is available in the <strong><a class="reference external" href="http://app.py">app.py</a></strong> script in the ML_API directory so lets try and apply the above flowchart!</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="api-usage">
+<h1>API usage<a class="headerlink" href="#api-usage" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Requests making  </span>
+<span class="kn">import</span> <span class="nn">requests</span> 
+
+<span class="c1"># Defining the constants for the API</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:8081&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-a-user">
+<h2>Creating a user<a class="headerlink" href="#creating-a-user" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining the user dict </span>
+<span class="n">user_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;eligijus_bujokas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;password&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;eligijus@testmail.com&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># Sending the post request to the running API </span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">/register-user&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">user_dict</span><span class="p">)</span>
+
+<span class="c1"># Getting the user id </span>
+<span class="n">user_id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">)</span>
+
+<span class="c1"># Printing the response </span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Response code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">; Response: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ConnectionRefusedError</span><span class="g g-Whitespace">                    </span>Traceback (most recent call last)
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/connection.py</span> in <span class="ni">_new_conn</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">173</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">174</span>             <span class="n">conn</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">create_connection</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">175</span>                 <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dns_host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_kw</span>
+
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/util/connection.py</span> in <span class="ni">create_connection</span><span class="nt">(address, timeout, source_address, socket_options)</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">if</span> <span class="n">err</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">96</span>         <span class="k">raise</span> <span class="n">err</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span> 
+
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/util/connection.py</span> in <span class="ni">create_connection</span><span class="nt">(address, timeout, source_address, socket_options)</span>
+<span class="g g-Whitespace">     </span><span class="mi">85</span>                 <span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">source_address</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">86</span>             <span class="n">sock</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">sa</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">87</span>             <span class="k">return</span> <span class="n">sock</span>
+
+<span class="ne">ConnectionRefusedError</span>: [Errno 111] Connection refused
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">NewConnectionError</span><span class="g g-Whitespace">                        </span>Traceback (most recent call last)
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/connectionpool.py</span> in <span class="ni">urlopen</span><span class="nt">(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, **response_kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">698</span>             <span class="c1"># Make the request on the httplib connection object.</span>
+<span class="ne">--&gt; </span><span class="mi">699</span>             <span class="n">httplib_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">700</span>                 <span class="n">conn</span><span class="p">,</span>
+
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/connectionpool.py</span> in <span class="ni">_make_request</span><span class="nt">(self, conn, method, url, timeout, chunked, **httplib_request_kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">393</span>             <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">394</span>                 <span class="n">conn</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">httplib_request_kw</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">395</span> 
+
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/connection.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, body, headers)</span>
+<span class="g g-Whitespace">    </span><span class="mi">238</span>             <span class="n">headers</span><span class="p">[</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_get_default_user_agent</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">239</span>         <span class="nb">super</span><span class="p">(</span><span class="n">HTTPConnection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">240</span> 
+
+<span class="nn">/usr/lib/python3.8/http/client.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1255</span>         <span class="sd">&quot;&quot;&quot;Send a complete request to the server.&quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1256</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_send_request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1257</span> 
+
+<span class="nn">/usr/lib/python3.8/http/client.py</span> in <span class="ni">_send_request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1301</span>             <span class="n">body</span> <span class="o">=</span> <span class="n">_encode</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1302</span>         <span class="bp">self</span><span class="o">.</span><span class="n">endheaders</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1303</span> 
+
+<span class="nn">/usr/lib/python3.8/http/client.py</span> in <span class="ni">endheaders</span><span class="nt">(self, message_body, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1250</span>             <span class="k">raise</span> <span class="n">CannotSendHeader</span><span class="p">()</span>
+<span class="ne">-&gt; </span><span class="mi">1251</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_send_output</span><span class="p">(</span><span class="n">message_body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1252</span> 
+
+<span class="nn">/usr/lib/python3.8/http/client.py</span> in <span class="ni">_send_output</span><span class="nt">(self, message_body, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1010</span>         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">[:]</span>
+<span class="ne">-&gt; </span><span class="mi">1011</span>         <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1012</span> 
+
+<span class="nn">/usr/lib/python3.8/http/client.py</span> in <span class="ni">send</span><span class="nt">(self, data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">950</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_open</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">951</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">952</span>             <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/connection.py</span> in <span class="ni">connect</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">204</span>     <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">205</span>         <span class="n">conn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new_conn</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">206</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_conn</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span>
+
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/connection.py</span> in <span class="ni">_new_conn</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>         <span class="k">except</span> <span class="n">SocketError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">186</span>             <span class="k">raise</span> <span class="n">NewConnectionError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">187</span>                 <span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;Failed to establish a new connection: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span>
+
+<span class="ne">NewConnectionError</span>: &lt;urllib3.connection.HTTPConnection object at 0x7f6f9c050e80&gt;: Failed to establish a new connection: [Errno 111] Connection refused
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">MaxRetryError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/requests/adapters.py</span> in <span class="ni">send</span><span class="nt">(self, request, stream, timeout, verify, cert, proxies)</span>
+<span class="g g-Whitespace">    </span><span class="mi">438</span>             <span class="k">if</span> <span class="ow">not</span> <span class="n">chunked</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">439</span>                 <span class="n">resp</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">440</span>                     <span class="n">method</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
+
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/connectionpool.py</span> in <span class="ni">urlopen</span><span class="nt">(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, **response_kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">754</span> 
+<span class="ne">--&gt; </span><span class="mi">755</span>             <span class="n">retries</span> <span class="o">=</span> <span class="n">retries</span><span class="o">.</span><span class="n">increment</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">756</span>                 <span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="n">e</span><span class="p">,</span> <span class="n">_pool</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">_stacktrace</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/util/retry.py</span> in <span class="ni">increment</span><span class="nt">(self, method, url, response, error, _pool, _stacktrace)</span>
+<span class="g g-Whitespace">    </span><span class="mi">573</span>         <span class="k">if</span> <span class="n">new_retry</span><span class="o">.</span><span class="n">is_exhausted</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">574</span>             <span class="k">raise</span> <span class="n">MaxRetryError</span><span class="p">(</span><span class="n">_pool</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">error</span> <span class="ow">or</span> <span class="n">ResponseError</span><span class="p">(</span><span class="n">cause</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">575</span> 
+
+<span class="ne">MaxRetryError</span>: HTTPConnectionPool(host=&#39;localhost&#39;, port=8081): Max retries exceeded with url: /register-user (Caused by NewConnectionError(&#39;&lt;urllib3.connection.HTTPConnection object at 0x7f6f9c050e80&gt;: Failed to establish a new connection: [Errno 111] Connection refused&#39;))
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">ConnectionError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_37853</span><span class="o">/</span><span class="mf">1864221189.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Sending the post request to the running API</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">/register-user&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">user_dict</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> 
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># Getting the user id</span>
+
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/requests/api.py</span> in <span class="ni">post</span><span class="nt">(url, data, json, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span>     <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span><span class="s2"> </span>
+<span class="ne">--&gt; </span><span class="mi">117</span><span class="s2">     return request(&#39;post&#39;, url, data=data, json=json, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span><span class="s2"> </span>
+
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/requests/api.py</span> in <span class="ni">request</span><span class="nt">(method, url, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span><span class="s2">     # cases, and look like a memory leak in others.</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span><span class="s2">     with sessions.Session() as session:</span>
+<span class="ne">---&gt; </span><span class="mi">61</span><span class="s2">         return session.request(method=method, url=url, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span><span class="s2"> </span>
+
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/requests/sessions.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, params, data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream, verify, cert, json)</span>
+<span class="g g-Whitespace">    </span><span class="mi">540</span><span class="s2">         }</span>
+<span class="g g-Whitespace">    </span><span class="mi">541</span><span class="s2">         send_kwargs.update(settings)</span>
+<span class="ne">--&gt; </span><span class="mi">542</span><span class="s2">         resp = self.send(prep, **send_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">543</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">544</span><span class="s2">         return resp</span>
+
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/requests/sessions.py</span> in <span class="ni">send</span><span class="nt">(self, request, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">653</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">654</span><span class="s2">         # Send the request</span>
+<span class="ne">--&gt; </span><span class="mi">655</span><span class="s2">         r = adapter.send(request, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">656</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">657</span><span class="s2">         # Total elapsed time of the request (approximately)</span>
+
+<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/requests/adapters.py</span> in <span class="ni">send</span><span class="nt">(self, request, stream, timeout, verify, cert, proxies)</span>
+<span class="g g-Whitespace">    </span><span class="mi">514</span><span class="s2">                 raise SSLError(e, request=request)</span>
+<span class="g g-Whitespace">    </span><span class="mi">515</span><span class="s2"> </span>
+<span class="ne">--&gt; </span><span class="mi">516</span><span class="s2">             raise ConnectionError(e, request=request)</span>
+<span class="g g-Whitespace">    </span><span class="mi">517</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">518</span><span class="s2">         except ClosedPoolError as e:</span>
+
+<span class="ne">ConnectionError</span>: HTTPConnectionPool(host=&#39;localhost&#39;, port=8081): Max retries exceeded with url: /register-user (Caused by NewConnectionError(&#39;&lt;urllib3.connection.HTTPConnection object at 0x7f6f9c050e80&gt;: Failed to establish a new connection: [Errno 111] Connection refused&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="getting-the-token">
+<h2>Getting the token<a class="headerlink" href="#getting-the-token" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Querying the API for the token </span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">/token&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">user_dict</span><span class="p">)</span>
+
+<span class="c1"># Extracting the token from the response</span>
+<span class="n">token</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;token&quot;</span><span class="p">)</span>
+
+<span class="c1"># Printing the response</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Response code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">; JWT token: </span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 200; JWT token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDIxOTY1NjksImlhdCI6MTY0MjE5Mjk2OSwic3ViIjo1fQ.T_Io9Gx-SUDlDrLzNVKsEuthot5kgkTPWQZQO8e-bfo
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="getting-the-predictions">
+<h2>Getting the predictions<a class="headerlink" href="#getting-the-predictions" title="Permalink to this headline">¶</a></h2>
+<p>We need to first recap what was the input used to train the model. The features were:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;input_schema&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;numeric&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;creatinine_phosphokinase&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;numeric&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ejection_fraction&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;numeric&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;platelets&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;numeric&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;serum_creatinine&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;numeric&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;serum_sodium&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;numeric&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;sex&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;boolean&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;high_blood_pressure&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;boolean&quot;</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We will use a POST request to get the probabilities because we want to send the features and their values not as a collection of URL parameters but as a JSON object in the request body.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating the input dictionary</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s1">&#39;creatinine_phosphokinase&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="s1">&#39;ejection_fraction&#39;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span>
+    <span class="s1">&#39;platelets&#39;</span><span class="p">:</span> <span class="mi">500000</span><span class="p">,</span>
+    <span class="s1">&#39;serum_creatinine&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s1">&#39;serum_sodium&#39;</span><span class="p">:</span> <span class="mi">135</span><span class="p">,</span>
+    <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;high_blood_pressure&#39;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="c1"># Creating the header with the token </span>
+<span class="n">header</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="n">token</span>
+<span class="p">}</span>
+
+<span class="c1"># Sending the request </span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">/predict&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+
+<span class="c1"># Infering the response</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Response code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">; Response: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 200; Response: {&#39;yhat_prob&#39;: &#39;0.5124506&#39;, &#39;yhat&#39;: &#39;1&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>The response dictionary has two keys:</p>
+<p><code class="docutils literal notranslate"><span class="pre">yhat_prob</span></code> - probability of a death event</p>
+<p><code class="docutils literal notranslate"><span class="pre">yhat</span></code> - the predicted class; 1 - death_event, 0 - no_death_event</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">predict_ml</span></code> from the <strong><a class="reference external" href="http://app.py">app.py</a></strong> file handles the request and the whole logic is presented here.</p>
+<p>The steps are:</p>
+<ol class="simple">
+<li><p>Extract the token</p></li>
+<li><p>Authenticate it</p></li>
+<li><p>Extract the inputs</p></li>
+<li><p>Log the request to database</p></li>
+<li><p>Make the prediction</p></li>
+<li><p>Log the response to database</p></li>
+<li><p>Return the response to the user</p></li>
+</ol>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="inspecting-the-results">
+<h1>Inspecting the results<a class="headerlink" href="#inspecting-the-results" title="Permalink to this headline">¶</a></h1>
+<p>All the sufficient information for tracking the API is in the <strong>Users</strong>, <strong>Requests</strong> and <strong>Responses</strong> tables. We can inspect them after our run of requests and responses.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing the connection </span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">from</span> <span class="nn">ML_API.database</span> <span class="kn">import</span> <span class="n">engine</span>
+
+<span class="c1"># There maybe some legacy users beside eligjus_bujokas</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;select * from users&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Users in the database:</span><span class="se">\n</span><span class="si">{</span><span class="n">users</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Tail of the requests</span>
+<span class="n">requests_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;select * from requests&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--</span><span class="se">\n</span><span class="s2">Last 5 requests:</span><span class="se">\n</span><span class="si">{</span><span class="n">requests_data</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Tail of the responses</span>
+<span class="n">response_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;select * from responses&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--</span><span class="se">\n</span><span class="s2">Last 5 responses:</span><span class="se">\n</span><span class="si">{</span><span class="n">response_data</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Users in the database:
+   id          username                                           password  \
+0   3              test  gAAAAABh0ZB3XUVqtNj0SIkgKzFmRey8Tt2et57V9GoAs2...   
+1   4          eligijus  gAAAAABh0ZTKq-0Es9-BzQd-KJ2R8dNY70vFlj3OY_hsC2...   
+2   5  eligijus_bujokas  gAAAAABh3uroEwCl80d480inMXMCE1TuHjaBYMgmJI3eKL...   
+
+                   email           created_datetime  \
+0      test@testmail.com 2022-01-02 13:45:59.012700   
+1  eligijus@testmail.com 2022-01-02 14:04:26.751085   
+2  eligijus@testmail.com 2022-01-12 16:51:20.534979   
+
+            updated_datetime  enabled  
+0 2022-01-02 13:45:59.072225    False  
+1 2022-01-02 14:04:26.751085     True  
+2 2022-01-12 16:51:20.534979     True  
+--
+Last 5 requests:
+    id  user_id                                              input  \
+17  18        5  {&quot;age&quot;: 25, &quot;creatinine_phosphokinase&quot;: 1000, ...   
+18  19        5  {&quot;age&quot;: 25, &quot;creatinine_phosphokinase&quot;: 1000, ...   
+19  20        5  {&quot;age&quot;: 25, &quot;creatinine_phosphokinase&quot;: 1000, ...   
+20  21        5  {&quot;age&quot;: 25, &quot;creatinine_phosphokinase&quot;: 1000, ...   
+21  22        5  {&quot;age&quot;: 25, &quot;creatinine_phosphokinase&quot;: 1000, ...   
+
+             created_datetime           updated_datetime  
+17 2022-01-12 20:45:31.866924 2022-01-12 20:45:31.866924  
+18 2022-01-12 20:54:14.030613 2022-01-12 20:54:14.030613  
+19 2022-01-14 20:36:34.018803 2022-01-14 20:36:34.018803  
+20 2022-01-14 20:37:26.669542 2022-01-14 20:37:26.669542  
+21 2022-01-14 20:42:49.979033 2022-01-14 20:42:49.979033  
+--
+Last 5 responses:
+    id  request_id                                   output  \
+13  14          18  {&quot;yhat_prob&quot;: &quot;0.5124506&quot;, &quot;yhat&quot;: &quot;1&quot;}   
+14  15          19  {&quot;yhat_prob&quot;: &quot;0.5124506&quot;, &quot;yhat&quot;: &quot;1&quot;}   
+15  16          20  {&quot;yhat_prob&quot;: &quot;0.5124506&quot;, &quot;yhat&quot;: &quot;1&quot;}   
+16  17          21  {&quot;yhat_prob&quot;: &quot;0.5124506&quot;, &quot;yhat&quot;: &quot;1&quot;}   
+17  18          22  {&quot;yhat_prob&quot;: &quot;0.5124506&quot;, &quot;yhat&quot;: &quot;1&quot;}   
+
+             created_datetime           updated_datetime  
+13 2022-01-12 20:45:31.904598 2022-01-12 20:45:31.904598  
+14 2022-01-12 20:54:14.048568 2022-01-12 20:54:14.048568  
+15 2022-01-14 20:36:34.059420 2022-01-14 20:36:34.059420  
+16 2022-01-14 20:37:26.694771 2022-01-14 20:37:26.694771  
+17 2022-01-14 20:42:50.004279 2022-01-14 20:42:50.004279  
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter-7-final-serving"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="machine_learning_db_models.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">ML database models</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="machine_learning_api_production.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Wrapping the API into a production container</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Eligijus Bujokas<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

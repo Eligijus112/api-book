@@ -1,0 +1,944 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classes and objects &#8212; Machine Learning serving</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Data types" href="data-types.html" />
+    <link rel="prev" title="Docker" href="../chapter-2-software/docker.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning serving</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Hardware and Linux OS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-specs.html">
+   Building blocks of a computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-OS.html">
+   Linux operating system
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Software for an ML developer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/python-intro.html">
+   Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/virtual-envs.html">
+   Virtual environments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/docker.html">
+   Docker
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Classes and objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-types.html">
+   Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-structures.html">
+   Data structures
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model.html">
+   Creating machine learning models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model-serving.html">
+   Basic ML serving
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-intro.html">
+   Application Programming Interface basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-server.html">
+   API server
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-DB.html">
+   Databases and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-example.html">
+   API and PSQL integration example
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Production Tools and Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/gunicorn.html">
+   Gunicorn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/docker.html">
+   Docker in production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/JWT.html">
+   JWT based authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/migrations.html">
+   Migrations
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  ML serving API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/users.html">
+   ML users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/authentification.html">
+   ML users authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_model.html">
+   Machine learning model
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Bibliography
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references/references.html">
+   Links and references
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chapter-3-python/object-oriented-programming.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Eligijus112/api-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Eligijus112/api-book/issues/new?title=Issue%20on%20page%20%2Fchapter-3-python/object-oriented-programming.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Eligijus112/api-book/master?urlpath=tree/docs/chapter-3-python/object-oriented-programming.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Classes and objects
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-definitions">
+     Basic definitions
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#python-magic-methods">
+       Python “magic” methods
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#constructors">
+       Constructors
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#object-attributes">
+       Object attributes
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#object-methods">
+       Object methods
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#object-state">
+     Object state
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#class-inheritance">
+     Class inheritance
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#encapsulation">
+     Encapsulation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="classes-and-objects">
+<h1>Classes and objects<a class="headerlink" href="#classes-and-objects" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-definitions">
+<h2>Basic definitions<a class="headerlink" href="#basic-definitions" title="Permalink to this headline">¶</a></h2>
+<p>To put it simply, in object oriented programming, the code is structured around <strong>objects</strong>.</p>
+<p>An <strong>object</strong> is an instance of a class.</p>
+<p>A <strong>class</strong> is a blueprint for creating objects, defined by its name in the namespace, its attributes and its methods.</p>
+<p>In computing, a namespace is a set of signs (names) that are used to identify and refer to objects of various kinds. The names are saved as pointers somewhere in computer memory. A namespace ensures that all of a given set of objects have unique names so that they can be easily identified. To put it simply, <em>a namespace is a mapping from names to objects</em>.</p>
+<p>A class in Python is defined with the keyword <code class="docutils literal notranslate"><span class="pre">class</span></code> following with the class name. Each class has a constructor, which is a method that is called when an object of the class is created. The constructor is called automatically when an object is created. The constructor is defined with an internal function __init__().</p>
+<p>For example, lets create a class that creates an object of class <strong>Employee</strong> (I will explain every detail after the class initialization):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Name of the class</span>
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span> 
+    <span class="c1"># The constructor </span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        In order to create an object of the class Employee, we need to pass:</span>
+<span class="sd">        name - name of the employee</span>
+<span class="sd">        surname - surname of the employee</span>
+<span class="sd">        position - position of the employee</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">surname</span> <span class="o">=</span> <span class="n">surname</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">position</span>
+
+        <span class="c1"># Calculating the name length of the employee in construction time </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="c1"># Defining a method for the object </span>
+    <span class="k">def</span> <span class="nf">get_full_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method returns the full name of the employee</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">surname</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>One might be wandering, what is the “<strong>self</strong>” argument in the <strong>init</strong>() function? The argument “self” is a reference to the object being created. The “self” argument is used to access the attributes and methods of the object.</p>
+<p>When creating an object, we skip the argument “self” and pass the other arguments to the constructor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Two employees</span>
+<span class="n">Jane</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s2">&quot;Jane&quot;</span><span class="p">,</span> <span class="s2">&quot;Doe&quot;</span><span class="p">,</span> <span class="s2">&quot;Manager&quot;</span><span class="p">)</span> 
+<span class="n">John</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;Doe&quot;</span><span class="p">,</span> <span class="s2">&quot;Sales&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see above, one blueprint (Employee class) was used to create two objects (Jane and John).</p>
+<p>This is exactly as a recipe works: you can have a recipe (or blueprint) for a cake and with that recipe make hundreds of cakes.</p>
+<p>One fact that should always be kept in one’s mind is that <strong>EVERYTHING in Python is an object</strong>. All the imported packages, all the defined variables even the functions are objects. This means that everything has a <strong>class</strong> with which the object was created, attributes and methods.</p>
+<div class="section" id="python-magic-methods">
+<h3>Python “magic” methods<a class="headerlink" href="#python-magic-methods" title="Permalink to this headline">¶</a></h3>
+<p><em>Magic</em> or <em>dunder</em> methods in Python are special methods that start and end with the double underscores <code class="docutils literal notranslate"><span class="pre">__&lt;name&gt;__</span></code>. Magic methods are not meant to be invoked directly by the user, but the invocation happens internally from the class on a certain action. For example, when you add two numbers using the <em>+</em> operator, internally, the <strong>add</strong>() method will be called:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">4</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Addition results: </span><span class="si">{</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Addition using the magic method: </span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="fm">__add__</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Addition results: 9
+Addition using the magic method: 9
+</pre></div>
+</div>
+</div>
+</div>
+<p>Every class has a lot of magic methods. To list them out, use the <code class="docutils literal notranslate"><span class="pre">dir()</span></code> function and search for the <code class="docutils literal notranslate"><span class="pre">__&lt;name&gt;__</span></code> pattern:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All the magic methods of the class Employee</span>
+<span class="n">magic_methods</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">Employee</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;__&quot;</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">magic_methods</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;__class__&#39;, &#39;__delattr__&#39;, &#39;__dict__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__getattribute__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__le__&#39;, &#39;__lt__&#39;, &#39;__module__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;__weakref__&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All the methods of the int class in Python</span>
+<span class="n">magic_methods</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;__&quot;</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">magic_methods</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;__abs__&#39;, &#39;__add__&#39;, &#39;__and__&#39;, &#39;__bool__&#39;, &#39;__ceil__&#39;, &#39;__class__&#39;, &#39;__delattr__&#39;, &#39;__dir__&#39;, &#39;__divmod__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;__float__&#39;, &#39;__floor__&#39;, &#39;__floordiv__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__getattribute__&#39;, &#39;__getnewargs__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__index__&#39;, &#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__int__&#39;, &#39;__invert__&#39;, &#39;__le__&#39;, &#39;__lshift__&#39;, &#39;__lt__&#39;, &#39;__mod__&#39;, &#39;__mul__&#39;, &#39;__ne__&#39;, &#39;__neg__&#39;, &#39;__new__&#39;, &#39;__or__&#39;, &#39;__pos__&#39;, &#39;__pow__&#39;, &#39;__radd__&#39;, &#39;__rand__&#39;, &#39;__rdivmod__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__rfloordiv__&#39;, &#39;__rlshift__&#39;, &#39;__rmod__&#39;, &#39;__rmul__&#39;, &#39;__ror__&#39;, &#39;__round__&#39;, &#39;__rpow__&#39;, &#39;__rrshift__&#39;, &#39;__rshift__&#39;, &#39;__rsub__&#39;, &#39;__rtruediv__&#39;, &#39;__rxor__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__sub__&#39;, &#39;__subclasshook__&#39;, &#39;__truediv__&#39;, &#39;__trunc__&#39;, &#39;__xor__&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="constructors">
+<h3>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">¶</a></h3>
+<p>A constructor is a special type of function of a class which initializes objects of a class. In Python, the constructor is automatically called when an object is beeing created.</p>
+<p>The constructor is a magic function denoted as <code class="docutils literal notranslate"><span class="pre">__init__()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Equivalent statements</span>
+<span class="n">Bob</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Smith&quot;</span><span class="p">,</span> <span class="s2">&quot;Sales&quot;</span><span class="p">)</span>
+<span class="n">Rob</span> <span class="o">=</span> <span class="n">Employee</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">Employee</span><span class="p">,</span> <span class="s2">&quot;Rob&quot;</span><span class="p">,</span> <span class="s2">&quot;Smith&quot;</span><span class="p">,</span> <span class="s2">&quot;Sales&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="object-attributes">
+<h3>Object attributes<a class="headerlink" href="#object-attributes" title="Permalink to this headline">¶</a></h3>
+<p>An object attribute is a piece of data that is associated with an object. It cannot be called as a function. To access an object attribute, we use the dot operator (<code class="docutils literal notranslate"><span class="pre">.</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Employee position of Jane: </span><span class="si">{</span><span class="n">Jane</span><span class="o">.</span><span class="n">position</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Surname of John: </span><span class="si">{</span><span class="n">John</span><span class="o">.</span><span class="n">surname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Name length of John: </span><span class="si">{</span><span class="n">John</span><span class="o">.</span><span class="n">name_length</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Employee position of Jane: Manager
+Surname of John: Doe
+Name length of John: 4
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can explicitly set any attribute to an object using the (<code class="docutils literal notranslate"><span class="pre">.</span></code>) operator as well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">John</span><span class="o">.</span><span class="n">salary</span> <span class="o">=</span> <span class="mi">1000</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;John&#39;s salary: </span><span class="si">{</span><span class="n">John</span><span class="o">.</span><span class="n">salary</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jane&#39;s salary: </span><span class="si">{</span><span class="n">Jane</span><span class="o">.</span><span class="n">salary</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jane does not have a salary yet!</span><span class="se">\n</span><span class="s2">Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">Jane</span><span class="o">.</span><span class="n">salary</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jane&#39;s salary: </span><span class="si">{</span><span class="n">Jane</span><span class="o">.</span><span class="n">salary</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>John&#39;s salary: 1000
+Jane does not have a salary yet!
+Error: &#39;Employee&#39; object has no attribute &#39;salary&#39;
+Jane&#39;s salary: 2000
+</pre></div>
+</div>
+</div>
+</div>
+<p>The objects are completely independent from each other. If we define a new attribute to Jane, it will not affect John and vice versa.</p>
+</div>
+<div class="section" id="object-methods">
+<h3>Object methods<a class="headerlink" href="#object-methods" title="Permalink to this headline">¶</a></h3>
+<p>An object method is a callable function that is associated with an object. Each object method only uses the attributes of the object it is called on. For example, to get the full names of the employees, we can use the method <code class="docutils literal notranslate"><span class="pre">get_full_name()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jane&#39;s full name: </span><span class="si">{</span><span class="n">Jane</span><span class="o">.</span><span class="n">get_full_name</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;John&#39;s full name: </span><span class="si">{</span><span class="n">John</span><span class="o">.</span><span class="n">get_full_name</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jane&#39;s full name: Jane Doe
+John&#39;s full name: John Doe
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="object-state">
+<h2>Object state<a class="headerlink" href="#object-state" title="Permalink to this headline">¶</a></h2>
+<p>An object state is all the data that is stored in the object. The data includes attributes, methods and other data. The state of an object is dynamic because it can change over time.</p>
+<p>For example, let’s create a new class <strong>Human</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Human</span><span class="p">:</span> 
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Template for human object; Attributes:</span>
+
+<span class="sd">        name - name of the human</span>
+<span class="sd">        surname - surname of the human</span>
+<span class="sd">        age - age of the person</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">surname</span> <span class="o">=</span> <span class="n">surname</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="k">def</span> <span class="nf">increase_age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to increase the age of the human by the given amount</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">+=</span> <span class="n">amount</span>
+    
+    <span class="k">def</span> <span class="nf">get_age</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to get the age of the human</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;My name is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> and my age is: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating a 25 year old John Doe</span>
+<span class="n">John</span> <span class="o">=</span> <span class="n">Human</span><span class="p">(</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;Doe&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span> 
+
+<span class="c1"># Initial age value </span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">John</span><span class="o">.</span><span class="n">get_age</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>My name is John and my age is: 25
+</pre></div>
+</div>
+</div>
+</div>
+<p>The initial state of the age of John Doe is 25. We can change that using the method <code class="docutils literal notranslate"><span class="pre">increase_age()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increasting the age </span>
+<span class="n">John</span><span class="o">.</span><span class="n">increase_age</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># What is the age now?</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">John</span><span class="o">.</span><span class="n">get_age</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>My name is John and my age is: 26
+</pre></div>
+</div>
+</div>
+</div>
+<p>The internal state of the object has changed and it effected <strong>only</strong> John.</p>
+</div>
+<div class="section" id="class-inheritance">
+<h2>Class inheritance<a class="headerlink" href="#class-inheritance" title="Permalink to this headline">¶</a></h2>
+<p>Class inheritence in programming is a mechanism that allows one class to inherit the attributes and methods of another class.</p>
+<p>In Python, the syntax is very simple:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DerivedClass</span><span class="p">(</span><span class="n">BaseClass</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>All the methods in the <code class="docutils literal notranslate"><span class="pre">DerivedClass</span></code> are inherited from the <code class="docutils literal notranslate"><span class="pre">BaseClass</span></code>.</p>
+<p>For example, lets a new class called <code class="docutils literal notranslate"><span class="pre">President</span></code> that inherits from the <code class="docutils literal notranslate"><span class="pre">Human</span></code> class:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">President</span><span class="p">(</span><span class="n">Human</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">country</span><span class="p">,</span> <span class="n">years_in_service</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Template for president object; Attributes:</span>
+
+<span class="sd">        name - name of the president</span>
+<span class="sd">        surname - surname of the president</span>
+<span class="sd">        age - age of the president</span>
+<span class="sd">        country - country of the president</span>
+<span class="sd">        years_in_service - years of service of the president</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="n">country</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">years_in_service</span> <span class="o">=</span> <span class="n">years_in_service</span>
+
+    <span class="k">def</span> <span class="nf">introduce</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to introduce the president</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;My name is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">surname</span><span class="si">}</span><span class="s2"> and I am a president of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">country</span><span class="si">}</span><span class="s2"> serving for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">years_in_service</span><span class="si">}</span><span class="s2"> years&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The constructor of <code class="docutils literal notranslate"><span class="pre">President</span></code> has a function called <code class="docutils literal notranslate"><span class="pre">super()</span></code> that calls the constructor of the base class and provides it with all the necessary arguments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lets create the past president of USA</span>
+<span class="n">Donald</span> <span class="o">=</span> <span class="n">President</span><span class="p">(</span><span class="s2">&quot;Donald&quot;</span><span class="p">,</span> <span class="s2">&quot;Trump&quot;</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="s2">&quot;USA&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Introduce yourself </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Donald</span><span class="o">.</span><span class="n">introduce</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>My name is Donald Trump and I am a president of USA serving for 8 years
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="encapsulation">
+<h2>Encapsulation<a class="headerlink" href="#encapsulation" title="Permalink to this headline">¶</a></h2>
+<p>Encapsulation is the packing of data and functions that work on that data within a single object. By doing so, you can hide the internal state of the object from the outside. This is done by defining the attributes of an object as either:</p>
+<ul class="simple">
+<li><p>Public</p></li>
+<li><p>Protected</p></li>
+<li><p>Private</p></li>
+</ul>
+<p>All the public variables in a class are accessible from outside the class and do not have any underscores infront of them <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code>.</p>
+<p>The members of a class that are declared protected are only accessible to a class derived from it and have 1 underscore in front of them <code class="docutils literal notranslate"><span class="pre">_&lt;name&gt;</span></code>.</p>
+<p>All the private variables are not accessible from outside the class and have a double underscore infront of them <code class="docutils literal notranslate"><span class="pre">__&lt;name&gt;</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lets create an example class of an animal </span>
+<span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Template for animal object; Attributes:</span>
+
+<span class="sd">        name - name of the animal</span>
+<span class="sd">        species - species of the animal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">_species</span> <span class="o">=</span> <span class="n">species</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__age</span> <span class="o">=</span> <span class="n">age</span>
+    
+    <span class="k">def</span> <span class="nf">increase_age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to increase the age of the animal by the given amount</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__age</span> <span class="o">+=</span> <span class="n">amount</span>
+
+    <span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the animal information </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;My name is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, I am a </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_species</span><span class="si">}</span><span class="s2"> and my age is: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__age</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># Lets create penguin </span>
+<span class="n">penguin</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Happy Feet&quot;</span><span class="p">,</span> <span class="s2">&quot;Penguin&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Trying to access the private variable will result in an error</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">penguin</span><span class="o">.</span><span class="n">__age</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error: &#39;Animal&#39; object has no attribute &#39;__age&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The above error is a bit missleading, because the private variable is not accessible from outside the class but it DOES exist. Only methods of the same class can access it and modify it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initial information</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">penguin</span><span class="o">.</span><span class="n">print_info</span><span class="p">())</span>
+
+<span class="c1"># Adding one year to the age</span>
+<span class="n">penguin</span><span class="o">.</span><span class="n">increase_age</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="c1"># New information</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">penguin</span><span class="o">.</span><span class="n">print_info</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>My name is Happy Feet, I am a Penguin and my age is: 1
+My name is Happy Feet, I am a Penguin and my age is: 2
+</pre></div>
+</div>
+</div>
+</div>
+<p>Secondly, in Python, there is no existence of <strong>private</strong> instance variables that cannot be accessed except inside an object. We can freely access the private variables of an object (<code class="docutils literal notranslate"><span class="pre">_species</span></code>).</p>
+<p>However, a convention is being followed by most Python coders that a name prefixed with an underscore should be treated as a non-public part of the API or any Python code, whether it is a function, a method, or a data member.</p>
+<p>What happens to the inherited public, private and protected members of the base class? Lets extend the above class:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lets create a domesticated animal class </span>
+<span class="k">class</span> <span class="nc">DomesticatedAnimal</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">owner</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Template for domesticated animal object; Attributes:</span>
+
+<span class="sd">        name - name of the animal</span>
+<span class="sd">        species - species of the animal</span>
+<span class="sd">        age - age of the animal</span>
+<span class="sd">        owner - owner of the animal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">owner</span>
+    
+    <span class="k">def</span> <span class="nf">increase_age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">increase_age</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prints all the information about the animal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;My name is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, I am a </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_species</span><span class="si">}</span><span class="s2"> and my age is: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__age</span><span class="si">}</span><span class="s2"> and I am owned by </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">owner</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># Lets create an instancte of the class</span>
+<span class="n">domesticated_penguin</span> <span class="o">=</span> <span class="n">DomesticatedAnimal</span><span class="p">(</span><span class="s2">&quot;Happy Feet&quot;</span><span class="p">,</span> <span class="s2">&quot;Penguin&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Old McDonald&quot;</span><span class="p">)</span>
+
+<span class="c1"># Lets try increasing the age </span>
+<span class="n">domesticated_penguin</span><span class="o">.</span><span class="n">increase_age</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Lets try to access the private variable </span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">domesticated_penguin</span><span class="o">.</span><span class="n">print_info</span><span class="p">())</span>
+<span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error: &#39;DomesticatedAnimal&#39; object has no attribute &#39;_DomesticatedAnimal__age&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Even though we inherited everything from the <code class="docutils literal notranslate"><span class="pre">Animal</span></code> class to the <code class="docutils literal notranslate"><span class="pre">DomesticatedAnimal</span></code> class, we still cannot access the private variable <code class="docutils literal notranslate"><span class="pre">__age</span></code> from the other class.</p>
+<p>Altough we can augment the internal variable <code class="docutils literal notranslate"><span class="pre">__age</span></code> with a new method <code class="docutils literal notranslate"><span class="pre">increase_age()</span></code> which calls the base class method.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="summary">
+<h1>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h1>
+<p>The most important thing from this chapter to remember is that <strong>everything in Python is an object</strong>. This means that:</p>
+<ul class="simple">
+<li><p>The created object has a template class.</p></li>
+<li><p>The template class has a constructor.</p></li>
+<li><p>The object has attributes and methods which can be reached via the <code class="docutils literal notranslate"><span class="pre">(.)</span></code> operator.</p></li>
+<li><p>You can chain multiple classes together using class inheritence.</p></li>
+</ul>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter-3-python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../chapter-2-software/docker.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Docker</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="data-types.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Data types</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Eligijus Bujokas<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

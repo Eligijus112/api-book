@@ -1,0 +1,680 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application Programming Interface basics &#8212; Machine Learning serving</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API server" href="API-server.html" />
+    <link rel="prev" title="Basic ML serving" href="../chapter-4-ML/machine-learning-model-serving.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning serving</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Hardware and Linux OS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-specs.html">
+   Building blocks of a computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-OS.html">
+   Linux operating system
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Software for an ML developer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/python-intro.html">
+   Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/virtual-envs.html">
+   Virtual environments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/docker.html">
+   Docker
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/object-oriented-programming.html">
+   Classes and objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-types.html">
+   Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-structures.html">
+   Data structures
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model.html">
+   Creating machine learning models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model-serving.html">
+   Basic ML serving
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  API
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Application Programming Interface basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="API-server.html">
+   API server
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="API-DB.html">
+   Databases and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="API-example.html">
+   API and PSQL integration example
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Production Tools and Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/gunicorn.html">
+   Gunicorn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/docker.html">
+   Docker in production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/JWT.html">
+   JWT based authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/migrations.html">
+   Migrations
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  ML serving API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/users.html">
+   ML users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/authentification.html">
+   ML users authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_model.html">
+   Machine learning model
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Bibliography
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references/references.html">
+   Links and references
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chapter-5-API/API-intro.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Eligijus112/api-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Eligijus112/api-book/issues/new?title=Issue%20on%20page%20%2Fchapter-5-API/API-intro.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Eligijus112/api-book/master?urlpath=tree/docs/chapter-5-API/API-intro.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Application Programming Interface basics
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#api-definitions">
+   API definitions
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#http-methods">
+     HTTP methods
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#url">
+     URL
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#url-query-parameters">
+     URL query parameters
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#restful-api">
+     RESTful API
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#endpoint">
+     Endpoint
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#status-codes">
+     Status codes
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#json">
+     JSON
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#api-implementation-in-python">
+   API implementation in Python
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-simple-api">
+     A simple API
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="application-programming-interface-basics">
+<h1>Application Programming Interface basics<a class="headerlink" href="#application-programming-interface-basics" title="Permalink to this headline">¶</a></h1>
+<p>An API is short for Application Programming Interface. It is a set of methods that allows different software parts to interact with each other. The interaction can be done without any internet connection (Windows requests the GPU to render something) or it can be done via the internet (we access our bank account via the internet).</p>
+<p>The <strong>application</strong> part of the definition refers to various applications that are running on a computer.</p>
+<p>The <strong>programming</strong> part of the definition refers to the underlying code that is used to implement the interaction between the applications.</p>
+<p>The <strong>Interface</strong> part of the definition refers to the a set of rules by which computer program interacts.</p>
+<p><img alt="api-flow-chart" src="../_images/api-flow.png" /></p>
+<p>The initial batch of data that is sent from the client to the server/software is called the <strong>request</strong>.</p>
+<p>A <strong>server</strong> can be any piece of code that runs on a computer. Sometimes, a web server, a database server, a game server, a desktop application, a mobile application, a desktop or mobile game is also called a <strong>server</strong>.</p>
+<p>Then, an API waits for the data from the software to come in and sends the output of the software back to the user. The output from the piece of software is called the <strong>response</strong>.</p>
+<p>To put it more mathematically, an API is a function that maps the request to the response:</p>
+<div class="math notranslate nohighlight">
+\[API: request \rightarrow response\]</div>
+<p>Or</p>
+<div class="math notranslate nohighlight">
+\[API(request) = response\]</div>
+<p>In a machine learning universe, the request is the data that is sent to the machine learning algorithm and the response is the output of the algorithm. Thus the API becomes a function that encompasses all the data preparation, the algorithm itself and returning of the results (in the CT winning case - a probability):</p>
+<div class="math notranslate nohighlight">
+\[API(\mathbb{X}) = \widehat{\mathbb{Y}} \in (0, 1)\]</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="api-definitions">
+<h1>API definitions<a class="headerlink" href="#api-definitions" title="Permalink to this headline">¶</a></h1>
+<p>When developing APIs it is very important to know certain concepts and definitions. This helps immensly when trying to integrate the developed API in other systems.</p>
+<div class="section" id="http-methods">
+<h2>HTTP methods<a class="headerlink" href="#http-methods" title="Permalink to this headline">¶</a></h2>
+<p>HTTP stands for hyper text transfer protocol. It is a set of rules that defines how the data is sent from the client to the server. The standart and the most popular methods are:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- GET: request data from the server without altering the underlying resources in any way. 
+- POST: send data to the server and create a new resource on the server.
+- PUT: update data on the server and replace the existing resource.
+- DELETE: delete data from the server and remove the resource.
+</pre></div>
+</div>
+<p>The term <strong>resource</strong> is a loose term that refers to any piece of data that is stored on the server: it can be a row in a database, it can be hyper parameters or it can even be a file.</p>
+<p>To read more about HTTP methods, check out the <a class="reference external" href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods">Wikipedia article</a>.</p>
+</div>
+<div class="section" id="url">
+<h2>URL<a class="headerlink" href="#url" title="Permalink to this headline">¶</a></h2>
+<p>A URL (uniform resource locator) is a string that contains the address of a resource. It is used to identify the resource on the internet. For example,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">google</span><span class="o">.</span><span class="n">com</span>
+</pre></div>
+</div>
+<p>When we type in the above link into our browser, under the hood, a request is sent to the server and we are greeted by the well known homepage of google.</p>
+</div>
+<div class="section" id="url-query-parameters">
+<h2>URL query parameters<a class="headerlink" href="#url-query-parameters" title="Permalink to this headline">¶</a></h2>
+<p>URL query parameters are a defined set of parameters attached to the end of a url. To append query parameters to the end of a URL, use the symbol <code class="docutils literal notranslate"><span class="pre">?</span></code> followed immediately by query parameters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>http://www.example.com?param1=value1
+</pre></div>
+</div>
+<p>The parameters sent to server in this case is called <code class="docutils literal notranslate"><span class="pre">param1</span></code> and its value is <code class="docutils literal notranslate"><span class="pre">value1</span></code>.</p>
+<p>To send multiple query parameters, use the <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> symbol to separate them:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>http://www.example.com?param1=value1&amp;param2=value2
+</pre></div>
+</div>
+</div>
+<div class="section" id="restful-api">
+<h2>RESTful API<a class="headerlink" href="#restful-api" title="Permalink to this headline">¶</a></h2>
+<p>A RESTful API is an architectural style for an application program interface (API) that uses HTTP requests to access and use data. That data can be used to GET, PUT, POST and DELETE data types, which refers to the reading, updating, creating and deleting of operations concerning resources.</p>
+<p>As per RedHat documentation <code class="docutils literal notranslate"><span class="pre">cite</span></code>{redhat:rest}:</p>
+<ul class="simple">
+<li><p>A client-server architecture made up of clients, servers, and resources, with requests managed through HTTP.</p></li>
+<li><p>Stateless client-server communication, meaning no client information is stored between get requests and each request is separate and unconnected.</p></li>
+<li><p>Cacheable data that streamlines client-server interactions.</p></li>
+<li><p>A uniform interface between components so that information is transferred in a standard form. This requires that:</p>
+<ul>
+<li><p>resources requested are identifiable and separate from the representations sent to the client.</p></li>
+<li><p>resources can be manipulated by the client via the representation they receive because the representation contains enough information to do so.</p></li>
+<li><p>self-descriptive messages returned to the client have enough information to describe how the client should process it.</p></li>
+<li><p>hypertext/hypermedia is available, meaning that after accessing a resource the client should be able to use hyperlinks to find all other currently available actions they can take.</p></li>
+</ul>
+</li>
+<li><p>A layered system that organizes each type of server (those responsible for security, load-balancing, etc.) involved the retrieval of requested information into hierarchies, invisible to the client.</p></li>
+</ul>
+</div>
+<div class="section" id="endpoint">
+<h2>Endpoint<a class="headerlink" href="#endpoint" title="Permalink to this headline">¶</a></h2>
+<p>An API endpoint is an URL that handles a certain functionality of the API. For example, if we have an API that allows us to get information about a person, we can have an endpoint that handles the GET request for a person:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">person</span><span class="o">/</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="status-codes">
+<h2>Status codes<a class="headerlink" href="#status-codes" title="Permalink to this headline">¶</a></h2>
+<p>An API status code is a number that is used to indicate the status of the request. The most popular status codes are:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- 200: OK
+- 201: Created
+- 202: Accepted
+- 204: No Content
+- 400: Bad Request
+- 401: Unauthorized
+- 403: Forbidden
+- 404: Not Found
+- 405: Method Not Allowed
+- 409: Conflict
+- 415: Unsupported Media Type
+- 500: Internal Server Error
+</pre></div>
+</div>
+<p>Any response after a request has, in some format, the field <code class="docutils literal notranslate"><span class="pre">status</span> <span class="pre">code</span></code> which indicates for the developer the status of the request.</p>
+</div>
+<div class="section" id="json">
+<h2>JSON<a class="headerlink" href="#json" title="Permalink to this headline">¶</a></h2>
+<p>JSON stands for JavaScript Object Notation. It is a very popular data format that is used to transfer data between a client and a server. The structure of a JSON is a <strong>dictionary</strong>: it is comprised of key-value pairs. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;person&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;John Doe&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="s1">&#39;30&#39;</span><span class="p">}}}</span>
+</pre></div>
+</div>
+<p>The key <code class="docutils literal notranslate"><span class="pre">data</span></code> stores a value of a dictionary with the key <code class="docutils literal notranslate"><span class="pre">person</span></code> and the value of the key <code class="docutils literal notranslate"><span class="pre">name</span></code> is <code class="docutils literal notranslate"><span class="pre">John</span> <span class="pre">Doe</span></code> and the value of the key <code class="docutils literal notranslate"><span class="pre">age</span></code> is <code class="docutils literal notranslate"><span class="pre">30</span></code>.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="api-implementation-in-python">
+<h1>API implementation in Python<a class="headerlink" href="#api-implementation-in-python" title="Permalink to this headline">¶</a></h1>
+<p>Right now, Python has 3 major frameworks for implementing APIs:</p>
+<ul class="simple">
+<li><p><strong>Django</strong></p></li>
+<li><p><strong>Flask</strong></p></li>
+<li><p><strong>FastAPI</strong></p></li>
+</ul>
+<p>These frameworks lets you worry about the logic behind certain endpoints and not dealing with server side logic.</p>
+<p>Throughout this book, we will use FastAPI as the basis of API creation. To read the great documentation, visit <a class="reference external" href="https://fastapi.tiangolo.com/">https://fastapi.tiangolo.com/</a></p>
+<div class="section" id="a-simple-api">
+<h2>A simple API<a class="headerlink" href="#a-simple-api" title="Permalink to this headline">¶</a></h2>
+<p>Lets create an API which accepts a GET method with a float and returns the root of that float. The code is in the file</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span><span class="o">-</span><span class="n">root</span><span class="o">/</span><span class="n">get_root</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat api-root/get_root.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Importing the fastAPI library
+from fastapi import FastAPI
+
+# Creating an instance of the FastAPI class
+app = FastAPI()
+
+# Creating an endpoint with the GET method
+@app.get(&quot;/root_of_number&quot;)
+def root_of_number(number: float):
+    &quot;&quot;&quot;
+    This function returns the square root of a number
+    &quot;&quot;&quot;
+    return {&quot;root&quot;: number ** 0.5} 
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can startup the API using the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uvicorn</span> <span class="n">api</span><span class="o">-</span><span class="n">root</span><span class="o">.</span><span class="n">get_root</span><span class="p">:</span><span class="n">app</span>
+</pre></div>
+</div>
+<p>The output displays the following message:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span>     <span class="n">Started</span> <span class="n">server</span> <span class="n">process</span> <span class="p">[</span><span class="mi">1457528</span><span class="p">]</span>
+<span class="n">INFO</span><span class="p">:</span>     <span class="n">Waiting</span> <span class="k">for</span> <span class="n">application</span> <span class="n">startup</span><span class="o">.</span>
+<span class="n">INFO</span><span class="p">:</span>     <span class="n">Application</span> <span class="n">startup</span> <span class="n">complete</span><span class="o">.</span>
+<span class="n">INFO</span><span class="p">:</span>     <span class="n">Uvicorn</span> <span class="n">running</span> <span class="n">on</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">8000</span> <span class="p">(</span><span class="n">Press</span> <span class="n">CTRL</span><span class="o">+</span><span class="n">C</span> <span class="n">to</span> <span class="n">quit</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The first INFO message indicates that the server process has started and the assigned internatl PID on the system is 1457528. The second message indicates that the server is waiting for the application to start. The third message indicates that the application has started. The fourth message indicates that the server is running on the localhost on port 8000.</p>
+<p>FastAPI framework has now isolated a portion of RAM and other resources for the running API. The program is now in runtime and is ready to accept requests.</p>
+<p>By default, the application is waiting for any data via <a class="reference external" href="http://127.0.0.1:8000">http://127.0.0.1:8000</a>.</p>
+<p>To test out the application, in your browser, we can try querying the endpoint:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>http://127.0.0.1:8000/root_of_number?number=2
+</pre></div>
+</div>
+<p>The response is a JSON object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;root&quot;</span><span class="p">:</span><span class="mf">1.4142135623730951</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter-5-API"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../chapter-4-ML/machine-learning-model-serving.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Basic ML serving</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="API-server.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">API server</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Eligijus Bujokas<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

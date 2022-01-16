@@ -1,0 +1,104 @@
+Traceback (most recent call last):
+  File "/home/eligijus/api-book/api_book/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/eligijus/api-book/api_book/lib/python3.8/site-packages/nbclient/client.py", line 1117, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/eligijus/api-book/api_book/lib/python3.8/site-packages/nbclient/util.py", line 78, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/eligijus/api-book/api_book/lib/python3.8/site-packages/nbclient/util.py", line 57, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/eligijus/api-book/api_book/lib/python3.8/site-packages/nbclient/client.py", line 558, in async_execute
+    await self.async_execute_cell(
+  File "/home/eligijus/api-book/api_book/lib/python3.8/site-packages/nbclient/client.py", line 862, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/eligijus/api-book/api_book/lib/python3.8/site-packages/nbclient/client.py", line 765, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Getting the probabilities 
+p = model.predict_proba(input_df)[0]
+
+# Initial results 
+print(p)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mXGBoostError[0m                              Traceback (most recent call last)
+[0;32m/tmp/ipykernel_14232/3693468520.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;31m# Getting the probabilities[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 2[0;31m [0mp[0m [0;34m=[0m [0mmodel[0m[0;34m.[0m[0mpredict_proba[0m[0;34m([0m[0minput_df[0m[0;34m)[0m[0;34m[[0m[0;36m0[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      3[0m [0;34m[0m[0m
+[1;32m      4[0m [0;31m# Initial results[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0mprint[0m[0;34m([0m[0mp[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/api-book/api_book/lib/python3.8/site-packages/xgboost/sklearn.py[0m in [0;36mpredict_proba[0;34m(self, X, ntree_limit, validate_features, base_margin, iteration_range)[0m
+[1;32m   1346[0m         [0;31m# binary:logistic: Expand the prob vector into 2-class matrix after predict.[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1347[0m         [0;31m# binary:logitraw: Unsupported by predict_proba()[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1348[0;31m         class_probs = super().predict(
+[0m[1;32m   1349[0m             [0mX[0m[0;34m=[0m[0mX[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1350[0m             [0moutput_margin[0m[0;34m=[0m[0mself[0m[0;34m.[0m[0mobjective[0m [0;34m==[0m [0;34m"multi:softmax"[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/api-book/api_book/lib/python3.8/site-packages/xgboost/sklearn.py[0m in [0;36mpredict[0;34m(self, X, output_margin, ntree_limit, validate_features, base_margin, iteration_range)[0m
+[1;32m    901[0m             [0menable_categorical[0m[0;34m=[0m[0mself[0m[0;34m.[0m[0menable_categorical[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    902[0m         )
+[0;32m--> 903[0;31m         return self.get_booster().predict(
+[0m[1;32m    904[0m             [0mdata[0m[0;34m=[0m[0mtest[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    905[0m             [0miteration_range[0m[0;34m=[0m[0miteration_range[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/api-book/api_book/lib/python3.8/site-packages/xgboost/core.py[0m in [0;36mpredict[0;34m(self, data, output_margin, ntree_limit, pred_leaf, pred_contribs, approx_contribs, pred_interactions, validate_features, training, iteration_range, strict_shape)[0m
+[1;32m   1885[0m             [0;32mraise[0m [0mTypeError[0m[0;34m([0m[0;34m'Expecting data to be a DMatrix object, got: '[0m[0;34m,[0m [0mtype[0m[0;34m([0m[0mdata[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1886[0m         [0;32mif[0m [0mvalidate_features[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1887[0;31m             [0mself[0m[0;34m.[0m[0m_validate_features[0m[0;34m([0m[0mdata[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1888[0m         [0miteration_range[0m [0;34m=[0m [0m_convert_ntree_limit[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mntree_limit[0m[0;34m,[0m [0miteration_range[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1889[0m         args = {
+
+[0;32m~/api-book/api_book/lib/python3.8/site-packages/xgboost/core.py[0m in [0;36m_validate_features[0;34m(self, data)[0m
+[1;32m   2449[0m         [0mSet[0m [0mfeature_names[0m [0;32mand[0m [0mfeature_types[0m [0;32mfrom[0m [0mDMatrix[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   2450[0m         """
+[0;32m-> 2451[0;31m         [0;32mif[0m [0mdata[0m[0;34m.[0m[0mnum_row[0m[0;34m([0m[0;34m)[0m [0;34m==[0m [0;36m0[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   2452[0m             [0;32mreturn[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   2453[0m [0;34m[0m[0m
+
+[0;32m~/api-book/api_book/lib/python3.8/site-packages/xgboost/core.py[0m in [0;36mnum_row[0;34m(self)[0m
+[1;32m    907[0m         """
+[1;32m    908[0m         [0mret[0m [0;34m=[0m [0mc_bst_ulong[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 909[0;31m         _check_call(_LIB.XGDMatrixNumRow(self.handle,
+[0m[1;32m    910[0m                                          ctypes.byref(ret)))
+[1;32m    911[0m         [0;32mreturn[0m [0mret[0m[0;34m.[0m[0mvalue[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/api-book/api_book/lib/python3.8/site-packages/xgboost/core.py[0m in [0;36m_check_call[0;34m(ret)[0m
+[1;32m    216[0m     """
+[1;32m    217[0m     [0;32mif[0m [0mret[0m [0;34m!=[0m [0;36m0[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 218[0;31m         [0;32mraise[0m [0mXGBoostError[0m[0;34m([0m[0mpy_str[0m[0;34m([0m[0m_LIB[0m[0;34m.[0m[0mXGBGetLastError[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    219[0m [0;34m[0m[0m
+[1;32m    220[0m [0;34m[0m[0m
+
+[0;31mXGBoostError[0m: [09:43:17] ../src/c_api/c_api.cc:524: DMatrix/Booster has not been initialized or has already been disposed.
+Stack trace:
+  [bt] (0) /home/eligijus/api-book/api_book/lib/python3.8/site-packages/xgboost/lib/libxgboost.so(+0x972bd) [0x7ff8ddbf82bd]
+  [bt] (1) /home/eligijus/api-book/api_book/lib/python3.8/site-packages/xgboost/lib/libxgboost.so(XGDMatrixNumRow+0x97) [0x7ff8ddbf92a7]
+  [bt] (2) /lib/x86_64-linux-gnu/libffi.so.7(+0x6ff5) [0x7ff98d6f5ff5]
+  [bt] (3) /lib/x86_64-linux-gnu/libffi.so.7(+0x640a) [0x7ff98d6f540a]
+  [bt] (4) /usr/lib/python3.8/lib-dynload/_ctypes.cpython-38-x86_64-linux-gnu.so(_ctypes_callproc+0x5b6) [0x7ff98ceaa306]
+  [bt] (5) /usr/lib/python3.8/lib-dynload/_ctypes.cpython-38-x86_64-linux-gnu.so(+0x139dc) [0x7ff98ceaa9dc]
+  [bt] (6) /home/eligijus/api-book/api_book/bin/python(_PyObject_MakeTpCall+0x29e) [0x5f698e]
+  [bt] (7) /home/eligijus/api-book/api_book/bin/python(_PyEval_EvalFrameDefault+0x5dcb) [0x57148b]
+  [bt] (8) /home/eligijus/api-book/api_book/bin/python(_PyFunction_Vectorcall+0x1b6) [0x5f6166]
+
+
+XGBoostError: [09:43:17] ../src/c_api/c_api.cc:524: DMatrix/Booster has not been initialized or has already been disposed.
+Stack trace:
+  [bt] (0) /home/eligijus/api-book/api_book/lib/python3.8/site-packages/xgboost/lib/libxgboost.so(+0x972bd) [0x7ff8ddbf82bd]
+  [bt] (1) /home/eligijus/api-book/api_book/lib/python3.8/site-packages/xgboost/lib/libxgboost.so(XGDMatrixNumRow+0x97) [0x7ff8ddbf92a7]
+  [bt] (2) /lib/x86_64-linux-gnu/libffi.so.7(+0x6ff5) [0x7ff98d6f5ff5]
+  [bt] (3) /lib/x86_64-linux-gnu/libffi.so.7(+0x640a) [0x7ff98d6f540a]
+  [bt] (4) /usr/lib/python3.8/lib-dynload/_ctypes.cpython-38-x86_64-linux-gnu.so(_ctypes_callproc+0x5b6) [0x7ff98ceaa306]
+  [bt] (5) /usr/lib/python3.8/lib-dynload/_ctypes.cpython-38-x86_64-linux-gnu.so(+0x139dc) [0x7ff98ceaa9dc]
+  [bt] (6) /home/eligijus/api-book/api_book/bin/python(_PyObject_MakeTpCall+0x29e) [0x5f698e]
+  [bt] (7) /home/eligijus/api-book/api_book/bin/python(_PyEval_EvalFrameDefault+0x5dcb) [0x57148b]
+  [bt] (8) /home/eligijus/api-book/api_book/bin/python(_PyFunction_Vectorcall+0x1b6) [0x5f6166]
+
+
+

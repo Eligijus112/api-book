@@ -1,0 +1,490 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Links and references &#8212; Machine Learning serving</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="ML model" href="../chapter-7-final-serving/machine_learning_model.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning serving</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Hardware and Linux OS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-specs.html">
+   Building blocks of a computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-OS.html">
+   Linux operating system
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Software for an ML developer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/python-intro.html">
+   Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/virtual-envs.html">
+   Virtual environments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/docker.html">
+   Docker
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/object-oriented-programming.html">
+   Classes and objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-types.html">
+   Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-structures.html">
+   Data structures
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model.html">
+   Creating machine learning models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model-serving.html">
+   Basic ML serving
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-intro.html">
+   Application Programming Interface basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-server.html">
+   API server
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-DB.html">
+   Databases and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-example.html">
+   API and PSQL integration example
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Production Tools and Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/gunicorn.html">
+   Gunicorn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/docker.html">
+   Docker in production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/JWT.html">
+   JWT based authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/migrations.html">
+   Migrations
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  ML serving API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/users.html">
+   ML users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/authentification.html">
+   ML users authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_model.html">
+   ML model
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Bibliography
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Links and references
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/references/references.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Eligijus112/api-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Eligijus112/api-book/issues/new?title=Issue%20on%20page%20%2Freferences/references.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="links-and-references">
+<h1>Links and references<a class="headerlink" href="#links-and-references" title="Permalink to this headline">¶</a></h1>
+<p id="id1"><dl class="citation">
+<dt class="label" id="id3"><span class="brackets">alt21</span></dt>
+<dd><p>altexsoft. What is api: definition, types, specifications, documentation. 2021. URL: <a class="reference external" href="https://www.altexsoft.com/blog/engineering/what-is-api-definition-types-specifications-documentation/">https://www.altexsoft.com/blog/engineering/what-is-api-definition-types-specifications-documentation/</a>.</p>
+</dd>
+<dt class="label" id="id17"><span class="brackets">Bro18</span></dt>
+<dd><p>Paul Brown. The linux filesystem explained. 2018. URL: <a class="reference external" href="https://www.linux.com/learn/linux-filesystem-explained">https://www.linux.com/learn/linux-filesystem-explained</a>.</p>
+</dd>
+<dt class="label" id="id5"><span class="brackets">Bur19</span></dt>
+<dd><p>Andryi Burkov. <em>The Hundred-Page Machine Learning Book</em>. Andryi Burkov, 2019. URL: <a class="reference external" href="http://themlbook.com/">http://themlbook.com/</a>.</p>
+</dd>
+<dt class="label" id="id28"><span class="brackets">DC20</span></dt>
+<dd><p>Giuseppe Jurman Davide Chicco. Machine learning can predict survival of patients with heart failure from serum creatinine and ejection fraction alone. <em>BMC Medical Informatics and Decision Making</em>, 2020. URL: <a class="reference external" href="https://rdcu.be/cEc9N">https://rdcu.be/cEc9N</a>.</p>
+</dd>
+<dt class="label" id="id12"><span class="brackets">Flo21</span></dt>
+<dd><p>David Floyer. Qlc flash hamrs hdd. 2021. URL: <a class="reference external" href="https://wikibon.com/qlc-flash-hamrs-hdd/">https://wikibon.com/qlc-flash-hamrs-hdd/</a>.</p>
+</dd>
+<dt class="label" id="id20"><span class="brackets">Fou21a</span></dt>
+<dd><p>Python Software Foundation. Python documentation. 2021. URL: <a class="reference external" href="https://docs.python.org/3/">https://docs.python.org/3/</a>.</p>
+</dd>
+<dt class="label" id="id23"><span class="brackets">Fou21b</span></dt>
+<dd><p>The Python Foundation. Data structures. 2021. URL: <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html">https://docs.python.org/3/tutorial/datastructures.html</a>.</p>
+</dd>
+<dt class="label" id="id16"><span class="brackets">Gar08</span></dt>
+<dd><p>Machtelt Garrels. <em>Introduction to Linux</em>. Machtelt Garrels, 2008. URL: <a class="reference external" href="https://tldp.org/LDP/intro-linux/intro-linux.pdf">https://tldp.org/LDP/intro-linux/intro-linux.pdf</a>.</p>
+</dd>
+<dt class="label" id="id22"><span class="brackets">Gee21</span></dt>
+<dd><p>GeeksForGeeks. Binary search tree. 2021. URL: <a class="reference external" href="https://www.geeksforgeeks.org/binary-search-tree-data-structure/">https://www.geeksforgeeks.org/binary-search-tree-data-structure/</a>.</p>
+</dd>
+<dt class="label" id="id2"><span class="brackets">Mit97</span></dt>
+<dd><p>T. Mitchell. <em>Machine Learning</em>. McGraw Hill, 1997. URL: <a class="reference external" href="http://www.cs.cmu.edu/~tom/mlbook.html">http://www.cs.cmu.edu/~tom/mlbook.html</a>.</p>
+</dd>
+<dt class="label" id="id6"><span class="brackets">Ng20</span></dt>
+<dd><p>Andrew Ng. <em>MLOps: From Model centric to Data centric AI</em>. 2020. URL: <a class="reference external" href="https://www.deeplearning.ai/wp-content/uploads/2021/06/MLOps-From-Model-centric-to-Data-centric-AI.pdf">https://www.deeplearning.ai/wp-content/uploads/2021/06/MLOps-From-Model-centric-to-Data-centric-AI.pdf</a>.</p>
+</dd>
+<dt class="label" id="id27"><span class="brackets">oCS21</span></dt>
+<dd><p>Darthmouth Department of Computer Science. Socket programming. 2021. URL: <a class="reference external" href="https://www.cs.dartmouth.edu/~campbell/cs60/socketprogramming.html">https://www.cs.dartmouth.edu/~campbell/cs60/socketprogramming.html</a>.</p>
+</dd>
+<dt class="label" id="id18"><span class="brackets">PyP21</span></dt>
+<dd><p>PyPL. Pypl index. 2021. URL: <a class="reference external" href="https://pypl.github.io/PYPL.html">https://pypl.github.io/PYPL.html</a>.</p>
+</dd>
+<dt class="label" id="id4"><span class="brackets">Rac03</span></dt>
+<dd><p>Alfredas Račkaukas. <em>Introduction to Econometrics</em>. Vilnius University, 2003. URL: <a class="reference external" href="http://www.statistika.mif.vu.lt/wp-content/uploads/2014/05/Ek-apz-t.pdf">http://www.statistika.mif.vu.lt/wp-content/uploads/2014/05/Ek-apz-t.pdf</a>.</p>
+</dd>
+<dt class="label" id="id8"><span class="brackets">Sol20</span></dt>
+<dd><p>Jacob Solawetz. <em>The Train, Validation, Test Split and Why You Need It</em>. 2020. URL: <a class="reference external" href="https://blog.roboflow.com/train-test-split/">https://blog.roboflow.com/train-test-split/</a>.</p>
+</dd>
+<dt class="label" id="id15"><span class="brackets">Sta21</span></dt>
+<dd><p>Statista. Global market share held by operating systems for desktop pcs, from january 2013 to june 2021. 2021. URL: <a class="reference external" href="https://www.statista.com/statistics/218089/global-market-share-of-windows-7/">https://www.statista.com/statistics/218089/global-market-share-of-windows-7/</a>.</p>
+</dd>
+<dt class="label" id="id9"><span class="brackets">Ste19</span></dt>
+<dd><p>Jonathan E. Steinhart. <em>The Secret Life of Programs; Understand Computers — Craft Better Code</em>. William Pollock, 2019.</p>
+</dd>
+<dt class="label" id="id7"><span class="brackets">Tib21</span></dt>
+<dd><p>Gareth James; Daniela Witten; Trevor Hastie; Robert Tibshirani. <em>An Introduction to Statistical Learning with Applications in R Second Edition</em>. Springer, 2021. URL: <a class="reference external" href="https://web.stanford.edu/~hastie/ISLR2/ISLRv2_website.pdf">https://web.stanford.edu/~hastie/ISLR2/ISLRv2_website.pdf</a>.</p>
+</dd>
+<dt class="label" id="id10"><span class="brackets">Wik20a</span></dt>
+<dd><p>Wikipedia. Computers. 2020. URL: <a class="reference external" href="https://en.wikipedia.org/wiki/Computers">https://en.wikipedia.org/wiki/Computers</a>.</p>
+</dd>
+<dt class="label" id="id11"><span class="brackets">Wik20b</span></dt>
+<dd><p>Wikipedia. Transistors. 2020. URL: <a class="reference external" href="https://en.wikipedia.org/wiki/Transistor">https://en.wikipedia.org/wiki/Transistor</a>.</p>
+</dd>
+<dt class="label" id="id21"><span class="brackets">Wik21a</span></dt>
+<dd><p>Wikipedia. Data structures. 2021. URL: <a class="reference external" href="https://en.wikipedia.org/wiki/Data_structure">https://en.wikipedia.org/wiki/Data_structure</a>.</p>
+</dd>
+<dt class="label" id="id24"><span class="brackets">Wik21b</span></dt>
+<dd><p>Wikipedia. Data type. 2021. URL: <a class="reference external" href="https://en.wikipedia.org/wiki/Data_type">https://en.wikipedia.org/wiki/Data_type</a>.</p>
+</dd>
+<dt class="label" id="id14"><span class="brackets">Wik21c</span></dt>
+<dd><p>Wikipedia. Kernel. 2021. URL: <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_(operating_system)">https://en.wikipedia.org/wiki/Kernel_(operating_system)</a>.</p>
+</dd>
+<dt class="label" id="id13"><span class="brackets">Wik21d</span></dt>
+<dd><p>Wikipedia. Operating system. 2021. URL: <a class="reference external" href="https://en.wikipedia.org/wiki/Operating_system">https://en.wikipedia.org/wiki/Operating_system</a>.</p>
+</dd>
+<dt class="label" id="id19"><span class="brackets">Zen21</span></dt>
+<dd><p>Python Zen. Python zen. 2021. URL: <a class="reference external" href="https://www.python.org/dev/peps/pep-0020/">https://www.python.org/dev/peps/pep-0020/</a>.</p>
+</dd>
+</dl>
+</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./references"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../chapter-7-final-serving/machine_learning_model.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">ML model</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Eligijus Bujokas<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

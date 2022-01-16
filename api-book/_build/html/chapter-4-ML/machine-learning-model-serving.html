@@ -1,0 +1,742 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic ML serving &#8212; Machine Learning serving</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Application Programming Interface basics" href="../chapter-5-API/API-intro.html" />
+    <link rel="prev" title="Creating machine learning models" href="machine-learning-model.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning serving</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Hardware and Linux OS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-specs.html">
+   Building blocks of a computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-OS.html">
+   Linux operating system
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Software for an ML developer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/python-intro.html">
+   Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/virtual-envs.html">
+   Virtual environments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/docker.html">
+   Docker
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/object-oriented-programming.html">
+   Classes and objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-types.html">
+   Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-structures.html">
+   Data structures
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine-learning-model.html">
+   Creating machine learning models
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Basic ML serving
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-intro.html">
+   Application Programming Interface basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-server.html">
+   API server
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-DB.html">
+   Databases and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-example.html">
+   API and PSQL integration example
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Production Tools and Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/gunicorn.html">
+   Gunicorn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/docker.html">
+   Docker in production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/JWT.html">
+   JWT based authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/migrations.html">
+   Migrations
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  ML serving API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/users.html">
+   ML users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/authentification.html">
+   ML users authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_model.html">
+   ML model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_db_models.html">
+   ML database models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api.html">
+   Machine learning API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api_production.html">
+   Wrapping the API into a production container
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Bibliography
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references/references.html">
+   Links and references
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chapter-4-ML/machine-learning-model-serving.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Eligijus112/api-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Eligijus112/api-book/issues/new?title=Issue%20on%20page%20%2Fchapter-4-ML/machine-learning-model-serving.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Eligijus112/api-book/master?urlpath=tree/docs/chapter-4-ML/machine-learning-model-serving.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Basic ML serving
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#importing-python-packages">
+   Importing Python packages
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-the-model-objects">
+   Reading the model objects
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-serving">
+   Model serving
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simulating-input">
+     Simulating input
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#input-preprocesing-function">
+       Input preprocesing function
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-the-model">
+     Using the model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#limitations-of-this-approach">
+   Limitations of this approach
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="basic-ml-serving">
+<h1>Basic ML serving<a class="headerlink" href="#basic-ml-serving" title="Permalink to this headline">¶</a></h1>
+<p>In the previous chapter we have created two very important objects and stored them in files:</p>
+<p><strong>ml-model-xgb.pkl</strong> - the fitted on data and ready to be used xgboost machine learning model.</p>
+<p><strong>ml-model-lr.pkl</strong> - the fitted on data and ready to be used logistic regression machine learning model.</p>
+<p><strong>ml-features.json</strong> - a dictionary containing the features that the model was trained with. <strong>NOTE</strong>: it is very important to preserve the exact <strong>key</strong> sequence in all the future use of the model.</p>
+<p>The file structure is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── ml_models
+│   ├── ml-features.json
+│   ├── ml-model-lr.pkl
+│   └── ml-model-xgb.pkl
+</pre></div>
+</div>
+<p>No matter what type of serving - simple or complex - we are doing, these two objects is a minimum requirement if we want anyone to use our ML solution.</p>
+<p>A basic chart for ML model serving is the following:</p>
+<p><img alt="ml-serving-basic" src="../_images/basic-ml-serving.png" /></p>
+<p>The steps are the following:</p>
+<ul class="simple">
+<li><p>Preparate the raw data for the model</p></li>
+<li><p>Use the model with the prepared data</p></li>
+<li><p>Store/use the predictions</p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="importing-python-packages">
+<h1>Importing Python packages<a class="headerlink" href="#importing-python-packages" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Json reading </span>
+<span class="kn">import</span> <span class="nn">json</span> 
+
+<span class="c1"># Pickle reading </span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="c1"># Operating system functionality </span>
+<span class="kn">import</span> <span class="nn">os</span> 
+
+<span class="c1"># Input simulation </span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">widgets</span><span class="p">,</span> <span class="n">interact</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+
+<span class="c1"># Data wrangling </span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="reading-the-model-objects">
+<h1>Reading the model objects<a class="headerlink" href="#reading-the-model-objects" title="Permalink to this headline">¶</a></h1>
+<p>Before any serving can be done, the necessary objects need to be loaded into the host computer memory. This simple fact is true even for the most complex real time ML model serving systems: somewhere, between all the clouds and servers, all the objects are loaded to computer memory and is used in runtime.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Saving the path to the ML folder </span>
+<span class="n">_ml_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="s1">&#39;ml_models&#39;</span><span class="p">)</span>
+<span class="n">_ml_model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_ml_folder</span><span class="p">,</span> <span class="s2">&quot;ml-model-lr.pkl&quot;</span><span class="p">)</span>
+<span class="n">_ml_features_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_ml_folder</span><span class="p">,</span> <span class="s2">&quot;ml-features.json&quot;</span><span class="p">)</span>
+
+<span class="c1"># Reading the model object </span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">_ml_model_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">_ml_features_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+
+<span class="c1"># Printing out the features </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;bomb_planted&#39;: &#39;int64&#39;, &#39;ct_health_share&#39;: &#39;float64&#39;, &#39;ct_players_alive&#39;: &#39;float64&#39;, &#39;t_players_alive&#39;: &#39;float64&#39;, &#39;ct_defuse_kit_present&#39;: &#39;int64&#39;, &#39;ct_helmets&#39;: &#39;float64&#39;, &#39;t_helmets&#39;: &#39;float64&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="model-serving">
+<h1>Model serving<a class="headerlink" href="#model-serving" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="simulating-input">
+<h2>Simulating input<a class="headerlink" href="#simulating-input" title="Permalink to this headline">¶</a></h2>
+<p>To test out our ML model, we will simulate an input for it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Has the bomb been planted? </span>
+<span class="n">bomb_planted</span> <span class="o">=</span> <span class="kc">True</span> 
+
+<span class="c1"># Boolean for the presence of the difusal kit</span>
+<span class="n">ct_defuse_kit_present</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># CT health share of total; the range is (0, 1.0)</span>
+<span class="n">ct_health_share</span> <span class="o">=</span> <span class="mf">0.75</span>
+
+<span class="c1"># CT and T alive players; the value set is {1, 2, 3, 4, 5}</span>
+<span class="n">ct_players_alive</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">t_players_alive</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># CT and T helmets; the value set is {1, 2, 3, 4, 5}</span>
+<span class="n">ct_helmets</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">t_helmets</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating a dataframe which will be used as raw input </span>
+<span class="n">raw_input</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;bomb_planted&quot;</span><span class="p">:</span> <span class="n">bomb_planted</span><span class="p">,</span>
+    <span class="s2">&quot;ct_defuse_kit_present&quot;</span><span class="p">:</span> <span class="n">ct_defuse_kit_present</span><span class="p">,</span>
+    <span class="s2">&quot;ct_health_share&quot;</span><span class="p">:</span> <span class="n">ct_health_share</span><span class="p">,</span> 
+    <span class="s2">&quot;ct_players_alive&quot;</span><span class="p">:</span> <span class="n">ct_players_alive</span><span class="p">,</span>
+    <span class="s2">&quot;t_players_alive&quot;</span><span class="p">:</span> <span class="n">t_players_alive</span><span class="p">,</span>
+    <span class="s2">&quot;ct_helmets&quot;</span><span class="p">:</span> <span class="n">ct_helmets</span><span class="p">,</span>
+    <span class="s2">&quot;t_helmets&quot;</span><span class="p">:</span> <span class="n">t_helmets</span>
+<span class="p">}</span>
+
+<span class="c1"># Displaying the raw input </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">raw_input</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;bomb_planted&#39;: True, &#39;ct_defuse_kit_present&#39;: False, &#39;ct_health_share&#39;: 0.75, &#39;ct_players_alive&#39;: 4, &#39;t_players_alive&#39;: 3, &#39;ct_helmets&#39;: 4, &#39;t_helmets&#39;: 3}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="input-preprocesing-function">
+<h3>Input preprocesing function<a class="headerlink" href="#input-preprocesing-function" title="Permalink to this headline">¶</a></h3>
+<p>Lets define a function that prepares the input for the model given the raw input dictionary and the saved features JSON object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prepare_input</span><span class="p">(</span><span class="n">raw_input_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function that accepts the raw input dictionary and the features dictionary and returns a pandas dataframe with the input prepared for the model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Extracting the key names </span>
+    <span class="n">feature_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">raw_input_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">original_feature_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="c1"># Ensuring that all the keys present in **features** are in **raw_input_dict**</span>
+    <span class="n">missing_features</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">original_feature_names</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing_features</span><span class="p">):</span> 
+        <span class="k">return</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing features in input: </span><span class="si">{</span><span class="n">missing_features</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Iterating and preprocesing </span>
+    <span class="n">prepared_features</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">feature_names</span><span class="p">:</span>
+        <span class="c1"># Extracting the type of the feature </span>
+        <span class="n">feature_type</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span> 
+
+        <span class="c1"># Converting to that type </span>
+        <span class="n">feature_value</span> <span class="o">=</span> <span class="n">raw_input_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">feature_type</span> <span class="o">==</span> <span class="s2">&quot;float64&quot;</span><span class="p">:</span>
+            <span class="n">feature_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">feature_value</span><span class="p">)</span> 
+        
+        <span class="k">if</span> <span class="n">feature_type</span> <span class="o">==</span> <span class="s2">&quot;int64&quot;</span><span class="p">:</span>
+            <span class="n">feature_value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">feature_value</span><span class="p">)</span>
+
+        <span class="c1"># Saving to the prepared features dictionary</span>
+        <span class="n">prepared_features</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature_value</span> 
+    
+    <span class="c1"># Creating a dataframe from the prepared features </span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">prepared_features</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># Ensuring that the names are in the exact order </span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">original_feature_names</span><span class="p">]</span>
+
+    <span class="c1"># Returning the dataframe </span>
+    <span class="k">return</span> <span class="n">df</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Testing out the function </span>
+<span class="n">input_df</span> <span class="o">=</span> <span class="n">prepare_input</span><span class="p">(</span><span class="n">raw_input</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Preprocesed input for ML model:</span><span class="se">\n</span><span class="si">{</span><span class="n">input_df</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Preprocesed input for ML model:
+   bomb_planted  ct_health_share  ct_players_alive  t_players_alive  \
+0             1             0.75               4.0              3.0   
+
+   ct_defuse_kit_present  ct_helmets  t_helmets  
+0                      0         4.0        3.0  
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-the-model">
+<h2>Using the model<a class="headerlink" href="#using-the-model" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have the input with the exact same structure with which the model was built, we can use that input for extracting predictions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Getting the probabilities </span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">input_df</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Initial results </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.34404195 0.65595805]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The extracted probabilities is vector of two and defines the following probabilities:</p>
+<div class="math notranslate nohighlight">
+\[ \mathbb{P(Y = 0|X)} \]</div>
+<p>And</p>
+<div class="math notranslate nohighlight">
+\[ \mathbb{P(Y = 1|X)}\]</div>
+<p>Note that:</p>
+<div class="math notranslate nohighlight">
+\[ \mathbb{P(Y = 1|X)} = 1 - \mathbb{P(Y = 0|X)}  \]</div>
+<p>In other words, the first coordinate is the probability that CT team will lose with the given inputs and the second coordinate is the probability that CT will win with the given inputs.</p>
+<p>These two probabilities is the final output of the machine learning model. How we use these results is a matter of our fantasy.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="limitations-of-this-approach">
+<h1>Limitations of this approach<a class="headerlink" href="#limitations-of-this-approach" title="Permalink to this headline">¶</a></h1>
+<p>This notebook is perfect to play around with the model and to see how certain feature values influence the model. This interactive notebook could be called as a sufficient serving API for a data scientist for debugging reasons or for presentation of the results.</p>
+<p>But we cannot call this type of serving <strong>production</strong> grade serving for several reasons:</p>
+<ul class="simple">
+<li><p>The enduser would have to download the notebook, the model and the feature list every time there is an update.</p></li>
+<li><p>Different machines may produce different results of the notebook (or would produce an error)</p></li>
+<li><p>It is hard to integrate a jupyter notebook to any working systems that the enduser may have.</p></li>
+<li><p>The code in the notebook would not deal well with a batch of inputs (&gt;1 row in the dataset)</p></li>
+</ul>
+<p>In the next chapters of this book we will explain all the steps and technologies needed in order to create a production ready ML serving system.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter-4-ML"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="machine-learning-model.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Creating machine learning models</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="../chapter-5-API/API-intro.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Application Programming Interface basics</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Eligijus Bujokas<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

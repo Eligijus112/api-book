@@ -1,0 +1,118 @@
+Traceback (most recent call last):
+  File "/home/eligijus/api-book/api_book/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/eligijus/api-book/api_book/lib/python3.8/site-packages/nbclient/client.py", line 1117, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/eligijus/api-book/api_book/lib/python3.8/site-packages/nbclient/util.py", line 78, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/eligijus/api-book/api_book/lib/python3.8/site-packages/nbclient/util.py", line 57, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/eligijus/api-book/api_book/lib/python3.8/site-packages/nbclient/client.py", line 558, in async_execute
+    await self.async_execute_cell(
+  File "/home/eligijus/api-book/api_book/lib/python3.8/site-packages/nbclient/client.py", line 862, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/eligijus/api-book/api_book/lib/python3.8/site-packages/nbclient/client.py", line 765, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Defining the final feature list 
+final_features = numeric_columns + ['smoking', 'diabetes', 'anemia']
+
+# Defining a list of hyperparameters 
+hp_dict = {
+    'n_estimators': [30, 60, 120, 160], 
+    'max_depth': [2, 3, 4, 5], 
+    'learning_rate': [0.1, 0.2, 0.3],
+    'eval_metric': ['logloss'],
+    'use_label_encoder': [False],
+    'min_child_weight': [0.5, 1]
+}
+
+# Creating the parameter grid 
+param_grid = ParameterGrid(hp_dict)
+
+# Initiating the empty placeholder for the AUC scores
+auc_scores = []
+
+# Iterating over the parameter grid
+for params in param_grid:
+    # Spliting the data into 5 folds 
+    kf = KFold(n_splits=5, shuffle=True, random_state=3)
+
+    # Initiating the empty placeholder for the scores
+    auc_scores_folds = []
+
+    # Iterating over the folds
+    for train_index, test_index in kf.split(d):
+        # Splitting the data into training and test sets
+        train, test = d.iloc[train_index], d.iloc[test_index]
+        
+        train_X_fold, test_X_fold = train[final_features], test[final_features]
+        train_y_fold, test_y_fold = train[y_var], test[y_var]
+
+        # Creating the XGBoost model 
+        model = xgb.XGBClassifier(**params)
+
+        # Fitting the model 
+        model.fit(train_X_fold, train_y_fold)
+
+        # Predicting the test set 
+        preds = model.predict_proba(test_X_fold)[:, 1]
+
+        # Calculating the AUC score 
+        auc_scores_folds.append(roc_auc_score(test_y_fold, preds))
+    
+    # Averaging the scores and appending to the master list 
+    auc_scores.append(np.mean(auc_scores_folds))
+
+# Creating the dataframe with the hyperparameters and AUC scores
+df_scores = pd.DataFrame(param_grid)
+df_scores['mean_auc'] = auc_scores
+
+# Sorting by mean AUC score
+df_scores = df_scores.sort_values('mean_auc', ascending=False)
+df_scores.reset_index(drop=True, inplace=True)
+
+# Printing the top 10 hyperparameters
+print(f"Top 10 hyperparameters:\n{df_scores.head(10)}")
+
+# Saving the best hyper parameters
+best_hp = df_scores.iloc[0].to_dict()
+best_hp.pop('mean_auc')
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mKeyError[0m                                  Traceback (most recent call last)
+[0;32m/tmp/ipykernel_42864/116530631.py[0m in [0;36m<module>[0;34m[0m
+[1;32m     31[0m         [0mtrain[0m[0;34m,[0m [0mtest[0m [0;34m=[0m [0md[0m[0;34m.[0m[0miloc[0m[0;34m[[0m[0mtrain_index[0m[0;34m][0m[0;34m,[0m [0md[0m[0;34m.[0m[0miloc[0m[0;34m[[0m[0mtest_index[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[1;32m     32[0m [0;34m[0m[0m
+[0;32m---> 33[0;31m         [0mtrain_X_fold[0m[0;34m,[0m [0mtest_X_fold[0m [0;34m=[0m [0mtrain[0m[0;34m[[0m[0mfinal_features[0m[0;34m][0m[0;34m,[0m [0mtest[0m[0;34m[[0m[0mfinal_features[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     34[0m         [0mtrain_y_fold[0m[0;34m,[0m [0mtest_y_fold[0m [0;34m=[0m [0mtrain[0m[0;34m[[0m[0my_var[0m[0;34m][0m[0;34m,[0m [0mtest[0m[0;34m[[0m[0my_var[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[1;32m     35[0m [0;34m[0m[0m
+
+[0;32m~/api-book/api_book/lib/python3.8/site-packages/pandas/core/frame.py[0m in [0;36m__getitem__[0;34m(self, key)[0m
+[1;32m   3462[0m             [0;32mif[0m [0mis_iterator[0m[0;34m([0m[0mkey[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   3463[0m                 [0mkey[0m [0;34m=[0m [0mlist[0m[0;34m([0m[0mkey[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 3464[0;31m             [0mindexer[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mloc[0m[0;34m.[0m[0m_get_listlike_indexer[0m[0;34m([0m[0mkey[0m[0;34m,[0m [0maxis[0m[0;34m=[0m[0;36m1[0m[0;34m)[0m[0;34m[[0m[0;36m1[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   3465[0m [0;34m[0m[0m
+[1;32m   3466[0m         [0;31m# take() does not accept boolean indexers[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/api-book/api_book/lib/python3.8/site-packages/pandas/core/indexing.py[0m in [0;36m_get_listlike_indexer[0;34m(self, key, axis)[0m
+[1;32m   1312[0m             [0mkeyarr[0m[0;34m,[0m [0mindexer[0m[0;34m,[0m [0mnew_indexer[0m [0;34m=[0m [0max[0m[0;34m.[0m[0m_reindex_non_unique[0m[0;34m([0m[0mkeyarr[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1313[0m [0;34m[0m[0m
+[0;32m-> 1314[0;31m         [0mself[0m[0;34m.[0m[0m_validate_read_indexer[0m[0;34m([0m[0mkeyarr[0m[0;34m,[0m [0mindexer[0m[0;34m,[0m [0maxis[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1315[0m [0;34m[0m[0m
+[1;32m   1316[0m         if needs_i8_conversion(ax.dtype) or isinstance(
+
+[0;32m~/api-book/api_book/lib/python3.8/site-packages/pandas/core/indexing.py[0m in [0;36m_validate_read_indexer[0;34m(self, key, indexer, axis)[0m
+[1;32m   1375[0m [0;34m[0m[0m
+[1;32m   1376[0m             [0mnot_found[0m [0;34m=[0m [0mlist[0m[0;34m([0m[0mensure_index[0m[0;34m([0m[0mkey[0m[0;34m)[0m[0;34m[[0m[0mmissing_mask[0m[0;34m.[0m[0mnonzero[0m[0;34m([0m[0;34m)[0m[0;34m[[0m[0;36m0[0m[0;34m][0m[0;34m][0m[0;34m.[0m[0munique[0m[0;34m([0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1377[0;31m             [0;32mraise[0m [0mKeyError[0m[0;34m([0m[0;34mf"{not_found} not in index"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1378[0m [0;34m[0m[0m
+[1;32m   1379[0m [0;34m[0m[0m
+
+[0;31mKeyError[0m: "['anemia'] not in index"
+KeyError: "['anemia'] not in index"
+
