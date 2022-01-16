@@ -42,8 +42,6 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -240,7 +238,22 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../chapter-7-final-serving/machine_learning_model.html">
-   Machine learning model
+   ML model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_db_models.html">
+   ML database models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api.html">
+   Machine learning API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api_production.html">
+   Wrapping the API into a production container
   </a>
  </li>
 </ul>
@@ -830,7 +843,7 @@ Databases available in PSQL:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Full name of user: Eligijus Bujokas
-Time of user creation: 2022-01-05 06:44:33
+Time of user creation: 2022-01-16 10:20:33
 </pre></div>
 </div>
 </div>
@@ -865,280 +878,6 @@ Time of user creation: 2022-01-05 06:44:33
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Listing all the users in the database (using Pandas)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>name</th>
-      <th>surname</th>
-      <th>created_at</th>
-      <th>updated_at</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2</td>
-      <td>Bligijus</td>
-      <td>Eujokas</td>
-      <td>2021-12-18 18:03:07.252155</td>
-      <td>2021-12-18 18:03:07.252156</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4</td>
-      <td>Bligijus</td>
-      <td>Eujokas</td>
-      <td>2021-12-18 18:24:53.184050</td>
-      <td>2021-12-18 18:24:53.184051</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>Eligijus</td>
-      <td>Kazlauskas</td>
-      <td>2021-12-18 17:49:52.135190</td>
-      <td>2021-12-18 18:24:53.197163</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>5</td>
-      <td>Eligijus</td>
-      <td>Bujokas</td>
-      <td>2021-12-18 22:14:30.569273</td>
-      <td>2021-12-18 22:14:30.569274</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>6</td>
-      <td>Bligijus</td>
-      <td>Eujokas</td>
-      <td>2021-12-18 22:14:30.594212</td>
-      <td>2021-12-18 22:14:30.594213</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>3</td>
-      <td>Eligijus</td>
-      <td>Kazlauskas</td>
-      <td>2021-12-18 18:24:53.153895</td>
-      <td>2021-12-18 22:14:30.611188</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>7</td>
-      <td>Eligijus</td>
-      <td>Bujokas</td>
-      <td>2022-01-05 06:44:33.996557</td>
-      <td>2022-01-05 06:44:33.996559</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Listing all the users in the database (using query())</span>
-<span class="n">users</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Users</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-<span class="p">[(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">surname</span><span class="p">)</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(2, &#39;Bligijus&#39;, &#39;Eujokas&#39;),
- (4, &#39;Bligijus&#39;, &#39;Eujokas&#39;),
- (1, &#39;Eligijus&#39;, &#39;Kazlauskas&#39;),
- (5, &#39;Eligijus&#39;, &#39;Bujokas&#39;),
- (6, &#39;Bligijus&#39;, &#39;Eujokas&#39;),
- (3, &#39;Eligijus&#39;, &#39;Kazlauskas&#39;),
- (7, &#39;Eligijus&#39;, &#39;Bujokas&#39;)]
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can create even more users and add them to the database.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating and uploading</span>
-<span class="n">bligijus</span> <span class="o">=</span> <span class="n">Users</span><span class="p">(</span><span class="s1">&#39;Bligijus&#39;</span><span class="p">,</span> <span class="s1">&#39;Eujokas&#39;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
-<span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">bligijus</span><span class="p">)</span>
-<span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-
-<span class="c1"># Listing all the users in the database (using Pandas)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>name</th>
-      <th>surname</th>
-      <th>created_at</th>
-      <th>updated_at</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2</td>
-      <td>Bligijus</td>
-      <td>Eujokas</td>
-      <td>2021-12-18 18:03:07.252155</td>
-      <td>2021-12-18 18:03:07.252156</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4</td>
-      <td>Bligijus</td>
-      <td>Eujokas</td>
-      <td>2021-12-18 18:24:53.184050</td>
-      <td>2021-12-18 18:24:53.184051</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>Eligijus</td>
-      <td>Kazlauskas</td>
-      <td>2021-12-18 17:49:52.135190</td>
-      <td>2021-12-18 18:24:53.197163</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>5</td>
-      <td>Eligijus</td>
-      <td>Bujokas</td>
-      <td>2021-12-18 22:14:30.569273</td>
-      <td>2021-12-18 22:14:30.569274</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>6</td>
-      <td>Bligijus</td>
-      <td>Eujokas</td>
-      <td>2021-12-18 22:14:30.594212</td>
-      <td>2021-12-18 22:14:30.594213</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>3</td>
-      <td>Eligijus</td>
-      <td>Kazlauskas</td>
-      <td>2021-12-18 18:24:53.153895</td>
-      <td>2021-12-18 22:14:30.611188</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>7</td>
-      <td>Eligijus</td>
-      <td>Bujokas</td>
-      <td>2022-01-05 06:44:33.996557</td>
-      <td>2022-01-05 06:44:33.996559</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>8</td>
-      <td>Bligijus</td>
-      <td>Eujokas</td>
-      <td>2022-01-05 06:44:34.017676</td>
-      <td>2022-01-05 06:44:34.017677</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-</div>
-<div class="section" id="querying-the-database">
-<h2>Querying the database<a class="headerlink" href="#querying-the-database" title="Permalink to this headline">¶</a></h2>
-<p>A big feature of SQLAlchemy is the seemless transition between records in database and objects in computer memory. To query the database, we use the <code class="docutils literal notranslate"><span class="pre">query()</span></code> method of the session object. The query method takes a SQL <strong>like</strong> query as an argument and returns a list of objects that mathces the query. For example, lets search for all the users with the name <code class="docutils literal notranslate"><span class="pre">eligijus</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Listing all the users with the name eligijus in the database using session.query()</span>
-<span class="n">users</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Users</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Users</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Eligijus&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-
-<span class="c1"># We can then interact with the object in the same way as with any Python method</span>
-<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">users</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No users found&#39;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span> 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">users</span><span class="p">)</span><span class="si">}</span><span class="s1"> users with the name Eligijus&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">([(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">surname</span><span class="p">)</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">])</span>
-
-    <span class="c1"># Extracting the first one</span>
-    <span class="n">user</span> <span class="o">=</span> <span class="n">users</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="c1"># Getting the full name</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Full name of user: </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">get_full_name</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Getting the exact time when the user was created</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time of user creation: </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">get_create_datetime</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 4 users with the name Eligijus
-[(1, &#39;Eligijus&#39;, &#39;Kazlauskas&#39;), (5, &#39;Eligijus&#39;, &#39;Bujokas&#39;), (3, &#39;Eligijus&#39;, &#39;Kazlauskas&#39;), (7, &#39;Eligijus&#39;, &#39;Bujokas&#39;)]
-Full name of user: Eligijus Kazlauskas
-Time of user creation: 2021-12-18 17:49:52
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can very simply update the user information. Because the user is an object, we can directly change the attributes using the <code class="docutils literal notranslate"><span class="pre">.</span></code> operator. Lets change the surname of Eligijus to the most typical surname in Lithunia: <code class="docutils literal notranslate"><span class="pre">Kazlauskas</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Changing the attributes of the user</span>
-<span class="n">user</span><span class="o">.</span><span class="n">surname</span> <span class="o">=</span> <span class="s1">&#39;Kazlauskas&#39;</span>
-
-<span class="c1"># Specifying the exact time when the user was updated</span>
-<span class="n">user</span><span class="o">.</span><span class="n">updated_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-
-<span class="c1"># Uploading the changes to the database</span>
-<span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>What is neat here, is that the session object tracks all the changes that is made in the memory and we do not need to specify which user was changed: the <code class="docutils literal notranslate"><span class="pre">commit()</span></code> method will automatically update the database. To see the final database, we can list all the rows using pandas.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Getting all the rows in the database</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1233,6 +972,330 @@ Time of user creation: 2021-12-18 17:49:52
       <td>Kazlauskas</td>
       <td>2021-12-18 17:49:52.135190</td>
       <td>2022-01-05 06:44:34.030981</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>Eligijus</td>
+      <td>Bujokas</td>
+      <td>2022-01-16 10:20:33.741444</td>
+      <td>2022-01-16 10:20:33.741445</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Listing all the users in the database (using query())</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Users</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="p">[(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">surname</span><span class="p">)</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(2, &#39;Bligijus&#39;, &#39;Eujokas&#39;),
+ (4, &#39;Bligijus&#39;, &#39;Eujokas&#39;),
+ (5, &#39;Eligijus&#39;, &#39;Bujokas&#39;),
+ (6, &#39;Bligijus&#39;, &#39;Eujokas&#39;),
+ (3, &#39;Eligijus&#39;, &#39;Kazlauskas&#39;),
+ (7, &#39;Eligijus&#39;, &#39;Bujokas&#39;),
+ (8, &#39;Bligijus&#39;, &#39;Eujokas&#39;),
+ (1, &#39;Eligijus&#39;, &#39;Kazlauskas&#39;),
+ (9, &#39;Eligijus&#39;, &#39;Bujokas&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can create even more users and add them to the database.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating and uploading</span>
+<span class="n">bligijus</span> <span class="o">=</span> <span class="n">Users</span><span class="p">(</span><span class="s1">&#39;Bligijus&#39;</span><span class="p">,</span> <span class="s1">&#39;Eujokas&#39;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+<span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">bligijus</span><span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="c1"># Listing all the users in the database (using Pandas)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>surname</th>
+      <th>created_at</th>
+      <th>updated_at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2021-12-18 18:03:07.252155</td>
+      <td>2021-12-18 18:03:07.252156</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2021-12-18 18:24:53.184050</td>
+      <td>2021-12-18 18:24:53.184051</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>Eligijus</td>
+      <td>Bujokas</td>
+      <td>2021-12-18 22:14:30.569273</td>
+      <td>2021-12-18 22:14:30.569274</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2021-12-18 22:14:30.594212</td>
+      <td>2021-12-18 22:14:30.594213</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3</td>
+      <td>Eligijus</td>
+      <td>Kazlauskas</td>
+      <td>2021-12-18 18:24:53.153895</td>
+      <td>2021-12-18 22:14:30.611188</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>7</td>
+      <td>Eligijus</td>
+      <td>Bujokas</td>
+      <td>2022-01-05 06:44:33.996557</td>
+      <td>2022-01-05 06:44:33.996559</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>8</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2022-01-05 06:44:34.017676</td>
+      <td>2022-01-05 06:44:34.017677</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1</td>
+      <td>Eligijus</td>
+      <td>Kazlauskas</td>
+      <td>2021-12-18 17:49:52.135190</td>
+      <td>2022-01-05 06:44:34.030981</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>Eligijus</td>
+      <td>Bujokas</td>
+      <td>2022-01-16 10:20:33.741444</td>
+      <td>2022-01-16 10:20:33.741445</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2022-01-16 10:20:33.764021</td>
+      <td>2022-01-16 10:20:33.764022</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="querying-the-database">
+<h2>Querying the database<a class="headerlink" href="#querying-the-database" title="Permalink to this headline">¶</a></h2>
+<p>A big feature of SQLAlchemy is the seemless transition between records in database and objects in computer memory. To query the database, we use the <code class="docutils literal notranslate"><span class="pre">query()</span></code> method of the session object. The query method takes a SQL <strong>like</strong> query as an argument and returns a list of objects that mathces the query. For example, lets search for all the users with the name <code class="docutils literal notranslate"><span class="pre">eligijus</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Listing all the users with the name eligijus in the database using session.query()</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Users</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Users</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Eligijus&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+<span class="c1"># We can then interact with the object in the same way as with any Python method</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">users</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No users found&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">users</span><span class="p">)</span><span class="si">}</span><span class="s1"> users with the name Eligijus&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">([(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">surname</span><span class="p">)</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">])</span>
+
+    <span class="c1"># Extracting the first one</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">users</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Getting the full name</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Full name of user: </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">get_full_name</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Getting the exact time when the user was created</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time of user creation: </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">get_create_datetime</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 5 users with the name Eligijus
+[(5, &#39;Eligijus&#39;, &#39;Bujokas&#39;), (3, &#39;Eligijus&#39;, &#39;Kazlauskas&#39;), (7, &#39;Eligijus&#39;, &#39;Bujokas&#39;), (1, &#39;Eligijus&#39;, &#39;Kazlauskas&#39;), (9, &#39;Eligijus&#39;, &#39;Bujokas&#39;)]
+Full name of user: Eligijus Bujokas
+Time of user creation: 2021-12-18 22:14:30
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can very simply update the user information. Because the user is an object, we can directly change the attributes using the <code class="docutils literal notranslate"><span class="pre">.</span></code> operator. Lets change the surname of Eligijus to the most typical surname in Lithunia: <code class="docutils literal notranslate"><span class="pre">Kazlauskas</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Changing the attributes of the user</span>
+<span class="n">user</span><span class="o">.</span><span class="n">surname</span> <span class="o">=</span> <span class="s1">&#39;Kazlauskas&#39;</span>
+
+<span class="c1"># Specifying the exact time when the user was updated</span>
+<span class="n">user</span><span class="o">.</span><span class="n">updated_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+<span class="c1"># Uploading the changes to the database</span>
+<span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What is neat here, is that the session object tracks all the changes that is made in the memory and we do not need to specify which user was changed: the <code class="docutils literal notranslate"><span class="pre">commit()</span></code> method will automatically update the database. To see the final database, we can list all the rows using pandas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Getting all the rows in the database</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>surname</th>
+      <th>created_at</th>
+      <th>updated_at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2021-12-18 18:03:07.252155</td>
+      <td>2021-12-18 18:03:07.252156</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2021-12-18 18:24:53.184050</td>
+      <td>2021-12-18 18:24:53.184051</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2021-12-18 22:14:30.594212</td>
+      <td>2021-12-18 22:14:30.594213</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>Eligijus</td>
+      <td>Kazlauskas</td>
+      <td>2021-12-18 18:24:53.153895</td>
+      <td>2021-12-18 22:14:30.611188</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>7</td>
+      <td>Eligijus</td>
+      <td>Bujokas</td>
+      <td>2022-01-05 06:44:33.996557</td>
+      <td>2022-01-05 06:44:33.996559</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>8</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2022-01-05 06:44:34.017676</td>
+      <td>2022-01-05 06:44:34.017677</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1</td>
+      <td>Eligijus</td>
+      <td>Kazlauskas</td>
+      <td>2021-12-18 17:49:52.135190</td>
+      <td>2022-01-05 06:44:34.030981</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>9</td>
+      <td>Eligijus</td>
+      <td>Bujokas</td>
+      <td>2022-01-16 10:20:33.741444</td>
+      <td>2022-01-16 10:20:33.741445</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>10</td>
+      <td>Bligijus</td>
+      <td>Eujokas</td>
+      <td>2022-01-16 10:20:33.764021</td>
+      <td>2022-01-16 10:20:33.764022</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>5</td>
+      <td>Eligijus</td>
+      <td>Kazlauskas</td>
+      <td>2021-12-18 22:14:30.569273</td>
+      <td>2022-01-16 10:20:33.777360</td>
     </tr>
   </tbody>
 </table>

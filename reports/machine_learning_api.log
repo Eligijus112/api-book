@@ -106,7 +106,7 @@ During handling of the above exception, another exception occurred:
 [0;32m--> 186[0;31m             raise NewConnectionError(
 [0m[1;32m    187[0m                 [0mself[0m[0;34m,[0m [0;34m"Failed to establish a new connection: %s"[0m [0;34m%[0m [0me[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mNewConnectionError[0m: <urllib3.connection.HTTPConnection object at 0x7f6f9c050e80>: Failed to establish a new connection: [Errno 111] Connection refused
+[0;31mNewConnectionError[0m: <urllib3.connection.HTTPConnection object at 0x7fa8056d6e50>: Failed to establish a new connection: [Errno 111] Connection refused
 
 During handling of the above exception, another exception occurred:
 
@@ -126,12 +126,12 @@ During handling of the above exception, another exception occurred:
 [0;32m--> 574[0;31m             [0;32mraise[0m [0mMaxRetryError[0m[0;34m([0m[0m_pool[0m[0;34m,[0m [0murl[0m[0;34m,[0m [0merror[0m [0;32mor[0m [0mResponseError[0m[0;34m([0m[0mcause[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m    575[0m [0;34m[0m[0m
 
-[0;31mMaxRetryError[0m: HTTPConnectionPool(host='localhost', port=8081): Max retries exceeded with url: /register-user (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f6f9c050e80>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[0;31mMaxRetryError[0m: HTTPConnectionPool(host='localhost', port=8081): Max retries exceeded with url: /register-user (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fa8056d6e50>: Failed to establish a new connection: [Errno 111] Connection refused'))
 
 During handling of the above exception, another exception occurred:
 
 [0;31mConnectionError[0m                           Traceback (most recent call last)
-[0;32m/tmp/ipykernel_37853/1864221189.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_15430/1864221189.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      7[0m [0;34m[0m[0m
 [1;32m      8[0m [0;31m# Sending the post request to the running API[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 9[0;31m [0mresponse[0m [0;34m=[0m [0mrequests[0m[0;34m.[0m[0mpost[0m[0;34m([0m[0;34mf"{url}/register-user"[0m[0;34m,[0m [0mjson[0m[0;34m=[0m[0muser_dict[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
@@ -173,6 +173,6 @@ During handling of the above exception, another exception occurred:
 [0m[1;32m    517[0m [0;34m[0m[0m
 [1;32m    518[0m         [0;32mexcept[0m [0mClosedPoolError[0m [0;32mas[0m [0me[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mConnectionError[0m: HTTPConnectionPool(host='localhost', port=8081): Max retries exceeded with url: /register-user (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f6f9c050e80>: Failed to establish a new connection: [Errno 111] Connection refused'))
-ConnectionError: HTTPConnectionPool(host='localhost', port=8081): Max retries exceeded with url: /register-user (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f6f9c050e80>: Failed to establish a new connection: [Errno 111] Connection refused'))
+[0;31mConnectionError[0m: HTTPConnectionPool(host='localhost', port=8081): Max retries exceeded with url: /register-user (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fa8056d6e50>: Failed to establish a new connection: [Errno 111] Connection refused'))
+ConnectionError: HTTPConnectionPool(host='localhost', port=8081): Max retries exceeded with url: /register-user (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fa8056d6e50>: Failed to establish a new connection: [Errno 111] Connection refused'))
 

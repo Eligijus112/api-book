@@ -469,35 +469,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># ORM functions for the database 
-from sqlalchemy.orm import declarative_base
-
-# Model creation 
-from sqlalchemy import Column, Integer, String, DateTime
-
-# Dates and times
-import datetime
-
-# Initiating the Base class
-Base = declarative_base()
-
-# Defining the models - Request and Response
-class User(Base):
-    # Table name in database
-    __tablename__ = &#39;users&#39;
-    
-    # If any changes are made to the columns, allow the database to know about it
-    __table_args__ = {&#39;extend_existing&#39;: True} 
-
-    id = Column(Integer, primary_key=True)
-    username = Column(String)
-    password = Column(String)
-    create_datetime = Column(DateTime)
-
-    def __init__(self, username: str, password: str):
-        self.username = username 
-        self.password = password
-        self.create_datetime = datetime.datetime.now()
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cat: jwt-token-example/models.py: No such file or directory
 </pre></div>
 </div>
 </div>
@@ -545,91 +517,7 @@ class User(Base):
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Importing the JWT library
-import jwt
-
-# The Users model 
-from models import User
-
-# Importing the session 
-from db import session
-
-# Datetime functionality
-import datetime
-
-# Reading the configuration file 
-import yaml 
-conf = yaml.safe_load(open(&quot;config.yml&quot;))
-
-# JWT constants
-_SECRET = conf[&quot;jwt&quot;][&quot;secret&quot;]
-_ALGORITHM = conf[&quot;jwt&quot;][&quot;algorithm&quot;]
-_EXPIRATION_TIME = conf[&quot;jwt&quot;][&quot;expiration_time&quot;] # Minutes until expiration
-
-# Creating the JWT token
-def create_token(user_id: int) -&gt; str:
-    &quot;&quot;&quot;
-    Method to create a JWT token for a user using internal user_id
-    
-    Parameters
-    ----------
-        user_id (int): The user_id of the user to create the token for
-
-    Returns
-    -------
-        str: The JWT token
-    &quot;&quot;&quot;
-    # Creating the claims dictionary
-    claims = {
-        # Expiration date of the token
-        &quot;exp&quot;: datetime.datetime.now() + datetime.timedelta(minutes=_EXPIRATION_TIME),
-        
-        # Issue time of the token
-        &quot;iat&quot;: datetime.datetime.now(),
-
-        # Subject of the token
-        &quot;sub&quot;: user_id
-    }
-
-    # Creating the token
-    return jwt.encode(claims, _SECRET, algorithm=_ALGORITHM)
-
-# Authenticating the JWT token
-def authenticate_token(jwt_token: str) -&gt; bool:
-    &quot;&quot;&quot;
-    Function that decodes the token and authenticates it. 
-
-    Parameters
-    ----------
-        jwt_token (str): The JWT token to authenticate
-
-    Returns
-    -------
-        bool: True if the token is valid, False otherwise
-    &quot;&quot;&quot;
-    try:
-        # Decoding the token
-        claims = jwt.decode(jwt_token, _SECRET, algorithms=[_ALGORITHM])
-
-        # Extracting the user_id from the token
-        user_id = claims[&quot;sub&quot;]
-
-        # Extracting the expiration date from the token
-        expiration_date = claims[&quot;exp&quot;]
-
-        # Checking if the token is expired
-        if datetime.datetime.fromtimestamp(expiration_date) &lt; datetime.datetime.utcnow():
-            return False
-
-        # Checking if the user exists in the database
-        user = session.query(User).filter(User.id == user_id).first()
-        if user:
-            return True
-        else:
-            return False
-    except:
-        # If the token is invalid, return False
-        return False
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cat: jwt-token-example/jwt_tokens.py: No such file or directory
 </pre></div>
 </div>
 </div>
@@ -659,7 +547,7 @@ def authenticate_token(jwt_token: str) -&gt; bool:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDIyODYyOTQsImlhdCI6MTY0MjI4MjY5NCwic3ViIjoxfQ.RsX6Exsx3moonUFo4BmkyERVe-qHfSJXtJ3X7r_b28Y
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDIzNDI2NTEsImlhdCI6MTY0MjMzOTA1MSwic3ViIjoxfQ.TVhoqzK-0HJMQ2IwsCTw-GCiHPS145dHNStIUar9yBM
 </pre></div>
 </div>
 </div>

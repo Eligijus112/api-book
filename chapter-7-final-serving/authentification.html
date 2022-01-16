@@ -42,8 +42,6 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -53,7 +51,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Machine learning model" href="machine_learning_model.html" />
+    <link rel="next" title="ML model" href="machine_learning_model.html" />
     <link rel="prev" title="ML users" href="users.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -240,7 +238,22 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="machine_learning_model.html">
-   Machine learning model
+   ML model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_db_models.html">
+   ML database models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_api.html">
+   Machine learning API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_api_production.html">
+   Wrapping the API into a production container
   </a>
  </li>
 </ul>
@@ -431,7 +444,14 @@ import datetime
 
 # Reading the configuration file 
 import yaml 
-conf = yaml.safe_load(open(&quot;config.yml&quot;))
+
+# OS functionalities
+import os 
+
+# Infering the file path 
+_file_dir = os.path.dirname(os.path.abspath(__file__))
+
+conf = yaml.safe_load(open(os.path.join(_file_dir, &quot;config.yml&quot;)))
 
 # JWT constants
 _SECRET = conf[&quot;jwt&quot;][&quot;secret&quot;]
@@ -521,12 +541,12 @@ def authenticate_token_view(jwt_token: str) -&gt; bool:
         # Checking if the user exists in the database
         user = session.query(User).filter(User.id == user_id).first()
         if user:
-            return True
+            return user
         else:
-            return False
+            return None
     except:
         # If the token is invalid, return False
-        return False
+        return None 
 </pre></div>
 </div>
 </div>
@@ -539,6 +559,9 @@ def authenticate_token_view(jwt_token: str) -&gt; bool:
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span> 
 
+<span class="c1"># Defining the url </span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://localhost:8001&quot;</span>
+
 <span class="c1"># Defining the user dict </span>
 <span class="n">user_dict</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;eligijus&quot;</span><span class="p">,</span>
@@ -547,7 +570,7 @@ def authenticate_token_view(jwt_token: str) -&gt; bool:
 <span class="p">}</span>
 
 <span class="c1"># Sending the post request to the running API </span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;http://localhost:8000/register-user&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">user_dict</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">/register-user&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">user_dict</span><span class="p">)</span>
 
 <span class="c1"># Getting the user id </span>
 <span class="n">user_id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">)</span>
@@ -558,7 +581,7 @@ def authenticate_token_view(jwt_token: str) -&gt; bool:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 404; Response: {&#39;detail&#39;: &#39;Not Found&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 409; Response: {&#39;message&#39;: &#39;User already exists&#39;, &#39;user_id&#39;: 4}
 </pre></div>
 </div>
 </div>
@@ -566,14 +589,14 @@ def authenticate_token_view(jwt_token: str) -&gt; bool:
 <p>Now that the user is registered, we can try to create a token with the username and password. First, lets send a bad password:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;http://localhost:8000/token&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s2">&quot;eligijus&quot;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s2">&quot;654321&quot;</span><span class="p">})</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">/token&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s2">&quot;eligijus&quot;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s2">&quot;654321&quot;</span><span class="p">})</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Response code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">; Response: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 404; Response: {&#39;detail&#39;: &#39;Not Found&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 401; Response: {&#39;message&#39;: &#39;Invalid credentials&#39;}
 </pre></div>
 </div>
 </div>
@@ -581,7 +604,7 @@ def authenticate_token_view(jwt_token: str) -&gt; bool:
 <p>Now lets the send the password with which the user was registered:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;http://localhost:8000/token&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">user_dict</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">/token&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">user_dict</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Response code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">; Response: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -591,7 +614,7 @@ def authenticate_token_view(jwt_token: str) -&gt; bool:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 404; Response: {&#39;detail&#39;: &#39;Not Found&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 200; Response: {&#39;token&#39;: &#39;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDIzNDMxODksImlhdCI6MTY0MjMzOTU4OSwic3ViIjo0fQ.wIWEI-1WFp6g-nfML8WUk2gsf7JcNRWW1p-E7B-bHtg&#39;}
 </pre></div>
 </div>
 </div>
@@ -604,14 +627,14 @@ def authenticate_token_view(jwt_token: str) -&gt; bool:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sending the request to inspect the token validity </span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;http://localhost:8000/token_status/</span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">/token_status/</span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Response code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">; Response: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 404; Response: {&#39;detail&#39;: &#39;Not Found&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 200; Response: {&#39;message&#39;: &#39;Token is valid&#39;}
 </pre></div>
 </div>
 </div>
@@ -619,22 +642,14 @@ def authenticate_token_view(jwt_token: str) -&gt; bool:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sending a bad request to inspect the token validity </span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;http://localhost:8000/token_status/</span><span class="si">{</span><span class="n">token</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">/token_status/</span><span class="si">{</span><span class="n">token</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Response code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">; Response: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_43918</span><span class="o">/</span><span class="mf">3114872895.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Sending a bad request to inspect the token validity</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;http://localhost:8000/token_status/</span><span class="si">{</span><span class="n">token</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> 
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Response code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">; Response: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="ne">TypeError</span>: &#39;NoneType&#39; object is not subscriptable
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 401; Response: {&#39;message&#39;: &#39;Invalid token&#39;}
 </pre></div>
 </div>
 </div>
@@ -684,7 +699,7 @@ def authenticate_token_view(jwt_token: str) -&gt; bool:
         <a class="right-next" href="machine_learning_model.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Machine learning model</p>
+                <p class="prevnext-title">ML model</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

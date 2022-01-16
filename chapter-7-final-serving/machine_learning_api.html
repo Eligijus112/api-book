@@ -593,7 +593,7 @@ def predict(model, feature_dict: dict, X: dict) -&gt; list:
 <span class="kn">import</span> <span class="nn">requests</span> 
 
 <span class="c1"># Defining the constants for the API</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:8081&#39;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:8001&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -621,146 +621,7 @@ def predict(model, feature_dict: dict, X: dict) -&gt; list:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ConnectionRefusedError</span><span class="g g-Whitespace">                    </span>Traceback (most recent call last)
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/connection.py</span> in <span class="ni">_new_conn</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">173</span>         <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">174</span>             <span class="n">conn</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">create_connection</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">175</span>                 <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dns_host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">extra_kw</span>
-
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/util/connection.py</span> in <span class="ni">create_connection</span><span class="nt">(address, timeout, source_address, socket_options)</span>
-<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">if</span> <span class="n">err</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">96</span>         <span class="k">raise</span> <span class="n">err</span>
-<span class="g g-Whitespace">     </span><span class="mi">97</span> 
-
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/util/connection.py</span> in <span class="ni">create_connection</span><span class="nt">(address, timeout, source_address, socket_options)</span>
-<span class="g g-Whitespace">     </span><span class="mi">85</span>                 <span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">source_address</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">86</span>             <span class="n">sock</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">sa</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">87</span>             <span class="k">return</span> <span class="n">sock</span>
-
-<span class="ne">ConnectionRefusedError</span>: [Errno 111] Connection refused
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
-<span class="ne">NewConnectionError</span><span class="g g-Whitespace">                        </span>Traceback (most recent call last)
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/connectionpool.py</span> in <span class="ni">urlopen</span><span class="nt">(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, **response_kw)</span>
-<span class="g g-Whitespace">    </span><span class="mi">698</span>             <span class="c1"># Make the request on the httplib connection object.</span>
-<span class="ne">--&gt; </span><span class="mi">699</span>             <span class="n">httplib_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">700</span>                 <span class="n">conn</span><span class="p">,</span>
-
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/connectionpool.py</span> in <span class="ni">_make_request</span><span class="nt">(self, conn, method, url, timeout, chunked, **httplib_request_kw)</span>
-<span class="g g-Whitespace">    </span><span class="mi">393</span>             <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">394</span>                 <span class="n">conn</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">httplib_request_kw</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">395</span> 
-
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/connection.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, body, headers)</span>
-<span class="g g-Whitespace">    </span><span class="mi">238</span>             <span class="n">headers</span><span class="p">[</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_get_default_user_agent</span><span class="p">()</span>
-<span class="ne">--&gt; </span><span class="mi">239</span>         <span class="nb">super</span><span class="p">(</span><span class="n">HTTPConnection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">240</span> 
-
-<span class="nn">/usr/lib/python3.8/http/client.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1255</span>         <span class="sd">&quot;&quot;&quot;Send a complete request to the server.&quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1256</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_send_request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1257</span> 
-
-<span class="nn">/usr/lib/python3.8/http/client.py</span> in <span class="ni">_send_request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1301</span>             <span class="n">body</span> <span class="o">=</span> <span class="n">_encode</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1302</span>         <span class="bp">self</span><span class="o">.</span><span class="n">endheaders</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1303</span> 
-
-<span class="nn">/usr/lib/python3.8/http/client.py</span> in <span class="ni">endheaders</span><span class="nt">(self, message_body, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1250</span>             <span class="k">raise</span> <span class="n">CannotSendHeader</span><span class="p">()</span>
-<span class="ne">-&gt; </span><span class="mi">1251</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_send_output</span><span class="p">(</span><span class="n">message_body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1252</span> 
-
-<span class="nn">/usr/lib/python3.8/http/client.py</span> in <span class="ni">_send_output</span><span class="nt">(self, message_body, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1010</span>         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">[:]</span>
-<span class="ne">-&gt; </span><span class="mi">1011</span>         <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1012</span> 
-
-<span class="nn">/usr/lib/python3.8/http/client.py</span> in <span class="ni">send</span><span class="nt">(self, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">950</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_open</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">951</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">952</span>             <span class="k">else</span><span class="p">:</span>
-
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/connection.py</span> in <span class="ni">connect</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">204</span>     <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">205</span>         <span class="n">conn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new_conn</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">206</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_conn</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span>
-
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/connection.py</span> in <span class="ni">_new_conn</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">185</span>         <span class="k">except</span> <span class="n">SocketError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">186</span>             <span class="k">raise</span> <span class="n">NewConnectionError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">187</span>                 <span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;Failed to establish a new connection: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span>
-
-<span class="ne">NewConnectionError</span>: &lt;urllib3.connection.HTTPConnection object at 0x7f6f9c050e80&gt;: Failed to establish a new connection: [Errno 111] Connection refused
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
-<span class="ne">MaxRetryError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/requests/adapters.py</span> in <span class="ni">send</span><span class="nt">(self, request, stream, timeout, verify, cert, proxies)</span>
-<span class="g g-Whitespace">    </span><span class="mi">438</span>             <span class="k">if</span> <span class="ow">not</span> <span class="n">chunked</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">439</span>                 <span class="n">resp</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">440</span>                     <span class="n">method</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
-
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/connectionpool.py</span> in <span class="ni">urlopen</span><span class="nt">(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, **response_kw)</span>
-<span class="g g-Whitespace">    </span><span class="mi">754</span> 
-<span class="ne">--&gt; </span><span class="mi">755</span>             <span class="n">retries</span> <span class="o">=</span> <span class="n">retries</span><span class="o">.</span><span class="n">increment</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">756</span>                 <span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="n">e</span><span class="p">,</span> <span class="n">_pool</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">_stacktrace</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
-
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/urllib3/util/retry.py</span> in <span class="ni">increment</span><span class="nt">(self, method, url, response, error, _pool, _stacktrace)</span>
-<span class="g g-Whitespace">    </span><span class="mi">573</span>         <span class="k">if</span> <span class="n">new_retry</span><span class="o">.</span><span class="n">is_exhausted</span><span class="p">():</span>
-<span class="ne">--&gt; </span><span class="mi">574</span>             <span class="k">raise</span> <span class="n">MaxRetryError</span><span class="p">(</span><span class="n">_pool</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">error</span> <span class="ow">or</span> <span class="n">ResponseError</span><span class="p">(</span><span class="n">cause</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">575</span> 
-
-<span class="ne">MaxRetryError</span>: HTTPConnectionPool(host=&#39;localhost&#39;, port=8081): Max retries exceeded with url: /register-user (Caused by NewConnectionError(&#39;&lt;urllib3.connection.HTTPConnection object at 0x7f6f9c050e80&gt;: Failed to establish a new connection: [Errno 111] Connection refused&#39;))
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
-<span class="ne">ConnectionError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_37853</span><span class="o">/</span><span class="mf">1864221189.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> 
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Sending the post request to the running API</span>
-<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">/register-user&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">user_dict</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> 
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># Getting the user id</span>
-
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/requests/api.py</span> in <span class="ni">post</span><span class="nt">(url, data, json, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">115</span>     <span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">116</span><span class="s2"> </span>
-<span class="ne">--&gt; </span><span class="mi">117</span><span class="s2">     return request(&#39;post&#39;, url, data=data, json=json, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">118</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">119</span><span class="s2"> </span>
-
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/requests/api.py</span> in <span class="ni">request</span><span class="nt">(method, url, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">59</span><span class="s2">     # cases, and look like a memory leak in others.</span>
-<span class="g g-Whitespace">     </span><span class="mi">60</span><span class="s2">     with sessions.Session() as session:</span>
-<span class="ne">---&gt; </span><span class="mi">61</span><span class="s2">         return session.request(method=method, url=url, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">62</span><span class="s2"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">63</span><span class="s2"> </span>
-
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/requests/sessions.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, params, data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream, verify, cert, json)</span>
-<span class="g g-Whitespace">    </span><span class="mi">540</span><span class="s2">         }</span>
-<span class="g g-Whitespace">    </span><span class="mi">541</span><span class="s2">         send_kwargs.update(settings)</span>
-<span class="ne">--&gt; </span><span class="mi">542</span><span class="s2">         resp = self.send(prep, **send_kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">543</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">544</span><span class="s2">         return resp</span>
-
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/requests/sessions.py</span> in <span class="ni">send</span><span class="nt">(self, request, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">653</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">654</span><span class="s2">         # Send the request</span>
-<span class="ne">--&gt; </span><span class="mi">655</span><span class="s2">         r = adapter.send(request, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">656</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">657</span><span class="s2">         # Total elapsed time of the request (approximately)</span>
-
-<span class="nn">~/api-book/api_book/lib/python3.8/site-packages/requests/adapters.py</span> in <span class="ni">send</span><span class="nt">(self, request, stream, timeout, verify, cert, proxies)</span>
-<span class="g g-Whitespace">    </span><span class="mi">514</span><span class="s2">                 raise SSLError(e, request=request)</span>
-<span class="g g-Whitespace">    </span><span class="mi">515</span><span class="s2"> </span>
-<span class="ne">--&gt; </span><span class="mi">516</span><span class="s2">             raise ConnectionError(e, request=request)</span>
-<span class="g g-Whitespace">    </span><span class="mi">517</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">518</span><span class="s2">         except ClosedPoolError as e:</span>
-
-<span class="ne">ConnectionError</span>: HTTPConnectionPool(host=&#39;localhost&#39;, port=8081): Max retries exceeded with url: /register-user (Caused by NewConnectionError(&#39;&lt;urllib3.connection.HTTPConnection object at 0x7f6f9c050e80&gt;: Failed to establish a new connection: [Errno 111] Connection refused&#39;))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 409; Response: {&#39;message&#39;: &#39;User already exists&#39;, &#39;user_id&#39;: 5}
 </pre></div>
 </div>
 </div>
@@ -782,7 +643,7 @@ def predict(model, feature_dict: dict, X: dict) -&gt; list:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 200; JWT token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDIxOTY1NjksImlhdCI6MTY0MjE5Mjk2OSwic3ViIjo1fQ.T_Io9Gx-SUDlDrLzNVKsEuthot5kgkTPWQZQO8e-bfo
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 200; JWT token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDIzNDMxOTAsImlhdCI6MTY0MjMzOTU5MCwic3ViIjo1fQ.c36TvLaR_KIeUqX6v9edqlD5U0q5LpyS8SuttbB4UJQ
 </pre></div>
 </div>
 </div>
@@ -907,49 +768,49 @@ def predict(model, feature_dict: dict, X: dict) -&gt; list:
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Users in the database:
    id          username                                           password  \
-0   3              test  gAAAAABh0ZB3XUVqtNj0SIkgKzFmRey8Tt2et57V9GoAs2...   
-1   4          eligijus  gAAAAABh0ZTKq-0Es9-BzQd-KJ2R8dNY70vFlj3OY_hsC2...   
-2   5  eligijus_bujokas  gAAAAABh3uroEwCl80d480inMXMCE1TuHjaBYMgmJI3eKL...   
+0   4          eligijus  gAAAAABh0ZTKq-0Es9-BzQd-KJ2R8dNY70vFlj3OY_hsC2...   
+1   5  eligijus_bujokas  gAAAAABh3uroEwCl80d480inMXMCE1TuHjaBYMgmJI3eKL...   
+2  10              test  gAAAAABh4_93mQfHPCQ51tEZ6oLqIZPbADDgIHdNDm2fg9...   
 
                    email           created_datetime  \
-0      test@testmail.com 2022-01-02 13:45:59.012700   
-1  eligijus@testmail.com 2022-01-02 14:04:26.751085   
-2  eligijus@testmail.com 2022-01-12 16:51:20.534979   
+0  eligijus@testmail.com 2022-01-02 14:04:26.751085   
+1  eligijus@testmail.com 2022-01-12 16:51:20.534979   
+2      test@testmail.com 2022-01-16 13:20:23.508369   
 
             updated_datetime  enabled  
-0 2022-01-02 13:45:59.072225    False  
-1 2022-01-02 14:04:26.751085     True  
-2 2022-01-12 16:51:20.534979     True  
+0 2022-01-02 14:04:26.751085     True  
+1 2022-01-12 16:51:20.534979     True  
+2 2022-01-16 13:20:23.519665    False  
 --
 Last 5 requests:
     id  user_id                                              input  \
-17  18        5  {&quot;age&quot;: 25, &quot;creatinine_phosphokinase&quot;: 1000, ...   
-18  19        5  {&quot;age&quot;: 25, &quot;creatinine_phosphokinase&quot;: 1000, ...   
 19  20        5  {&quot;age&quot;: 25, &quot;creatinine_phosphokinase&quot;: 1000, ...   
 20  21        5  {&quot;age&quot;: 25, &quot;creatinine_phosphokinase&quot;: 1000, ...   
 21  22        5  {&quot;age&quot;: 25, &quot;creatinine_phosphokinase&quot;: 1000, ...   
+22  23        5  {&quot;age&quot;: 25, &quot;creatinine_phosphokinase&quot;: 1000, ...   
+23  24        5  {&quot;age&quot;: 25, &quot;creatinine_phosphokinase&quot;: 1000, ...   
 
              created_datetime           updated_datetime  
-17 2022-01-12 20:45:31.866924 2022-01-12 20:45:31.866924  
-18 2022-01-12 20:54:14.030613 2022-01-12 20:54:14.030613  
 19 2022-01-14 20:36:34.018803 2022-01-14 20:36:34.018803  
 20 2022-01-14 20:37:26.669542 2022-01-14 20:37:26.669542  
 21 2022-01-14 20:42:49.979033 2022-01-14 20:42:49.979033  
+22 2022-01-16 13:22:03.372336 2022-01-16 13:22:03.372336  
+23 2022-01-16 13:26:30.148125 2022-01-16 13:26:30.148125  
 --
 Last 5 responses:
     id  request_id                                   output  \
-13  14          18  {&quot;yhat_prob&quot;: &quot;0.5124506&quot;, &quot;yhat&quot;: &quot;1&quot;}   
-14  15          19  {&quot;yhat_prob&quot;: &quot;0.5124506&quot;, &quot;yhat&quot;: &quot;1&quot;}   
 15  16          20  {&quot;yhat_prob&quot;: &quot;0.5124506&quot;, &quot;yhat&quot;: &quot;1&quot;}   
 16  17          21  {&quot;yhat_prob&quot;: &quot;0.5124506&quot;, &quot;yhat&quot;: &quot;1&quot;}   
 17  18          22  {&quot;yhat_prob&quot;: &quot;0.5124506&quot;, &quot;yhat&quot;: &quot;1&quot;}   
+18  19          23  {&quot;yhat_prob&quot;: &quot;0.5124506&quot;, &quot;yhat&quot;: &quot;1&quot;}   
+19  20          24  {&quot;yhat_prob&quot;: &quot;0.5124506&quot;, &quot;yhat&quot;: &quot;1&quot;}   
 
              created_datetime           updated_datetime  
-13 2022-01-12 20:45:31.904598 2022-01-12 20:45:31.904598  
-14 2022-01-12 20:54:14.048568 2022-01-12 20:54:14.048568  
 15 2022-01-14 20:36:34.059420 2022-01-14 20:36:34.059420  
 16 2022-01-14 20:37:26.694771 2022-01-14 20:37:26.694771  
 17 2022-01-14 20:42:50.004279 2022-01-14 20:42:50.004279  
+18 2022-01-16 13:22:03.390882 2022-01-16 13:22:03.390882  
+19 2022-01-16 13:26:30.155778 2022-01-16 13:26:30.155778  
 </pre></div>
 </div>
 </div>

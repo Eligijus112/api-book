@@ -42,8 +42,6 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -240,7 +238,22 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../chapter-7-final-serving/machine_learning_model.html">
-   Machine learning model
+   ML model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_db_models.html">
+   ML database models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api.html">
+   Machine learning API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api_production.html">
+   Wrapping the API into a production container
   </a>
  </li>
 </ul>
@@ -546,23 +559,23 @@ system(&quot;ping -c 5 www.google.com&quot;)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PING www.google.com (172.217.16.4) 56(84) bytes of data.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64 bytes from mil02s06-in-f4.1e100.net (172.217.16.4): icmp_seq=1 ttl=56 time=35.2 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64 bytes from waw02s13-in-f4.1e100.net (172.217.16.4): icmp_seq=1 ttl=56 time=35.2 ms
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64 bytes from mil02s06-in-f4.1e100.net (172.217.16.4): icmp_seq=2 ttl=56 time=35.5 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64 bytes from waw02s13-in-f4.1e100.net (172.217.16.4): icmp_seq=2 ttl=56 time=35.3 ms
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64 bytes from mil02s06-in-f4.1e100.net (172.217.16.4): icmp_seq=3 ttl=56 time=35.6 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64 bytes from waw02s13-in-f4.1e100.net (172.217.16.4): icmp_seq=3 ttl=56 time=35.4 ms
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64 bytes from mil02s06-in-f4.1e100.net (172.217.16.4): icmp_seq=4 ttl=56 time=35.3 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64 bytes from waw02s13-in-f4.1e100.net (172.217.16.4): icmp_seq=4 ttl=56 time=35.2 ms
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64 bytes from mil02s06-in-f4.1e100.net (172.217.16.4): icmp_seq=5 ttl=56 time=35.3 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64 bytes from waw02s13-in-f4.1e100.net (172.217.16.4): icmp_seq=5 ttl=56 time=35.6 ms
 
 --- www.google.com ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 4007ms
-rtt min/avg/max/mdev = 35.229/35.371/35.561/0.141 ms
+5 packets transmitted, 5 received, 0% packet loss, time 4005ms
+rtt min/avg/max/mdev = 35.154/35.327/35.564/0.139 ms
 </pre></div>
 </div>
 </div>
