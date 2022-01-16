@@ -1,0 +1,938 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ML model &#8212; Machine Learning serving</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ML database models" href="machine_learning_db_models.html" />
+    <link rel="prev" title="ML users authentification" href="authentification.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning serving</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Hardware and Linux OS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-specs.html">
+   Building blocks of a computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-OS.html">
+   Linux operating system
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Software for an ML developer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/python-intro.html">
+   Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/virtual-envs.html">
+   Virtual environments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/docker.html">
+   Docker
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/object-oriented-programming.html">
+   Classes and objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-types.html">
+   Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-structures.html">
+   Data structures
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model.html">
+   Creating machine learning models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model-serving.html">
+   Basic ML serving
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-intro.html">
+   Application Programming Interface basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-server.html">
+   API server
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-DB.html">
+   Databases and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-example.html">
+   API and PSQL integration example
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Production Tools and Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/gunicorn.html">
+   Gunicorn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/docker.html">
+   Docker in production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/JWT.html">
+   JWT based authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/migrations.html">
+   Migrations
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  ML serving API
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="users.html">
+   ML users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="authentification.html">
+   ML users authentification
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   ML model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_db_models.html">
+   ML database models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_api.html">
+   Machine learning API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_api_production.html">
+   Wrapping the API into a production container
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Bibliography
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references/references.html">
+   Links and references
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chapter-7-final-serving/machine_learning_model.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Eligijus112/api-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Eligijus112/api-book/issues/new?title=Issue%20on%20page%20%2Fchapter-7-final-serving/machine_learning_model.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Eligijus112/api-book/master?urlpath=tree/docs/chapter-7-final-serving/machine_learning_model.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   ML model
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-packages">
+   Python packages
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-input">
+   Data input
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collumn-explanation">
+     Collumn explanation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#eda">
+   EDA
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#y-variable-distribution">
+     Y variable distribution
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#numeric-feature-impact">
+     Numeric feature impact
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#xgboost-model">
+   Xgboost model
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-the-final-model">
+   Fitting the final model
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#saving-all-the-necessary-objects">
+     Saving all the necessary objects
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="ml-model">
+<h1>ML model<a class="headerlink" href="#ml-model" title="Permalink to this headline">¶</a></h1>
+<p>Now that we have set up user creation and authentification, we need our main selling point - the machine learning model. We will create an ML model that outputs how likely is a person surviving after a heart attack given a set of features <span id="id1">[<a class="reference internal" href="../references/references.html#id28">Davide Chicco, 2020</a>]</span>.</p>
+<p>The data source can be found here: <a class="reference external" href="https://www.kaggle.com/andrewmvd/heart-failure-clinical-data">https://www.kaggle.com/andrewmvd/heart-failure-clinical-data</a></p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="python-packages">
+<h1>Python packages<a class="headerlink" href="#python-packages" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data wrangling </span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="c1"># Xgboost model </span>
+<span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+
+<span class="c1"># Directory traversal </span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># Classifier accuracy</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_auc_score</span>
+
+<span class="c1"># Ploting </span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Train test split </span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="c1"># Array math </span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+
+<span class="c1"># Model saving </span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="c1"># Cross validation split </span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+
+<span class="c1"># Parameter grid creation </span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">ParameterGrid</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="data-input">
+<h1>Data input<a class="headerlink" href="#data-input" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Input data </span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;ML_API/ml_input/heart_failure_clinical_records_dataset.csv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shape of data: </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Listing out the columns</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Columns:</span><span class="se">\n</span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Printing out the head of data </span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Head of data:</span><span class="se">\n</span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of data: (299, 13)
+Columns:
+[&#39;age&#39; &#39;anaemia&#39; &#39;creatinine_phosphokinase&#39; &#39;diabetes&#39; &#39;ejection_fraction&#39;
+ &#39;high_blood_pressure&#39; &#39;platelets&#39; &#39;serum_creatinine&#39; &#39;serum_sodium&#39; &#39;sex&#39;
+ &#39;smoking&#39; &#39;time&#39; &#39;DEATH_EVENT&#39;]
+Head of data:
+    age  anaemia  creatinine_phosphokinase  diabetes  ejection_fraction  \
+0  75.0        0                       582         0                 20   
+1  55.0        0                      7861         0                 38   
+2  65.0        0                       146         0                 20   
+3  50.0        1                       111         0                 20   
+4  65.0        1                       160         1                 20   
+
+   high_blood_pressure  platelets  serum_creatinine  serum_sodium  sex  \
+0                    1  265000.00               1.9           130    1   
+1                    0  263358.03               1.1           136    1   
+2                    0  162000.00               1.3           129    1   
+3                    0  210000.00               1.9           137    1   
+4                    0  327000.00               2.7           116    0   
+
+   smoking  time  DEATH_EVENT  
+0        0     4            1  
+1        0     6            1  
+2        1     7            1  
+3        0     7            1  
+4        0     8            1  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="collumn-explanation">
+<h2>Collumn explanation<a class="headerlink" href="#collumn-explanation" title="Permalink to this headline">¶</a></h2>
+<p>We will be using the following columns in our model:</p>
+<p><strong>DEATH_EVENT</strong> - <code class="docutils literal notranslate"><span class="pre">boolean</span></code> - whether the patient died or not after the heart attack.</p>
+<p><strong>age</strong> - <code class="docutils literal notranslate"><span class="pre">float</span></code> - age durring heart attack.</p>
+<p><strong>anaemia</strong> - <code class="docutils literal notranslate"><span class="pre">boolean</span></code> - decrease of red blood cells.</p>
+<p><strong>creatinine_phosphokinase</strong> - float - level of the CPK enzyme in the blood (mcg/L).</p>
+<p><strong>diabetes</strong> - <code class="docutils literal notranslate"><span class="pre">boolean</span></code> - whether the patient has diabetes or not.</p>
+<p><strong>ejection_fraction</strong> - <code class="docutils literal notranslate"><span class="pre">float</span></code> - percentage of blood leaving the heart at each contraction (percentage).</p>
+<p><strong>high_blood_pressure</strong> - <code class="docutils literal notranslate"><span class="pre">boolean</span></code> - whether the patient has high blood pressure or not.</p>
+<p><strong>platelets</strong> - <code class="docutils literal notranslate"><span class="pre">float</span></code> - platelets in the blood (kiloplatelets/mL)</p>
+<p><strong>serum_creatinine</strong> - <code class="docutils literal notranslate"><span class="pre">float</span></code> - serum creatinine level (mg/dL).</p>
+<p><strong>serum_sodium</strong> - <code class="docutils literal notranslate"><span class="pre">float</span></code> - serum sodium level (mEq/L).</p>
+<p><strong>sex</strong> - <code class="docutils literal notranslate"><span class="pre">boolean</span></code> - woman or man (binary).</p>
+<p><strong>smoking</strong> - <code class="docutils literal notranslate"><span class="pre">boolean</span></code> - whether the person smoked or not.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining the columns and saving for later </span>
+<span class="n">y_var</span> <span class="o">=</span> <span class="s1">&#39;DEATH_EVENT&#39;</span>
+
+<span class="c1"># Numerics </span>
+<span class="n">numeric_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;age&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;creatinine_phosphokinase&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ejection_fraction&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;platelets&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;serum_creatinine&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;serum_sodium&#39;</span>
+<span class="p">]</span>
+
+<span class="c1"># Categoricals </span>
+<span class="n">categorical_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;anaemia&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;diabetes&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;high_blood_pressure&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;sex&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;smoking&#39;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="eda">
+<h1>EDA<a class="headerlink" href="#eda" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="y-variable-distribution">
+<h2>Y variable distribution<a class="headerlink" href="#y-variable-distribution" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Distribution of the binary variable</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">y_var</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+<span class="n">counts</span><span class="p">[</span><span class="s1">&#39;distr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">counts</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="c1"># Visualizing the distribution </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="s1">&#39;DEATH_EVENT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span> <span class="n">counts</span><span class="p">[</span><span class="s1">&#39;distr&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;DEATH_EVENT&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Share of total observations&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of DEATH_EVENT&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Distribution of DEATH_EVENT&#39;)
+</pre></div>
+</div>
+<img alt="../_images/machine_learning_model_9_1.png" src="../_images/machine_learning_model_9_1.png" />
+</div>
+</div>
+<p>The Y variable classes are not perfectly balanced but we cannot say that they are extremely unbalanced as well (in some cases, one class observations comprise less than 1% of data).</p>
+<p>In our model, we will not be doing any artificial class balancing.</p>
+</div>
+<div class="section" id="numeric-feature-impact">
+<h2>Numeric feature impact<a class="headerlink" href="#numeric-feature-impact" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Numeric feature impact </span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">numeric_columns</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="n">y_var</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="n">y_var</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Distribution&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distribution of </span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s2"> by DEATH_EVENT&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine_learning_model_11_0.png" src="../_images/machine_learning_model_11_0.png" />
+<img alt="../_images/machine_learning_model_11_1.png" src="../_images/machine_learning_model_11_1.png" />
+<img alt="../_images/machine_learning_model_11_2.png" src="../_images/machine_learning_model_11_2.png" />
+<img alt="../_images/machine_learning_model_11_3.png" src="../_images/machine_learning_model_11_3.png" />
+<img alt="../_images/machine_learning_model_11_4.png" src="../_images/machine_learning_model_11_4.png" />
+<img alt="../_images/machine_learning_model_11_5.png" src="../_images/machine_learning_model_11_5.png" />
+</div>
+</div>
+<p>There are no clear separation of classes in either of the numeric features.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="xgboost-model">
+<h1>Xgboost model<a class="headerlink" href="#xgboost-model" title="Permalink to this headline">¶</a></h1>
+<p>We will do a 5 fold cross validation hyperparameter search in order to find the best XGB model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining the final feature list </span>
+<span class="n">final_features</span> <span class="o">=</span> <span class="n">numeric_columns</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="s1">&#39;high_blood_pressure&#39;</span><span class="p">]</span>
+
+<span class="c1"># Defining a list of hyperparameters </span>
+<span class="n">hp_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">160</span><span class="p">],</span> 
+    <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> 
+    <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span>
+    <span class="s1">&#39;eval_metric&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;logloss&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;use_label_encoder&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">],</span>
+    <span class="s1">&#39;min_child_weight&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Creating the parameter grid </span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="n">ParameterGrid</span><span class="p">(</span><span class="n">hp_dict</span><span class="p">)</span>
+
+<span class="c1"># Initiating the empty placeholder for the AUC scores</span>
+<span class="n">auc_scores</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Iterating over the parameter grid</span>
+<span class="k">for</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">param_grid</span><span class="p">:</span>
+    <span class="c1"># Spliting the data into 5 folds </span>
+    <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1"># Initiating the empty placeholder for the scores</span>
+    <span class="n">auc_scores_folds</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Iterating over the folds</span>
+    <span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+        <span class="c1"># Splitting the data into training and test sets</span>
+        <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+        
+        <span class="n">train_X_fold</span><span class="p">,</span> <span class="n">test_X_fold</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">final_features</span><span class="p">],</span> <span class="n">test</span><span class="p">[</span><span class="n">final_features</span><span class="p">]</span>
+        <span class="n">train_y_fold</span><span class="p">,</span> <span class="n">test_y_fold</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">y_var</span><span class="p">],</span> <span class="n">test</span><span class="p">[</span><span class="n">y_var</span><span class="p">]</span>
+
+        <span class="c1"># Creating the XGBoost model </span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBClassifier</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="c1"># Fitting the model </span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X_fold</span><span class="p">,</span> <span class="n">train_y_fold</span><span class="p">)</span>
+
+        <span class="c1"># Predicting the test set </span>
+        <span class="n">preds</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">test_X_fold</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Calculating the AUC score </span>
+        <span class="n">auc_scores_folds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">test_y_fold</span><span class="p">,</span> <span class="n">preds</span><span class="p">))</span>
+    
+    <span class="c1"># Averaging the scores and appending to the master list </span>
+    <span class="n">auc_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">auc_scores_folds</span><span class="p">))</span>
+
+<span class="c1"># Creating the dataframe with the hyperparameters and AUC scores</span>
+<span class="n">df_scores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">param_grid</span><span class="p">)</span>
+<span class="n">df_scores</span><span class="p">[</span><span class="s1">&#39;mean_auc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">auc_scores</span><span class="p">]</span>
+
+<span class="c1"># Sorting by mean AUC score</span>
+<span class="n">df_scores</span> <span class="o">=</span> <span class="n">df_scores</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;mean_auc&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df_scores</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Printing the top 10 hyperparameters</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Top 10 hyperparameters:</span><span class="se">\n</span><span class="si">{</span><span class="n">df_scores</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Saving the best hyper parameters</span>
+<span class="n">best_hp</span> <span class="o">=</span> <span class="n">df_scores</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="k">del</span> <span class="n">best_hp</span><span class="p">[</span><span class="s1">&#39;mean_auc&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Top 10 hyperparameters:
+  eval_metric  learning_rate  max_depth  min_child_weight  n_estimators  \
+0     logloss            0.1          2               0.5            30   
+1     logloss            0.1          5               1.0            30   
+2     logloss            0.1          2               1.0            30   
+3     logloss            0.1          4               1.0            30   
+4     logloss            0.1          3               0.5            30   
+5     logloss            0.1          5               1.0            60   
+6     logloss            0.1          3               1.0            30   
+7     logloss            0.2          2               1.0            30   
+8     logloss            0.1          5               0.5            30   
+9     logloss            0.1          4               0.5            30   
+
+   use_label_encoder  mean_auc  
+0              False     0.776  
+1              False     0.774  
+2              False     0.770  
+3              False     0.768  
+4              False     0.767  
+5              False     0.760  
+6              False     0.760  
+7              False     0.759  
+8              False     0.758  
+9              False     0.755  
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="fitting-the-final-model">
+<h1>Fitting the final model<a class="headerlink" href="#fitting-the-final-model" title="Permalink to this headline">¶</a></h1>
+<p>We will be using xgboost as our final model for this project.</p>
+<p>The final hyperparameters are the top ones from the K-FOLD analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># X and Y for the model </span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">final_features</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">d</span><span class="p">[</span><span class="n">y_var</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Fitting the model </span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBClassifier</span><span class="p">(</span><span class="o">**</span><span class="n">best_hp</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBClassifier(base_score=0.5, booster=&#39;gbtree&#39;, colsample_bylevel=1,
+              colsample_bynode=1, colsample_bytree=1, enable_categorical=False,
+              eval_metric=&#39;logloss&#39;, gamma=0, gpu_id=-1, importance_type=None,
+              interaction_constraints=&#39;&#39;, learning_rate=0.1, max_delta_step=0,
+              max_depth=2, min_child_weight=0.5, missing=nan,
+              monotone_constraints=&#39;()&#39;, n_estimators=30, n_jobs=16,
+              num_parallel_tree=1, predictor=&#39;auto&#39;, random_state=0,
+              reg_alpha=0, reg_lambda=1, scale_pos_weight=1, subsample=1,
+              tree_method=&#39;exact&#39;, use_label_encoder=False,
+              validate_parameters=1, verbosity=None)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating the feature importance frame </span>
+<span class="n">feature_importance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;feature&#39;</span><span class="p">:</span> <span class="n">final_features</span><span class="p">,</span>
+    <span class="s1">&#39;importance&#39;</span><span class="p">:</span> <span class="n">clf</span><span class="o">.</span><span class="n">feature_importances_</span>
+<span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;importance&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Ploting </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">feature_importance</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">],</span> <span class="n">feature_importance</span><span class="p">[</span><span class="s1">&#39;importance&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Feature&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Importance&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Feature importance&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine_learning_model_17_0.png" src="../_images/machine_learning_model_17_0.png" />
+</div>
+</div>
+<div class="section" id="saving-all-the-necessary-objects">
+<h2>Saving all the necessary objects<a class="headerlink" href="#saving-all-the-necessary-objects" title="Permalink to this headline">¶</a></h2>
+<p>In order to successfuly serve the model, we need to save all the necessary objects. The objects are:</p>
+<ul class="simple">
+<li><p>The model itself.</p></li>
+<li><p>The input data schema.</p></li>
+</ul>
+<p>The input data schema will be saved as a dictionary in a JSON file with the following structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;input_schema&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;column_name&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;float&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;column_name&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;float&quot;</span>
+            <span class="p">},</span>
+            <span class="o">...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The model will be saved as a pickle file as well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final feature list in the correct order:</span><span class="se">\n</span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Creating the input schema</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[]</span> 
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numeric_columns</span><span class="p">:</span>
+        <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;numeric&quot;</span>
+        <span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;boolean&quot;</span>
+        <span class="p">})</span>
+
+<span class="n">input_schema</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;input_schema&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="n">features</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Creating the output dir </span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;ML_API&quot;</span><span class="p">,</span> <span class="s2">&quot;ml_model&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_dir</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+
+<span class="c1"># Saving the model to a pickle file </span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;model.pkl&quot;</span><span class="p">),</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># Saving the input schema </span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;input_schema.json&quot;</span><span class="p">),</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">input_schema</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final feature list in the correct order:
+[&#39;age&#39; &#39;creatinine_phosphokinase&#39; &#39;ejection_fraction&#39; &#39;platelets&#39;
+ &#39;serum_creatinine&#39; &#39;serum_sodium&#39; &#39;sex&#39; &#39;high_blood_pressure&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have these files, we can use them in our ML API. When serving machine learning, it is always a good practice to save the input schema as well as the model. The schema will be used to preprocess the incoming data from users and make it ingestable by the model.</p>
+<p>In the next chapter, we will create more database models and endpoints to serve predictions from our model.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter-7-final-serving"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="authentification.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">ML users authentification</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="machine_learning_db_models.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">ML database models</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Eligijus Bujokas<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

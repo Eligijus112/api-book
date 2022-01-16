@@ -1,0 +1,680 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Building blocks of a computer &#8212; Machine Learning serving</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Linux operating system" href="computer-OS.html" />
+    <link rel="prev" title="Introduction" href="../intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning serving</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Hardware and Linux OS
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Building blocks of a computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="computer-OS.html">
+   Linux operating system
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Software for an ML developer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/python-intro.html">
+   Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/virtual-envs.html">
+   Virtual environments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/docker.html">
+   Docker
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/object-oriented-programming.html">
+   Classes and objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-types.html">
+   Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-structures.html">
+   Data structures
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model.html">
+   Creating machine learning models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model-serving.html">
+   Basic ML serving
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-intro.html">
+   Application Programming Interface basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-server.html">
+   API server
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-DB.html">
+   Databases and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-example.html">
+   API and PSQL integration example
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Production Tools and Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/gunicorn.html">
+   Gunicorn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/docker.html">
+   Docker in production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/JWT.html">
+   JWT based authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/migrations.html">
+   Migrations
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  ML serving API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/users.html">
+   ML users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/authentification.html">
+   ML users authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_model.html">
+   ML model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_db_models.html">
+   ML database models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api.html">
+   Machine learning API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api_production.html">
+   Wrapping the API into a production container
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Bibliography
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references/references.html">
+   Links and references
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chapter-1-computer/computer-specs.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Eligijus112/api-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Eligijus112/api-book/issues/new?title=Issue%20on%20page%20%2Fchapter-1-computer/computer-specs.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Eligijus112/api-book/master?urlpath=tree/docs/chapter-1-computer/computer-specs.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Building blocks of a computer
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-a-computer">
+   What is a computer?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#main-component-of-modern-computers">
+   Main component of modern computers
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#disk-space">
+   Disk space
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hdds">
+     HDDs
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ssds">
+     SSDs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cpu">
+   CPU
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#threads">
+     Threads
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ram">
+   RAM
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#putting-all-the-pieces-together">
+   Putting all the pieces together
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="building-blocks-of-a-computer">
+<h1>Building blocks of a computer<a class="headerlink" href="#building-blocks-of-a-computer" title="Permalink to this headline">¶</a></h1>
+<p>All the creation of the ML models and model serving could not be possible without a computer. Ussualy, when a project starts and the initial meetings take place, a large part of the conversation is about what hardware to use and how much will it cost. In order to estimate the potential costs and having in mind the scope of the project, it is imperative to know at least on the high level what are the main components of the computer from the standpoint of an Machine Learning engineer. The main parts, along with the popular acronyms, are:</p>
+<ul class="simple">
+<li><p>Disk space - SSD and HDD</p></li>
+<li><p>Processors - CPU units</p></li>
+<li><p>Random access memory - RAM</p></li>
+<li><p>Operating systems</p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="what-is-a-computer">
+<h1>What is a computer?<a class="headerlink" href="#what-is-a-computer" title="Permalink to this headline">¶</a></h1>
+<p>As per wiki <span id="id1">[<a class="reference internal" href="../references/references.html#id10">Wikipedia, 2020</a>]</span>:</p>
+<p><em><strong>“A computer is a machine that can be programmed to carry out sequences of arithmetic or logical operations automatically.”</strong></em></p>
+<p>The author Jonathan E. Steinhart augments this definition with some of this thoughts:</p>
+<p><em><strong>“Sending email and playing games are made possible by programs running on computers. The computer itself is like a newborn baby. It doesn’t really know how to do much. We hardly ever think about the basic machinery of human beings, because we mostly interact with the personalities that are running on that basic machinery, just like programs running on computers. For example, when you’re on a web page, you’re not reading it using just the computer itself; you’re reading it using programs someone else wrote that are running on your computer, the computer hosting the web page, and all of the computers in between that make the internet function.”</strong></em></p>
+<p>Putting these definitions and thoughts in simpler terms, a computer is a machine with various hardware parts working together in order to run software programs.</p>
+<p>From a machine learning practitioner point of view, <strong>a computer is a machine which uses disk space, processors, computer memory, graphical units and operating systems in order to serve machine learning models to the client</strong>.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="main-component-of-modern-computers">
+<h1>Main component of modern computers<a class="headerlink" href="#main-component-of-modern-computers" title="Permalink to this headline">¶</a></h1>
+<p>Computers would not be that usefull if we could not store some data into it and the access it later. The building blocks of computer memory are <strong>bits</strong>. The bit represents a logical state with one of two possible values most commonly denoted as <strong>1 or 0</strong>, <strong>True or False</strong>. How does a computer know when a bit has a value of 1 or 0? This is where transistors<span id="id2">[<a class="reference internal" href="../references/references.html#id11">Wikipedia, 2020</a>]</span> come into play. A transistor is one of the most influential inventions in the modern history, enabling anyone to have a powerfull and cheap computers in their households, communications between computers and overall transistors enable the internal calculation logic inside the computers.</p>
+<p><strong>“You don’t need to know everything about the guts of transistors. The important thing to know is that a transistor is made on a substrate, or slab, of some semiconducting material, usually silicon. Unlike other technologies such as gears, valves, relays, and vacuum tubes, transistors aren’t individually manufactured objects. They’re made through a process called photolithography, which involves projecting a picture of a transistor onto a silicon wafer and developing it. This process is suitable for mass production because large numbers of transistors can be projected onto a single silicon wafer substrate, developed, and then sliced up into individual components.”</strong><span id="id3">[<a class="reference internal" href="../references/references.html#id9">Steinhart, 2019</a>]</span></p>
+<p><img alt="transistor" src="../_images/transistor.jpeg" /></p>
+<p>One of the main uses of a transistor is that it can “hold” voltage. To simplify things and to build intuition, we can say that a transistor is “on” or has a state of “1” when there is voltage in it, and the transistor is “off” or it’s state is “0” if there is no voltage in it.</p>
+<p>A single transistor would not be much usefull, because we could only store 1 bit of information in it. Modern computers have integrated circuits that have millions and more transistors inside of them.</p>
+<p><img alt="transistor" src="../_images/circuit.png" /></p>
+<p>This means that a single circuit can hold millions, billions and even more bits. These bits can be accessed by a computer in a billionths of a second. If you open up your desktop computer you would see alot of integrated circuits bunched up together which forms a certain architecture. But no matter how many circuits and transistors there are in a computer, no matter the marketing messages, all the modern computer computation and data storage logic depends on a very simple fact that a single transistor can be either “1” or “0”.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="disk-space">
+<h1>Disk space<a class="headerlink" href="#disk-space" title="Permalink to this headline">¶</a></h1>
+<p>In order to store files, data, models and to execute <strong><a class="reference external" href="http://scripts.py">scripts.py</a></strong> files we need storage space inside a computer to put them in. Nowadays, there are two main types of hardware used for storage: <strong>hard disk drives (HDD)</strong> and <strong>solid state drives (SSD)</strong>.</p>
+<div class="section" id="hdds">
+<h2>HDDs<a class="headerlink" href="#hdds" title="Permalink to this headline">¶</a></h2>
+<p>A typical hard disk drive looks like this:</p>
+<p><img alt="HDD-example" src="../_images/hdd.jpg" /></p>
+<p>The most important parts are the disk where the data is stored and the “needle” on top of the round disk which is used to extract the data. That needle is refered to as the <strong>head</strong>.</p>
+<p><strong>“It takes time to talk to memory. Imagine you had to go to the store every time you needed a cup of flour. It’s much more practical to go to the store once and bring home a whole sack of flour. Larger memory devices use this principle. Think warehouse shopping for bits. Disk drives, also known as mass storage, are great for storing immense amounts of data. &lt;…&gt;. They’re often referred to as mass storage. Some religious institutions use mass storage for their ceremonies in between use. Disk drives store bits on rotating magnetic platters, sort of like a lazy Susan. Bits periodically come around to where you’re sitting, and you use your hand to pluck them off or put them on.</strong></p>
+<p><strong>In a disk drive, your hand is replaced by the disk head. Disk drives are relatively slow compared to other types of memory. If you want something that just passed by the head, you have to wait almost an entire rotation for it to come around again. Modern disks spin at 7,200 rotations per minute (RPM), which means a rotation takes slightly longer than 8 milliseconds. The big problem with disk drives is that they’re mechanical and wear out. Bearing wear is one of the big causes of disk failure The difference between commercial and consumer-grade devices is primarily the amount of grease in the bearing—manufacturers are able to charge hundreds of dollars for something that costs less than a penny Disk drives store data by magnetizing areas on the disk, which makes them nonvolatile just like core memory. Disk drives are a trade-off between speed and density. They’re slow because of the time it takes for the bits you want to show up under the head, but because the data is being brought to the head, no space is required for address and data connections, unlike, for example, in a DRAM. They’re built in sealed containers because dust and dirt would cause them to fail.”</strong><span id="id4">[<a class="reference internal" href="../references/references.html#id9">Steinhart, 2019</a>]</span></p>
+</div>
+<div class="section" id="ssds">
+<h2>SSDs<a class="headerlink" href="#ssds" title="Permalink to this headline">¶</a></h2>
+<p>A solid state drive is a type of memory storing hardware that uses transistors and bites to store information. A typical SSD drive looks like this:</p>
+<p><img alt="SSD-example" src="../_images/ssd.jpg" /></p>
+<p>As one can see, an SSD has electronic circuits in it which are used to store data. Because there are no spinning parts and the memory can be accessed almost instantly, the SSD is becoming the more dominant technology in storing data.</p>
+<p><strong>“It works like RAM for reading and also for writing a blank device filled with 0s. But although 0s can be turned into 1s, they can’t be turned back without being erased first. Flash memory is internally divided into blocks, and only blocks can be erased, not individual locations. Flash memory devices are random-access for reads, and block-access for writes. Disk drives are slowly being replaced by solid-state disk drives, which are pretty much just flash memory packaged up to look like a disk drive. Right now their price per bit is much higher than spinning disks, but that’s expected to change. Because flash memory wears out, solid-state drives include a processor that keeps track of the usages in different blocks and tries to even it out so that all blocks wear out at the same rate.”</strong><span id="id5">[<a class="reference internal" href="../references/references.html#id9">Steinhart, 2019</a>]</span></p>
+<p>Acording to a research by David Floyer<span id="id6">[<a class="reference internal" href="../references/references.html#id12">Floyer, 2021</a>]</span> the SSDs will become more cheap in terms of cost per gigabyte by 2026:</p>
+<p><img alt="SSD-vs-HDD" src="../_images/SSD-vs-HDD.jpg" /></p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="cpu">
+<h1>CPU<a class="headerlink" href="#cpu" title="Permalink to this headline">¶</a></h1>
+<p>A <strong>Central Procesing Unit</strong> in a computer gives out commands to all the other hardware inside of the computer. It also serves as an interaction point between a program (piece of software code) and the internal hardware. A typical CPU:</p>
+<p><img alt="CPU-example" src="../_images/cpu.jpg" /></p>
+<p>A CPU is made of billions of transistors which are bundled together into electronic circuits. Circuits bundled up with a processor form a <strong>core</strong>.</p>
+<p>A processor is a circuit that executes instructions from the programs to the hardware components and back.</p>
+<p>In the past, all the CPUs were single core units. Nowadays, the most common form of a CPU is a multi-core CPU:</p>
+<p><img alt="CPU-multi-example" src="../_images/multi-core-cpu.png" /></p>
+<p>All individual cores have an environment dedicated to them (memory, instructions, objects, etc.) and there is a shared memory space.</p>
+<p>To list the information about a CPU in an Ubuntu machine use the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lscpu</span>
+</pre></div>
+</div>
+<p>It should print out something similar:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Architecture</span><span class="p">:</span>                    <span class="n">x86_64</span>
+<span class="n">CPU</span> <span class="n">op</span><span class="o">-</span><span class="n">mode</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>                  <span class="mi">32</span><span class="o">-</span><span class="n">bit</span><span class="p">,</span> <span class="mi">64</span><span class="o">-</span><span class="n">bit</span>
+<span class="n">Byte</span> <span class="n">Order</span><span class="p">:</span>                      <span class="n">Little</span> <span class="n">Endian</span>
+<span class="n">Address</span> <span class="n">sizes</span><span class="p">:</span>                   <span class="mi">48</span> <span class="n">bits</span> <span class="n">physical</span><span class="p">,</span> <span class="mi">48</span> <span class="n">bits</span> <span class="n">virtual</span>
+<span class="n">CPU</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>                          <span class="mi">16</span>
+<span class="n">On</span><span class="o">-</span><span class="n">line</span> <span class="n">CPU</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="nb">list</span><span class="p">:</span>             <span class="mi">0</span><span class="o">-</span><span class="mi">15</span>
+<span class="n">Thread</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">per</span> <span class="n">core</span><span class="p">:</span>              <span class="mi">2</span>
+<span class="n">Core</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">per</span> <span class="n">socket</span><span class="p">:</span>              <span class="mi">8</span>
+<span class="n">Socket</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>                       <span class="mi">1</span>
+<span class="n">NUMA</span> <span class="n">node</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>                    <span class="mi">1</span>
+<span class="n">Vendor</span> <span class="n">ID</span><span class="p">:</span>                       <span class="n">AuthenticAMD</span>
+<span class="n">CPU</span> <span class="n">family</span><span class="p">:</span>                      <span class="mi">25</span>
+<span class="n">Model</span><span class="p">:</span>                           <span class="mi">33</span>
+<span class="n">Model</span> <span class="n">name</span><span class="p">:</span>                      <span class="n">AMD</span> <span class="n">Ryzen</span> <span class="mi">7</span> <span class="mi">5800</span><span class="n">X</span> <span class="mi">8</span><span class="o">-</span><span class="n">Core</span> <span class="n">Processor</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>The CPU with the above information has 16 cores and 32 <strong>threads</strong> in total (<strong>2 Thread(s) per core</strong> * <strong>CPU(s)</strong> = 16 * 2 = 32).</p>
+<div class="section" id="threads">
+<h2>Threads<a class="headerlink" href="#threads" title="Permalink to this headline">¶</a></h2>
+<p>There are two types of threads in regards to a CPU: <strong>hardware threads</strong> and <strong>software threads</strong>.</p>
+<p>A hardware thred refers to the highest level of code (set of instructions) executed by a processor. Each CPU core has at least one thread, but nowadays, in terms of hardware, there are two threads per CPU. So, in the case of the example above, while having 16 physical cores on a chip, there are 16 additional “virtual” cores who can be used to give out instructions to programs. In practise, from a program point of view, a computer with 16 cores and 2 threads per core has 32 cores.</p>
+<p>Software threads are the smallest sequence of instructons that can be managed independently. Even if you have 32 hardware threads, you can have thousands of software threads. Software threads form units of <strong>processes</strong>. Each process can have many threads. For example, a command in Linux to show the CPU usage is <strong>htop</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install first if not present with </span>
+<span class="c1"># apt-get install htop</span>
+
+<span class="c1"># Run the command</span>
+<span class="n">htop</span>
+</pre></div>
+</div>
+<p>A snapshot of a typical output:</p>
+<p><img alt="htop" src="../_images/htop.png" /></p>
+<p>The above output shows the physical cores available (16) and, along other things, it shows that the total number of active processes running (tasks) are <strong>281</strong> and those proceses have <strong>1561</strong> threads running. All the individual processes are listed in real time as well. Each process has a PID (process identification number) assigned to it.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="ram">
+<h1>RAM<a class="headerlink" href="#ram" title="Permalink to this headline">¶</a></h1>
+<p>RAM is short for <strong>Random Access Memory</strong>. A typical hardware piece of RAM looks like this:</p>
+<p><img alt="RAM" src="../_images/RAM.jpg" /></p>
+<p>A RAM piece has transistors and circuits on it and the main usage for RAM is to almost instantaneously transfer information from CPU back and forth (hence the term access memory). The random part is due to the fact that the information is assigned to random <strong>addresses</strong> of memory storage.</p>
+<p><strong>“Memory is like a long street full of houses. Each house is exactly the same size and has room for a certain number of bits. Building codes have pretty much settled on 1 byte per house. And just like on a real street, each house has an address, which is just a number. If you have 64 MiB of memory in your computer, that’s 64 × 1,024 × 1,024 = 67,108,864 bytes (or 536,870,912 bits). The bytes have addresses from 0 to 67,108,863. This numbering makes sense, unlike the numbering on many real streets.”</strong><span id="id7">[<a class="reference internal" href="../references/references.html#id9">Steinhart, 2019</a>]</span></p>
+<p>Thus each byte of information has it’s own address on a RAM board. If a place is already allocated, it means that the voltage in a certain transistors is not 0 and the place in RAM cannot be occupied by another piece of data. Bytes can only be stored to a place in RAM where the space is currently free (meaning - no voltage). If a computer is turned off, then all the information in RAM is lost.</p>
+<p>To check out the information about RAMs on a Linux machine use the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">free</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<p>A general output of the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>              <span class="n">total</span>        <span class="n">used</span>        <span class="n">free</span>      <span class="n">shared</span>  <span class="n">buff</span><span class="o">/</span><span class="n">cache</span>   <span class="n">available</span>
+<span class="n">Mem</span><span class="p">:</span>           <span class="mi">62</span><span class="n">Gi</span>       <span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="n">Gi</span>        <span class="mi">53</span><span class="n">Gi</span>       <span class="mi">265</span><span class="n">Mi</span>       <span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="n">Gi</span>        <span class="mi">56</span><span class="n">Gi</span>
+<span class="n">Swap</span><span class="p">:</span>         <span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="n">Gi</span>          <span class="mi">0</span><span class="n">B</span>       <span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="n">Gi</span>
+</pre></div>
+</div>
+<p>The <strong>Mem:</strong> row indicates the memory available in the RAM hardware.</p>
+<p>The <strong>Swap:</strong> row indicates the available SSD space which is dedicated for random access. If all the RAM hardware is depleted, then CPU will write data to a part in SSD.</p>
+<p>The <strong>total</strong> collumn indicates the total amount of RAM available on a machine. This is the total amount of unique addresses which data can be stored for an instant access for any CPU proccesses.</p>
+<p>The <strong>used</strong> collumn indicates the currently used up memory in random access hardware.</p>
+<p>The <strong>free</strong> collumn indicates the total available memory which can be populated by processes running in the computer.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="putting-all-the-pieces-together">
+<h1>Putting all the pieces together<a class="headerlink" href="#putting-all-the-pieces-together" title="Permalink to this headline">¶</a></h1>
+<p>The three major parts of a computer which strongly influence costs and are the main resources for running programs are:</p>
+<p><strong>Disk space</strong> - either HHD or an SSD.</p>
+<p><strong>CPU</strong> - amount of processes managed and their speed of execution.</p>
+<p><strong>RAM</strong> - memory space for storing data created by various processes.</p>
+<p><img alt="process-chart" src="../_images/process-chart.png" /></p>
+<p>When a user initiates a python script with the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">script</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>There are many threads and processes that are sprung but the main parts are the following:</p>
+<ol class="simple">
+<li><p>The process gets assigned a PID.</p></li>
+<li><p>The CPU then finds the script in the dedicated space the script is in the computer file storage.</p></li>
+<li><p>The python language deciphers the text in the script from human readable code to compiler readable instructions.</p></li>
+<li><p>One of the cores and the CPU is then assigned to calculate all the instructions from the python script.</p></li>
+<li><p>All while calculating, a portion of RAM is occupied by the objects created in the script and can be accessed very quickly.</p></li>
+<li><p>After all the calculations, an output is presented to the user.</p></li>
+</ol>
+<p>All the intermediate steps (which can be hundreds or thousands) are separate threads that are assigned to the main PID.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The execution of this cell is a separate process and gets a unique PID. Every intermediate step is a software thread.</span>
+
+<span class="c1"># Storing the data in RAM </span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">5</span> 
+<span class="n">b</span> <span class="o">=</span> <span class="mi">10</span> 
+
+<span class="c1"># Creating another object in memory; </span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> 
+
+<span class="c1"># Printing out the result to the user</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The sum of </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2"> is: </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The sum of 5 and 10 is: 15
+</pre></div>
+</div>
+</div>
+</div>
+<p>Altough the above script in the cell is straightforward, it initiates hundreds of subprocesses in the computer hardware.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter-1-computer"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../intro.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Introduction</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="computer-OS.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Linux operating system</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Eligijus Bujokas<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

@@ -1,0 +1,617 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API server &#8212; Machine Learning serving</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Databases and Python" href="API-DB.html" />
+    <link rel="prev" title="Application Programming Interface basics" href="API-intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning serving</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Hardware and Linux OS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-specs.html">
+   Building blocks of a computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-OS.html">
+   Linux operating system
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Software for an ML developer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/python-intro.html">
+   Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/virtual-envs.html">
+   Virtual environments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/docker.html">
+   Docker
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/object-oriented-programming.html">
+   Classes and objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-types.html">
+   Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-structures.html">
+   Data structures
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model.html">
+   Creating machine learning models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model-serving.html">
+   Basic ML serving
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  API
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="API-intro.html">
+   Application Programming Interface basics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   API server
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="API-DB.html">
+   Databases and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="API-example.html">
+   API and PSQL integration example
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Production Tools and Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/gunicorn.html">
+   Gunicorn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/docker.html">
+   Docker in production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/JWT.html">
+   JWT based authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/migrations.html">
+   Migrations
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  ML serving API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/users.html">
+   ML users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/authentification.html">
+   ML users authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_model.html">
+   ML model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_db_models.html">
+   ML database models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api.html">
+   Machine learning API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api_production.html">
+   Wrapping the API into a production container
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Bibliography
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references/references.html">
+   Links and references
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chapter-5-API/API-server.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Eligijus112/api-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Eligijus112/api-book/issues/new?title=Issue%20on%20page%20%2Fchapter-5-API/API-server.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Eligijus112/api-book/master?urlpath=tree/docs/chapter-5-API/API-server.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   API server
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#terminologies-of-api-serving">
+   Terminologies of API serving
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     API server
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sync-vs-async">
+     SYNC vs ASYNC
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#socket">
+     Socket
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#asgi">
+     ASGI
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#api-server-example">
+   API server example
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="api-server">
+<h1>API server<a class="headerlink" href="#api-server" title="Permalink to this headline">¶</a></h1>
+<p>In the past chapter, we have created a simple API that can be called from a browser with one endpoint. That one endpoint returned the root of a number.</p>
+<p>When we call that endpoint (<a class="reference external" href="http://127.0.0.1:8000/root_of_number?number=2">http://127.0.0.1:8000/root_of_number?number=2</a>), all the transfering of data, waiting for Python calculations, and returning the result, is done by a program called <code class="docutils literal notranslate"><span class="pre">uvicorn</span></code>.</p>
+<p>As the writers of <code class="docutils literal notranslate"><span class="pre">uvicorn</span></code> say:</p>
+<p>“<code class="docutils literal notranslate"><span class="pre">Uvicorn</span></code> is a lightning-fast ASGI server implementation, using <strong>uvloop</strong> and <strong>httptools</strong>”.</p>
+<p>To read the official documentation of the framework visit: <a class="reference external" href="https://www.uvicorn.org/">https://www.uvicorn.org/</a></p>
+<p>Programs like <code class="docutils literal notranslate"><span class="pre">uvicorn</span></code>, <code class="docutils literal notranslate"><span class="pre">gunicorn</span></code> and <code class="docutils literal notranslate"><span class="pre">gevent</span></code> are populary termed as API servers (they serve the API requests and response). When initiated, the program <code class="docutils literal notranslate"><span class="pre">uvicorn</span></code> creates an application in runtime (losely speaking, this program is called a server) and it is ready to accept connections.</p>
+<p>Reading the definitions and the documentations for the first time, it may not be easy to understand what is an API or what is an ASGI. Before diving deeper and writing more complex programs, it is important to understand the basics of the API server side.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="terminologies-of-api-serving">
+<h1>Terminologies of API serving<a class="headerlink" href="#terminologies-of-api-serving" title="Permalink to this headline">¶</a></h1>
+<p>In this section, I provide a brief explanation of the terms used in the API serving.</p>
+<div class="section" id="id1">
+<h2>API server<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>The term <code class="docutils literal notranslate"><span class="pre">server</span></code> is used to describe the server side of an API. The server is the program that is running on the computer that is serving the API requests. <code class="docutils literal notranslate"><span class="pre">Uvicorn</span></code> is an API server that is in runtime on the machine it is started in, receives requests, runs the data from the requests through the user written code and returns the response. Every API server has its own PID on the system.</p>
+</div>
+<div class="section" id="sync-vs-async">
+<h2>SYNC vs ASYNC<a class="headerlink" href="#sync-vs-async" title="Permalink to this headline">¶</a></h2>
+<p>Synchronous (sync) API server is a type of server that sends out a request, waits for all the internal calculations to be completed, and returns the response. The underlying enpoint cannot be accessed while the initial calculations are being made.</p>
+<p>Asynchronous (async) API server is a type of server that sends out a request, and returns a response immediately. The underlying endpoint can be accessed while the initial calculations are being made. All the calls get queued and the server will process them in the order they were received.</p>
+</div>
+<div class="section" id="socket">
+<h2>Socket<a class="headerlink" href="#socket" title="Permalink to this headline">¶</a></h2>
+<p>A socket is an electrical device that is used to connect a device to the source of electricity.</p>
+<p><img alt="socket-mechanical" src="../_images/socket.jpg" /></p>
+<p>There are two main subjects in a socket system: the socket itself and the device which is connecting to it. Keep this in mind when you are reading this section, it will make the grasping of linux sockets easier.</p>
+<p>A socket in Linux is a program (which has as PID) that enables the connection of two applications via a netork. In an API world, a socket on the server receives data and sends out a response, and a socket on the client receives the response and sends out a request.</p>
+<p>A diagram on sockets <span id="id2">[<a class="reference internal" href="../references/references.html#id27">of Computer Science, 2021</a>]</span>:</p>
+<p><img alt="socket" src="../_images/TCPsockets.jpg" /></p>
+<p>TCP stands for Transmission Control Protocol. It is a protocol that is used to send data over a network. As we can see from the graph, a socket is created on the server side which has different functionalities than the user side. We can view a socket as an actively running object in computer memory with standart methods:</p>
+<ul class="simple">
+<li><p>connect()</p></li>
+<li><p>send()</p></li>
+<li><p>recv()</p></li>
+<li><p>close()</p></li>
+<li><p>bind()</p></li>
+<li><p>listen()</p></li>
+<li><p>…</p></li>
+</ul>
+<p>Lets assume we are running the API server via the link <a class="reference external" href="http://127.0.0.1:8000">http://127.0.0.1:8000</a>. The <code class="docutils literal notranslate"><span class="pre">uvicorn</span></code> application automaticaly creates a socket between the <strong>IP</strong> address of 127.0.0.1 (which is the local machine), port 8000 with any calls to the link. The <code class="docutils literal notranslate"><span class="pre">uvicorn</span></code> framework automatically creates a socket for every request that is received.</p>
+</div>
+<div class="section" id="asgi">
+<h2>ASGI<a class="headerlink" href="#asgi" title="Permalink to this headline">¶</a></h2>
+<p><strong>ASGI</strong> stands for Asynchronous Server Gateway Interface. It is a specification for the API server side, containing a set of rules that defines how the API server should behave. In this case, the API server is asynchronously accepting requests, running them through the user written code and returning the response.</p>
+<p><img alt="uvicorn" src="../_images/uvicorn.png" /></p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="api-server-example">
+<h1>API server example<a class="headerlink" href="#api-server-example" title="Permalink to this headline">¶</a></h1>
+<p>Lets create an async API endpoint which returns the n-th order root of a number. The full Python code for creating the API in memory:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat api-n-root/get_n_root.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Importing the fastAPI library
+from fastapi import FastAPI
+
+# Creating an instance of the FastAPI class
+app = FastAPI()
+
+# Creating an endpoint with the GET method
+@app.get(&quot;/root&quot;)
+def root_of_number(number: float, n: float):
+    &quot;&quot;&quot;
+    The function returns the n-th root of the number.
+
+    Parameters
+    ----------
+    number : float
+        The number to find the n-th root of.
+    n : float
+        The n-th root to find.
+
+    Returns
+    -------
+    float
+        The n-th root of the number.
+    &quot;&quot;&quot;
+    return {&quot;root&quot;: number ** n} 
+</pre></div>
+</div>
+</div>
+</div>
+<p>This Python code will be used by uvicorn not only to create an enpoint (/root) but also to tell the computer what to do when a request access it. To launch the uvicorn API server, use the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uvicorn</span> <span class="n">api</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="n">root</span><span class="o">.</span><span class="n">get_n_root</span><span class="p">:</span><span class="n">app</span>
+</pre></div>
+</div>
+<p>The uvicorn application will search for the script <code class="docutils literal notranslate"><span class="pre">get_n_root.py</span></code> in the directory <code class="docutils literal notranslate"><span class="pre">api-n-root</span></code> and will use the object <code class="docutils literal notranslate"><span class="pre">app</span></code> to handle the requests. All of the socketing and other runtime stuff is handled by the <code class="docutils literal notranslate"><span class="pre">uvicorn</span></code> framework.</p>
+<p>After the command is initialized, the output should be similar to the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span>     <span class="n">Started</span> <span class="n">server</span> <span class="n">process</span> <span class="p">[</span><span class="mi">78406</span><span class="p">]</span>
+<span class="n">INFO</span><span class="p">:</span>     <span class="n">Waiting</span> <span class="k">for</span> <span class="n">application</span> <span class="n">startup</span><span class="o">.</span>
+<span class="n">INFO</span><span class="p">:</span>     <span class="n">Application</span> <span class="n">startup</span> <span class="n">complete</span><span class="o">.</span>
+<span class="n">INFO</span><span class="p">:</span>     <span class="n">Uvicorn</span> <span class="n">running</span> <span class="n">on</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">8000</span> <span class="p">(</span><span class="n">Press</span> <span class="n">CTRL</span><span class="o">+</span><span class="n">C</span> <span class="n">to</span> <span class="n">quit</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The API server has a PID of <code class="docutils literal notranslate"><span class="pre">78406</span></code> and is listening on the port 8000 on the localhost machine. When a client sends data to the address <a class="reference external" href="http://127.0.0.1:8000">http://127.0.0.1:8000</a>, the request is “hijacked” by uvicorn and all the logic starts. The first thing that uvicorn does is it checks whether an API endpoint exists which matches the request. If it does, it will run the code in the file <code class="docutils literal notranslate"><span class="pre">get_n_root.py</span></code> and return the response. If it does not, a response with status code 404 (resource not found) is returned.</p>
+<p>For example, if the client sends a request to <a class="reference external" href="http://127.0.0.1:8000/root?number=1879&amp;root=0.75">http://127.0.0.1:8000/root?number=1879&amp;root=0.75</a>, a dictionary with the following content is returned:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;root&quot;</span><span class="p">:</span> <span class="mf">285.39416206496446</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>That is the answer to the problem of what is <span class="math notranslate nohighlight">\(1879^{0.75}\)</span>. The uvicorn server tracks all the traffic going into it and the above request creates a log entry of:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">57894</span> <span class="o">-</span> <span class="s2">&quot;GET /root?number=1879&amp;n=0.75 HTTP/1.1&quot;</span> <span class="mi">200</span> <span class="n">OK</span>
+</pre></div>
+</div>
+<p>By default, the HTTP method of the request when we enter a link to a browser is <strong>GET</strong>. The server responded with the status code 200 which means OK.</p>
+<p>If we try another link like <a class="reference external" href="http://127.0.0.1:8000/groot?number=1879&amp;root=0.75">http://127.0.0.1:8000/groot?number=1879&amp;root=0.75</a>, we would get the following response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;detail&quot;</span><span class="p">:</span><span class="s2">&quot;Not Found&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>With the info entry:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;GET /groot?number=1879&amp;root=0.75 HTTP/1.1&quot;</span> <span class="mi">404</span> <span class="n">Not</span> <span class="n">Found</span>
+</pre></div>
+</div>
+<p>In the next chapter, we will connect to a database and create a bit more complext API.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter-5-API"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="API-intro.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Application Programming Interface basics</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="API-DB.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Databases and Python</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Eligijus Bujokas<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

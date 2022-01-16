@@ -1,0 +1,776 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wrapping the API into a production container &#8212; Machine Learning serving</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Links and references" href="../references/references.html" />
+    <link rel="prev" title="Machine learning API" href="machine_learning_api.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning serving</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Hardware and Linux OS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-specs.html">
+   Building blocks of a computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-OS.html">
+   Linux operating system
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Software for an ML developer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/python-intro.html">
+   Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/virtual-envs.html">
+   Virtual environments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/docker.html">
+   Docker
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/object-oriented-programming.html">
+   Classes and objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-types.html">
+   Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-structures.html">
+   Data structures
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model.html">
+   Creating machine learning models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model-serving.html">
+   Basic ML serving
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-intro.html">
+   Application Programming Interface basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-server.html">
+   API server
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-DB.html">
+   Databases and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-example.html">
+   API and PSQL integration example
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Production Tools and Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/gunicorn.html">
+   Gunicorn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/docker.html">
+   Docker in production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/JWT.html">
+   JWT based authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/migrations.html">
+   Migrations
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  ML serving API
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="users.html">
+   ML users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="authentification.html">
+   ML users authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_model.html">
+   ML model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_db_models.html">
+   ML database models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_api.html">
+   Machine learning API
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Wrapping the API into a production container
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Bibliography
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references/references.html">
+   Links and references
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chapter-7-final-serving/machine_learning_api_production.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Eligijus112/api-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Eligijus112/api-book/issues/new?title=Issue%20on%20page%20%2Fchapter-7-final-serving/machine_learning_api_production.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Eligijus112/api-book/master?urlpath=tree/docs/chapter-7-final-serving/machine_learning_api_production.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Wrapping the API into a production container
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dockerfile">
+   Dockerfile
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-the-containers">
+   Running the containers
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#high-level-schema">
+   High level schema
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-the-api-from-the-container">
+   Using the API from the container
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-user">
+     Creating a user
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#getting-the-token">
+     Getting the token
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#getting-the-predictions">
+     Getting the predictions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="wrapping-the-api-into-a-production-container">
+<h1>Wrapping the API into a production container<a class="headerlink" href="#wrapping-the-api-into-a-production-container" title="Permalink to this headline">¶</a></h1>
+<p>In the previous chapter, we have created an API that can log requests and return responses locally. We need to wrap everything up into a docker container to make it available to the outside world.</p>
+<p>First off all, lets see the file structure and recap what is the logic behind each of the file and directory in the project folder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>tree ML_API_docker -L <span class="m">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Blue">ML_API_docker</span>
+├── <span class=" -Color -Color-Bold -Color-Bold-Blue">alembic</span>
+│   ├── env.py
+│   ├── <span class=" -Color -Color-Bold -Color-Bold-Blue">__pycache__</span>
+│   ├── README
+│   ├── script.py.mako
+│   └── <span class=" -Color -Color-Bold -Color-Bold-Blue">versions</span>
+├── alembic.ini
+├── app.py
+├── <span class=" -Color -Color-Bold -Color-Bold-Blue">database</span>
+│   ├── config.yml
+│   ├── database.py
+│   ├── __init__.py
+│   ├── jwt_tokens.py
+│   ├── ML.py
+│   ├── <span class=" -Color -Color-Bold -Color-Bold-Blue">__pycache__</span>
+│   └── Users.py
+├── <span class=" -Color -Color-Bold -Color-Bold-Blue">data_docker</span>
+│   └── <span class=" -Color -Color-Bold -Color-Bold-Blue">db</span>
+├── docker-compose.yml
+├── Dockerfile
+├── gunicorn_config.conf
+├── __init__.py
+├── <span class=" -Color -Color-Bold -Color-Bold-Blue">ml_model</span>
+│   ├── input_schema.json
+│   └── model.pkl
+└── requirements.txt
+
+8 directories, 18 files
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">alembic</span></code> directory manages the migrations and that the changes in the python files get reflected in the database.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">alembic.ini</span></code> file is the configuration file for the <code class="docutils literal notranslate"><span class="pre">alembic</span></code> package. It holds the connection string to the database and the location of the migration scripts. In a real life application you should not track this file because it contains the full connection URI.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">app.py</span></code> file is the main file of the API. It imports all the necesary logic to run and creates the FlaskAPI object which is used in runtime.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">database</span></code> directory holds all the database models and other associated logic.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">data_docker</span></code> directory links the data from PSQL in a docker container to the local machine. This way, if restart the container, all the data is saved and we do not need to rerun all the migrations.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> file creates the two containers: 1 for the PSQL service and 1 for the API service.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> handles the image creation for the API application.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">gunicorn_config.conf</span></code> is a configuration file for the supervisor application to serve the API using gunicorn.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file indicates for python that the whole directory is a package. This makes certain imports not break.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ml_model</span></code> holds the files necesary for the machine learning model.</p>
+<p>Lastly, the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file holds the dependencies for the API.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="dockerfile">
+<h1>Dockerfile<a class="headerlink" href="#dockerfile" title="Permalink to this headline">¶</a></h1>
+<p>The dockerfile commands will create an image which can be used to spin up the docker container.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat ML_API_docker/Dockerfile
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Base image. We will use the Ubuntu base image and populate it 
+FROM ubuntu:20.04 
+
+# Updating all the base packages and installing python and pip 
+RUN apt-get update &amp;&amp; apt-get install -y python3-pip
+
+# Installing supervisor to manage the API processes
+RUN apt-get install -y supervisor
+
+# Creating the working directory **inside** the container. All the subsequent commands will be executed in this directory. 
+WORKDIR /app
+
+# Copying the requirements.txt file to the container. The . means that copy everything to the current WORKDIR (which is /app) 
+COPY requirements.txt .
+
+# Installing every package in the requirements.txt file
+RUN pip3 install -r requirements.txt
+
+# Copying over the app code to the container
+COPY app.py . 
+
+# Copying the database functionalities
+COPY database/ /app/database/ 
+
+# Copying the ml_model folder to the container 
+COPY ml_model/ /app/ml_model/
+
+# Copying the configuration for the supervisor process 
+COPY gunicorn_config.conf /etc/supervisor/conf.d/gunicorn_config.conf
+
+# Running the gunicorn process
+CMD [&quot;/usr/bin/supervisord&quot;, &quot;-c&quot;, &quot;/etc/supervisor/supervisord.conf&quot;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>To build the image use the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">build</span> <span class="o">-</span><span class="n">t</span> <span class="n">ml</span><span class="o">-</span><span class="n">api</span> <span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="running-the-containers">
+<h1>Running the containers<a class="headerlink" href="#running-the-containers" title="Permalink to this headline">¶</a></h1>
+<p>The built image is used in the docker-compose.yml file alongside another container for psql:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat ML_API_docker/docker-compose.yml
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>version: &#39;3.1&#39;
+
+services:
+
+  psql_db:
+    image: postgres:14.1
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user 
+    ports:
+      - &quot;5444:5432&quot;
+    volumes:
+      - ./data_docker/db:/var/lib/postgresql/data
+
+  ml_api:
+    image: ml-api
+    restart: always
+    ports:
+      - &quot;8999:8900&quot;
+    
+</pre></div>
+</div>
+</div>
+</div>
+<p>The container for the ml-api will will link requests from 8999 port on the local machine to port 8900 inside the container.</p>
+<p>If the container goes down for some reason, the docker background process will restart it.</p>
+<p>To spin up both the containers use the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">up</span>
+</pre></div>
+</div>
+<p>Be sure to make the necesary migrations if this is the initial run of the containers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alembic</span> <span class="n">revision</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Creating migrations&quot;</span> <span class="o">--</span><span class="n">autogenerate</span>
+</pre></div>
+</div>
+<p>And apply them:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alembic</span> <span class="n">upgrade</span> <span class="n">head</span>
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="high-level-schema">
+<h1>High level schema<a class="headerlink" href="#high-level-schema" title="Permalink to this headline">¶</a></h1>
+<p>To get a better view of what processes get start after the command <code class="docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">up</span></code>, lets illustrate the high level schema:</p>
+<p><img alt="api-flow" src="../_images/api-production.png" /></p>
+<p>Both of the containers are managed by docker.</p>
+<p>The only port where the requests can come in for the machine learning API is through the port <strong>8999</strong>. All the requests get redirected to the port <strong>8900</strong> inside the container. From there, gunicorn gives the request to one of the workers.</p>
+<p>The container with the PSQL database can be reached via port <strong>5444</strong> on the local machine. The data gets redirected to the port <strong>5432</strong> inside the container.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="using-the-api-from-the-container">
+<h1>Using the API from the container<a class="headerlink" href="#using-the-api-from-the-container" title="Permalink to this headline">¶</a></h1>
+<p>All the API calls will be done to the container which is running on the local machine.</p>
+<div class="section" id="creating-a-user">
+<h2>Creating a user<a class="headerlink" href="#creating-a-user" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing the package </span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c1"># Defining the URL </span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:8999&#39;</span>
+
+<span class="c1"># Defining the user dict </span>
+<span class="n">user_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;eligijus_bujokas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;password&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;eligijus@testmail.com&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># Sending the post request to the running API </span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">/register-user&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">user_dict</span><span class="p">)</span>
+
+<span class="c1"># Getting the user id </span>
+<span class="n">user_id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">)</span>
+
+<span class="c1"># Printing the response </span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Response code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">; Response: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 409; Response: {&#39;message&#39;: &#39;User already exists&#39;, &#39;user_id&#39;: 1}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="getting-the-token">
+<h2>Getting the token<a class="headerlink" href="#getting-the-token" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Registering the user to docker </span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">/token&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;eligijus_bujokas&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;password&quot;</span><span class="p">})</span>
+
+<span class="c1"># Extracting the token from the response</span>
+<span class="n">token</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;token&quot;</span><span class="p">)</span>
+
+<span class="c1"># Printing the response</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Response code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">; JWT token: </span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 200; JWT token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDIzMzU4ODcsImlhdCI6MTY0MjMzMjI4Nywic3ViIjoxfQ.UPflLuHwVXqGiiUpCUS-Sq9VcR-lo4oJ_tI_vao9s-U
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="getting-the-predictions">
+<h2>Getting the predictions<a class="headerlink" href="#getting-the-predictions" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating the input dictionary</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s1">&#39;creatinine_phosphokinase&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="s1">&#39;ejection_fraction&#39;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span>
+    <span class="s1">&#39;platelets&#39;</span><span class="p">:</span> <span class="mi">500000</span><span class="p">,</span>
+    <span class="s1">&#39;serum_creatinine&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s1">&#39;serum_sodium&#39;</span><span class="p">:</span> <span class="mi">135</span><span class="p">,</span>
+    <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;high_blood_pressure&#39;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="c1"># Creating the header with the token </span>
+<span class="n">header</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="n">token</span>
+<span class="p">}</span>
+
+<span class="c1"># Sending the request </span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">/predict&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+
+<span class="c1"># Infering the response</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Response code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">; Response: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Response code: 200; Response: {&#39;yhat_prob&#39;: &#39;0.5124506&#39;, &#39;yhat&#39;: &#39;1&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="conclusion">
+<h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h1>
+<p>The container accepts requests via the port 8999. If we have a running docker background process on any server, we can spin up this container and use the machine learning model imediatly.</p>
+<p>The API itself is served using <code class="docutils literal notranslate"><span class="pre">gunicorn</span></code> with <strong>n</strong> workers.</p>
+<p>Each worker is an <code class="docutils literal notranslate"><span class="pre">uvicorn</span></code> async server that will handle the requests.</p>
+<p>Gunicorn itself is managed using <code class="docutils literal notranslate"><span class="pre">supervisor</span></code>.</p>
+<p>If the container breaks, then docker daemon will automatically restart it.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter-7-final-serving"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="machine_learning_api.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Machine learning API</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="../references/references.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Links and references</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Eligijus Bujokas<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
