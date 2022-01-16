@@ -2,10 +2,10 @@
 import jwt
 
 # The Users model 
-from Users import User
+from database.Users import User
 
 # Importing the session 
-from database import session
+from database.database import session
 
 # Datetime functionality
 import datetime

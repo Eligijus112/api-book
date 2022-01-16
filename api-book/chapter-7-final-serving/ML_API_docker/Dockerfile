@@ -16,15 +16,11 @@ COPY requirements.txt .
 # Installing every package in the requirements.txt file
 RUN pip3 install -r requirements.txt
 
-# Copying over the code to the container
+# Copying over the app code to the container
 COPY app.py . 
-COPY database.py . 
-COPY jwt_tokens.py . 
-COPY machine_learning_utils.py . 
-COPY users.py . 
-COPY Users.py . 
-COPY MLDB.py . 
-COPY config.yml .
+
+# Copying the database functionalities
+COPY database/ /app/database/ 
 
 # Copying the ml_model folder to the container 
 COPY ml_model/ /app/ml_model/

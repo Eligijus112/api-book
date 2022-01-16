@@ -6,10 +6,10 @@ from sqlalchemy import pool
 from alembic import context
 
 # Importing the User model
-from Users import Base as user_base
+from database.Users import Base as user_base
 
 # Importing the Request and Response models 
-from MLDB import Base as mldb_base
+from database.ML import Base as mldb_base
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

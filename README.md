@@ -91,7 +91,7 @@ docker pull eligijusbujokas/ml-serving-book:latest
 To create the container with the access to the book use: 
 
 ```
-docker run -p 4000:80 eligijusbujokas/ml-serving-book
+docker run -d -p 4000:80 eligijusbujokas/ml-serving-book
 ```
 
 ## Accessing the book via the Digital Ocean server

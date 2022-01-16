@@ -2,17 +2,16 @@
 from fastapi import FastAPI, status, Response, Request
 
 # Importing the current session from DB 
-from database import session
+from database.database import session
 
-# Importing the DB models 
-from MLDB import MLRequests, MLResponses
+# Machine Learning functionalities
+from database.ML import MLRequests, MLResponses, load_ml_model, predict
 
-# Views 
-from users import register_user_view, remove_user_view, toggle_user_permission_view
-from jwt_tokens import authenticate_token_view, authenticate_user_view, create_token_view
+# User functionalities
+from database.Users import register_user_view, remove_user_view, toggle_user_permission_view
 
-# ML functionalities 
-from machine_learning_utils import load_ml_model, predict
+# Authentification functionalities
+from database.jwt_tokens import authenticate_token_view, authenticate_user_view, create_token_view
 
 # Input and output wrangling 
 import json
