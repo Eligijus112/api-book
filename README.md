@@ -4,6 +4,8 @@ A book about how to create a production level machine learning serving API with 
 
 The framework to create the book is **jupyter books**: https://jupyterbook.org/intro.html
 
+The full rendered book can be viewed via: https://eligijus112.github.io/api-book/
+
 # Creating the virtual environment 
 
 ```
@@ -58,6 +60,15 @@ Building of the book:
 jupyter-book build api-book
 ```
 
+# Publishing the book to github 
+
+To publish the rendered book to github use the command:
+
+```
+cd api-book
+ghp-import -n -p -f _build/html
+```
+
 # Serving the book via docker and Nginx
 
 To serve the book across multiple computers, servers or whatever place that Docker is installed in, we can build an image and create a container with which we can access the book. 
@@ -109,14 +120,5 @@ docker pull eligijusbujokas/ml-serving-book:latest
 To create the container with the access to the book use: 
 
 ```
-`docker run -d -p 4000:80 eligijusbujokas/ml-serving-book`
+docker run -d -p 4000:80 eligijusbujokas/ml-serving-book
 ```
-
-## Accessing the book via the Digital Ocean server
-
-The container is built in my custom server and can be reached via: 
-
-
-http://eligijus.me:4000
-
-
