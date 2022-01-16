@@ -1,0 +1,967 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Linux operating system &#8212; Machine Learning serving</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Python" href="../chapter-2-software/python-intro.html" />
+    <link rel="prev" title="Building blocks of a computer" href="computer-specs.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning serving</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Hardware and Linux OS
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="computer-specs.html">
+   Building blocks of a computer
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Linux operating system
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Software for an ML developer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/python-intro.html">
+   Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/virtual-envs.html">
+   Virtual environments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/docker.html">
+   Docker
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/object-oriented-programming.html">
+   Classes and objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-types.html">
+   Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-structures.html">
+   Data structures
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model.html">
+   Creating machine learning models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model-serving.html">
+   Basic ML serving
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-intro.html">
+   Application Programming Interface basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-server.html">
+   API server
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-DB.html">
+   Databases and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-example.html">
+   API and PSQL integration example
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Production Tools and Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/gunicorn.html">
+   Gunicorn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/docker.html">
+   Docker in production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/JWT.html">
+   JWT based authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/migrations.html">
+   Migrations
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  ML serving API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/users.html">
+   ML users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/authentification.html">
+   ML users authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_model.html">
+   ML model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_db_models.html">
+   ML database models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api.html">
+   Machine learning API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api_production.html">
+   Wrapping the API into a production container
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Bibliography
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references/references.html">
+   Links and references
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chapter-1-computer/computer-OS.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Eligijus112/api-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Eligijus112/api-book/issues/new?title=Issue%20on%20page%20%2Fchapter-1-computer/computer-OS.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Eligijus112/api-book/master?urlpath=tree/docs/chapter-1-computer/computer-OS.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Linux operating system
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kernel">
+     Kernel
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#popular-examples-of-os">
+     Popular examples of OS
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   Linux operating system
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linux-then-and-now">
+   Linux then and now
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#history">
+     History
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#learning-curve">
+     Learning curve
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#key-features-of-linux">
+   Key features of Linux
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#command-line-terminal">
+     Command line terminal
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linux-directory-system">
+     Linux directory system
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linux-users-and-groups">
+     Linux users and groups
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linux-permission-system">
+     Linux permission system
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#symbolic-permission-representation">
+       Symbolic permission representation
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#octal-permission-specification">
+       Octal permission specification
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linux-processes">
+     Linux processes
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#process-priority">
+       Process priority
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#killing-and-stoping-the-processes">
+       Killing and stoping the processes
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="linux-operating-system">
+<h1>Linux operating system<a class="headerlink" href="#linux-operating-system" title="Permalink to this headline">¶</a></h1>
+<p>Even with the newest and the most expensive hardware a computer would not be very practical without a convenient way for humans to interact with it. In theory, we could somehow translate certain tasks into 1s and 0s and transfer that information to a computer in a form of electrons. But I think everybody can agree that that would not be very practical.</p>
+<p>To help humans in interacting with the hardware in the computer in a more easy way, operating systems with a vast amount of programs are beeing created and updated almost every day.</p>
+<p>An <strong>operating system (OS)</strong> is the main computer software which manages the interactions between all the programs in the computer and the computer’s hardware<span id="id1">[<a class="reference internal" href="../references/references.html#id13">Wikipedia, 2021</a>]</span>.</p>
+<p><strong>Software</strong> is a collection of instructions (code) which tells the computer what to do and how to work.</p>
+<p>A <strong>computer program</strong> is a collection of software that solves a specific task.</p>
+<p><img alt="computer-os" src="../_images/os-chart.png" /></p>
+<div class="section" id="kernel">
+<h2>Kernel<a class="headerlink" href="#kernel" title="Permalink to this headline">¶</a></h2>
+<p>A <strong>kernel</strong> is a computer program at the core of a computer’s operating system and has complete control over everything in the system. &lt;…&gt; On most systems, the kernel is one of the first programs loaded on startup (after the bootloader). It handles the rest of startup as well as memory, peripherals, and input/output (I/O) requests from software, translating them into data-processing instructions for the central processing unit <span id="id2">[<a class="reference internal" href="../references/references.html#id14">Wikipedia, 2021</a>]</span>.</p>
+<p>In the Oxford dictionary, a kernel is <em>the central, most important part of an idea or a subject</em>.</p>
+<p>Putting these two definitions together, we can say that the kernel is the most import program in the computer OS.</p>
+</div>
+<div class="section" id="popular-examples-of-os">
+<h2>Popular examples of OS<a class="headerlink" href="#popular-examples-of-os" title="Permalink to this headline">¶</a></h2>
+<p>The most used desktop operating systems around the world (as of June 2021) are<span id="id3">[<a class="reference internal" href="../references/references.html#id15">Statista, 2021</a>]</span>:</p>
+<ul class="simple">
+<li><p><strong>Windows (73%)</strong></p></li>
+<li><p><strong>macOS (15.6%)</strong></p></li>
+<li><p><strong>Linux (2.7%)</strong></p></li>
+<li><p><strong>Others</strong></p></li>
+</ul>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id4">
+<h1>Linux operating system<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h1>
+<p>Altough Linux OS is not popular among casual computer users, it is very popular in the developer circles. Linux has a lot of <strong>distributions</strong> (think of it as types of Linux with different programs running on it and different kernels). The most popular ones are:</p>
+<ul class="simple">
+<li><p>Ubuntu</p></li>
+<li><p>CentosOS</p></li>
+<li><p>Debian</p></li>
+<li><p>Linux Mint</p></li>
+<li><p>ArchLinux</p></li>
+</ul>
+<p>A full list of all available distributions ranked on popularity can be found <a class="reference external" href="https://distrowatch.com/dwres.php?resource=popularity">here</a>.</p>
+<p>In big cloud service providers the most popular choices for virtual machines are Linux distributions.</p>
+<p>DigitalOcean :</p>
+<p><img alt="digital-ocean-droplets" src="../_images/linux-distros-DO.png" /></p>
+<p>A developer who wants to serve machine learning in production should know atleast the crucial concepts of Linux. This will make developing ML apps easier and cheaper.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="linux-then-and-now">
+<h1>Linux then and now<a class="headerlink" href="#linux-then-and-now" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="history">
+<h2>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h2>
+<p>In the 1960s and 1970s, computers were way bigger then they are today. Every operating system written was very specific to the computer model in question.</p>
+<p><strong>“While the sizes of those computers posed substantial problems, there was one thing that made this even worse: every computer had a different operating system. Software was always customized to serve a specific purpose, and software for one given system didn’t run on another system. Being able to work with one system didn’t automatically mean that you could work with another. It was difficult, both for the users and the system administrators. Computers were extremely expensive then, and sacrifices had to be made even after the original purchase just to get the users to understand how they worked. The total cost per unit of computing power was enormous.”</strong><span id="id5">[<a class="reference internal" href="../references/references.html#id16">Garrels, 2008</a>]</span></p>
+<p>In 1969, a team of developers in the Bell Labs laboratories started working on a solution for the software problem, to address these compatibility issues. They developed a new operating system, which was</p>
+<ol class="simple">
+<li><p>Simple and elegant.</p></li>
+<li><p>Written in the C programming language instead of in assembly code.</p></li>
+<li><p>Able to recycle code.</p></li>
+</ol>
+<p>The Bell Labs developers named their project <strong>“UNIX.”</strong></p>
+<p>As the computer became smaller and more affordable, they began to populate more and more households. Up untill the 1990s, the UNIX project covered the big computers that were in academia, government or big corporations. There was still an issue with desktop operating systems. Back then, many people simply ran MS DOS or Windows 3.1.</p>
+<p>Beggining in 1991 a student in the University of Helsinky named Linus Torvalds started proposing and developing a UNIX based system for home computers. A couple of years later, Linus’ project user base grew to 12000 users. Back then, these were all hardcore programmers and it became a running joke to call themselves “freaks”. Linus Torvalds proposed to call the UNIX OS he was developing as <strong>FREAX</strong> (free, freaks and x for UNIX). The University of Helsinky dismissed this name and started calling the project as Linux (Linus and Unix). Thus the name sticked and right now, Linux is used by millions of users and companies around the world.</p>
+</div>
+<div class="section" id="learning-curve">
+<h2>Learning curve<a class="headerlink" href="#learning-curve" title="Permalink to this headline">¶</a></h2>
+<p>As per <span id="id6">[<a class="reference internal" href="../references/references.html#id16">Garrels, 2008</a>]</span>:</p>
+<p><em>“Whether Linux is difficult to learn depends on the person you’re asking. Experienced UNIX users will say no, because Linux is an ideal operating system for power-users and programmers, because it has been and is being developed by such people. Everything a good programmer can wish for is available: compilers, libraries, development and debugging tools. These packages come with every standard Linux distribution. The C-compiler is included for free - as opposed to many UNIX distributions demanding licensing fees for this tool”</em></p>
+<p><em>“Linux felt better than the rest of the “lusers” who hadn’t seen the light yet. It was common practice to tell a beginning user to “RTFM” (read the manuals). While the manuals were on every system, it was difficult to find the documentation, and even if someone did, explanations were in such technical terms that the new user became easily discouraged from learning the system. The Linux-using community started to realize that if Linux was ever to be an important player on the operating system market, there had to be some serious changes in the accessibility of the system.”</em></p>
+<p><em>“Companies such as RedHat, SuSE and Mandriva have sprung up, providing packaged Linux distributions suitable for mass consumption. They integrated a great deal of graphical user interfaces (GUIs), developed by the community, in order to ease management of programs and services. As a Linux user today you have all the means of getting to know your system inside out, but it is no longer necessary to have that knowledge in order to make the system comply to your requests.”</em></p>
+<p>Personaly, the switch from Windows to Ubuntu (a Linux distribution) was not as difficult as I have thought. All the logic seems to be very similar to that of Windows: point and clicking, folder traversal, making copies, opening files - everything can be done both with a command line and with the help of a graphical interface.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="key-features-of-linux">
+<h1>Key features of Linux<a class="headerlink" href="#key-features-of-linux" title="Permalink to this headline">¶</a></h1>
+<p>The main differences between Linux and other OS from a practical point of view are:</p>
+<ul class="simple">
+<li><p>Easy-to-use command line terminal</p></li>
+<li><p>The directory system</p></li>
+<li><p>Permission system</p></li>
+<li><p>Processes managment system</p></li>
+</ul>
+<div class="section" id="command-line-terminal">
+<h2>Command line terminal<a class="headerlink" href="#command-line-terminal" title="Permalink to this headline">¶</a></h2>
+<p>The terminal in Linux by default is a <strong>Unix Shell</strong> called <strong>Bash</strong>.</p>
+<p>A <strong>Unix Shell</strong> is a command prompt used in Linux to transfer commands from the user to the operating system.</p>
+<p><img alt="bash" src="../_images/bash-example.png" /></p>
+<p>In the example above the command which was invoked was <strong>echo</strong> which as an argument takes in a string and then prints it out in the terminal.</p>
+<p>The popular commands who come up often when working with Linux:</p>
+<p><strong>ls</strong> - Displays a list of files in the current working directory, like the dir command in
+DOS</p>
+<p><strong>cd</strong> - directory change directories</p>
+<p><strong>cat –textfile</strong> -  throws content of –textfile on the screen</p>
+<p><strong>pwd</strong> - display present working directory</p>
+<p><strong>exit or logout</strong> - leave this session</p>
+<p><strong>cp –file –destination</strong> - copies the –file to –destination</p>
+<p>The general syntax for bash commands is the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">command</span> <span class="p">[</span><span class="o">--</span><span class="n">parameters</span><span class="p">]</span> <span class="p">[</span><span class="n">arguments</span><span class="p">]</span> 
+</pre></div>
+</div>
+<p>There are ussualy some additional parameters with which we can execute a command. Theser are written with – or - at the begining. For example,</p>
+<p>The command <strong>ls</strong> in the root directory / prints out:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> 
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">bin</span>  <span class="n">boot</span>  <span class="n">cdrom</span>  <span class="n">dev</span>  <span class="n">etc</span>  <span class="n">home</span>  <span class="n">lib</span>  <span class="n">lib32</span>  <span class="n">lib64</span>  <span class="n">libx32</span>  <span class="n">lost</span><span class="o">+</span><span class="n">found</span>  <span class="n">media</span>  <span class="n">mnt</span>  <span class="n">opt</span>  <span class="n">proc</span>  <span class="n">root</span>  <span class="n">run</span>  <span class="n">sbin</span>  <span class="n">snap</span>  <span class="n">srv</span>  <span class="n">swapfile</span>  <span class="n">sys</span>  <span class="n">tmp</span>  <span class="n">usr</span>  <span class="n">var</span>
+</pre></div>
+</div>
+<p>Adding a parameters -la gives us:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">-</span><span class="n">la</span> 
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">20</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">4096</span> <span class="n">liep</span><span class="o">.</span>   <span class="mi">6</span> <span class="mi">13</span><span class="p">:</span><span class="mi">29</span> <span class="o">.</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">20</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">4096</span> <span class="n">liep</span><span class="o">.</span>   <span class="mi">6</span> <span class="mi">13</span><span class="p">:</span><span class="mi">29</span> <span class="o">..</span>
+<span class="n">lrwxrwxrwx</span>   <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>          <span class="mi">7</span> <span class="n">liep</span><span class="o">.</span>   <span class="mi">6</span> <span class="mi">13</span><span class="p">:</span><span class="mi">29</span> <span class="nb">bin</span> <span class="o">-&gt;</span> <span class="n">usr</span><span class="o">/</span><span class="nb">bin</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>   <span class="mi">4</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">4096</span> <span class="n">lapkr</span><span class="o">.</span> <span class="mi">15</span> <span class="mi">16</span><span class="p">:</span><span class="mi">48</span> <span class="n">boot</span>
+<span class="n">drwxrwxr</span><span class="o">-</span><span class="n">x</span>   <span class="mi">2</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">4096</span> <span class="n">liep</span><span class="o">.</span>   <span class="mi">6</span> <span class="mi">13</span><span class="p">:</span><span class="mi">29</span> <span class="n">cdrom</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">22</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">4960</span> <span class="n">lapkr</span><span class="o">.</span> <span class="mi">17</span> <span class="mi">12</span><span class="p">:</span><span class="mi">29</span> <span class="n">dev</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">146</span> <span class="n">root</span> <span class="n">root</span>      <span class="mi">12288</span> <span class="n">lapkr</span><span class="o">.</span> <span class="mi">16</span> <span class="mi">13</span><span class="p">:</span><span class="mi">05</span> <span class="n">etc</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>   <span class="mi">3</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">4096</span> <span class="n">liep</span><span class="o">.</span>   <span class="mi">6</span> <span class="mi">13</span><span class="p">:</span><span class="mi">29</span> <span class="n">home</span>
+<span class="n">lrwxrwxrwx</span>   <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>          <span class="mi">7</span> <span class="n">liep</span><span class="o">.</span>   <span class="mi">6</span> <span class="mi">13</span><span class="p">:</span><span class="mi">29</span> <span class="n">lib</span> <span class="o">-&gt;</span> <span class="n">usr</span><span class="o">/</span><span class="n">lib</span>
+<span class="n">lrwxrwxrwx</span>   <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>          <span class="mi">9</span> <span class="n">liep</span><span class="o">.</span>   <span class="mi">6</span> <span class="mi">13</span><span class="p">:</span><span class="mi">29</span> <span class="n">lib32</span> <span class="o">-&gt;</span> <span class="n">usr</span><span class="o">/</span><span class="n">lib32</span>
+<span class="n">lrwxrwxrwx</span>   <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>          <span class="mi">9</span> <span class="n">liep</span><span class="o">.</span>   <span class="mi">6</span> <span class="mi">13</span><span class="p">:</span><span class="mi">29</span> <span class="n">lib64</span> <span class="o">-&gt;</span> <span class="n">usr</span><span class="o">/</span><span class="n">lib64</span>
+<span class="n">lrwxrwxrwx</span>   <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>         <span class="mi">10</span> <span class="n">liep</span><span class="o">.</span>   <span class="mi">6</span> <span class="mi">13</span><span class="p">:</span><span class="mi">29</span> <span class="n">libx32</span> <span class="o">-&gt;</span> <span class="n">usr</span><span class="o">/</span><span class="n">libx32</span>
+<span class="n">drwx</span><span class="o">------</span>   <span class="mi">2</span> <span class="n">root</span> <span class="n">root</span>      <span class="mi">16384</span> <span class="n">liep</span><span class="o">.</span>   <span class="mi">6</span> <span class="mi">13</span><span class="p">:</span><span class="mi">28</span> <span class="n">lost</span><span class="o">+</span><span class="n">found</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>   <span class="mi">3</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">4096</span> <span class="n">liep</span><span class="o">.</span>   <span class="mi">6</span> <span class="mi">16</span><span class="p">:</span><span class="mi">40</span> <span class="n">media</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>   <span class="mi">2</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">4096</span> <span class="n">vas</span><span class="o">.</span>    <span class="mi">9</span>  <span class="mi">2021</span> <span class="n">mnt</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>   <span class="mi">7</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">4096</span> <span class="n">lapkr</span><span class="o">.</span>  <span class="mi">8</span> <span class="mi">12</span><span class="p">:</span><span class="mi">11</span> <span class="n">opt</span>
+<span class="n">dr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">575</span> <span class="n">root</span> <span class="n">root</span>          <span class="mi">0</span> <span class="n">lapkr</span><span class="o">.</span> <span class="mi">17</span> <span class="mi">12</span><span class="p">:</span><span class="mi">29</span> <span class="n">proc</span>
+<span class="n">drwx</span><span class="o">------</span>   <span class="mi">8</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">4096</span> <span class="n">rugp</span><span class="o">.</span>  <span class="mi">12</span> <span class="mi">16</span><span class="p">:</span><span class="mi">31</span> <span class="n">root</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">39</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">1140</span> <span class="n">lapkr</span><span class="o">.</span> <span class="mi">17</span> <span class="mi">12</span><span class="p">:</span><span class="mi">29</span> <span class="n">run</span>
+<span class="n">lrwxrwxrwx</span>   <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>          <span class="mi">8</span> <span class="n">liep</span><span class="o">.</span>   <span class="mi">6</span> <span class="mi">13</span><span class="p">:</span><span class="mi">29</span> <span class="n">sbin</span> <span class="o">-&gt;</span> <span class="n">usr</span><span class="o">/</span><span class="n">sbin</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">16</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">4096</span> <span class="n">spal</span><span class="o">.</span>  <span class="mi">13</span> <span class="mi">17</span><span class="p">:</span><span class="mi">40</span> <span class="n">snap</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>   <span class="mi">2</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">4096</span> <span class="n">vas</span><span class="o">.</span>    <span class="mi">9</span>  <span class="mi">2021</span> <span class="n">srv</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-------</span>   <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span> <span class="mi">2147483648</span> <span class="n">liep</span><span class="o">.</span>   <span class="mi">6</span> <span class="mi">13</span><span class="p">:</span><span class="mi">28</span> <span class="n">swapfile</span>
+<span class="n">dr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">13</span> <span class="n">root</span> <span class="n">root</span>          <span class="mi">0</span> <span class="n">lapkr</span><span class="o">.</span> <span class="mi">17</span> <span class="mi">12</span><span class="p">:</span><span class="mi">29</span> <span class="n">sys</span>
+<span class="n">drwxrwxrwt</span>  <span class="mi">28</span> <span class="n">root</span> <span class="n">root</span>      <span class="mi">16384</span> <span class="n">lapkr</span><span class="o">.</span> <span class="mi">17</span> <span class="mi">12</span><span class="p">:</span><span class="mi">35</span> <span class="n">tmp</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">14</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">4096</span> <span class="n">vas</span><span class="o">.</span>    <span class="mi">9</span>  <span class="mi">2021</span> <span class="n">usr</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">15</span> <span class="n">root</span> <span class="n">root</span>       <span class="mi">4096</span> <span class="n">liep</span><span class="o">.</span>   <span class="mi">6</span> <span class="mi">21</span><span class="p">:</span><span class="mi">19</span> <span class="n">var</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="linux-directory-system">
+<h2>Linux directory system<a class="headerlink" href="#linux-directory-system" title="Permalink to this headline">¶</a></h2>
+<p>The files in most of Linux distributions are stored in standartized folders. The start path of all the directories is called the <strong>root</strong> and is denoted as <strong>“/”</strong>. The command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span> 
+</pre></div>
+</div>
+<p>Will always bring the bash terminal to the root of your computers’ file system.</p>
+<p>The main directories which are present in most Linux distributions are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── bin
+├── boot
+├── dev
+├── etc
+├── home
+├── lib 
+├── media
+├── mnt
+├── opt
+├── proc
+├── root
+├── run
+├── snap
+├── srv
+├── sys
+├── tmp
+├── usr
+└── var
+</pre></div>
+</div>
+<p>You can navigate to these directories using the cp command or by using a GUI and point and clicking with a mouse.</p>
+<p>All the directories have specific purposes and most of the software installed in Linux follows predifined rules.</p>
+<p>According to the official Linux documentation <span id="id7">[<a class="reference internal" href="../references/references.html#id17">Brown, 2018</a>]</span>:</p>
+<p><strong>/bin</strong></p>
+<p>Directory that contains binaries, that is, some of the applications and programs you can run. You will find the ls program mentioned above in this directory, as well as other basic tools for making and removing files and directories, moving them around, and so on.</p>
+<p><strong>/boot</strong></p>
+<p>Directory that contains files required for starting your system.</p>
+<p><strong>/dev</strong></p>
+<p>Directory that contains device files. Many of these are generated at boot time or even on the fly. For example, if you plug in a new webcam or a USB pendrive into your machine, a new device entry will automagically pop up here.</p>
+<p><strong>/etc</strong></p>
+<p>Directory where names start to get confusing. /etc gets its name from the earliest Unixes and it was literally “et cetera” because it was the dumping ground for system files administrators were not sure where else to put.</p>
+<p>Nowadays, it would be more appropriate to say that etc stands for “Everything to configure,” as it contains most, if not all system-wide configuration files. For example, the files that contain the name of your system, the users and their passwords, the names of machines on your network and when and where the partitions on your hard disks should be mounted are all in here.</p>
+<p><strong>/home</strong></p>
+<p>Directory where you will find your users’ personal directories. In my case, under /home there is one directory: /home/eligijus.</p>
+<p><strong>/lib</strong></p>
+<p>/lib is where libraries live. Libraries are files containing code that your applications can use. They contain snippets of code that applications use to draw windows on your desktop, control peripherals, or send files to your hard disk.</p>
+<p>There are more lib directories scattered around the file system, but this one, the one hanging directly off of / is special in that, among other things, it contains the all-important kernel modules. The kernel modules are drivers that enables software interact with hardware and vice versa.</p>
+<p><strong>/media</strong></p>
+<p>The /media directory is where external storage will be automatically mounted when you plug it in and try to access it. As opposed to most of the other items on this list, /media does not hail back to 1970s, mainly because inserting and detecting storage (pendrives, USB hard disks, SD cards, external SSDs, etc) on the fly, while a computer is running, is a relatively new thing.</p>
+<p><strong>/mnt</strong></p>
+<p>The /mnt directory, however, is a bit of remnant from days gone by. This is where you would manually mount storage devices or partitions. It is not used very often nowadays.</p>
+<p><strong>/opt</strong></p>
+<p>The /opt directory is often where software you compile (that is, you build yourself from source code and do not install from your distribution repositories) sometimes lands. Applications will end up in the /opt/bin directory and libraries in the /opt/lib directory.</p>
+<p>A slight digression: another place where applications and libraries end up in is /usr/local, When software gets installed here, there will also be /usr/local/bin and /usr/local/lib directories. What determines which software goes where is how the developers have configured the files that control the compilation and installation process.</p>
+<p><strong>/proc</strong></p>
+<p>/proc, like /dev is a virtual directory. It contains information about your computer, such as information about your CPU and the kernel your Linux system is running. As with /dev, the files and directories are generated when your computer starts, or on the fly, as your system is running and things change.</p>
+<p><strong>/root</strong>
+/root is the home directory of the superuser (also known as the “Administrator”) of the system. It is separate from the rest of the users’ home directories BECAUSE YOU ARE NOT MEANT TO TOUCH IT.</p>
+<p><strong>/run</strong></p>
+<p>/run is another new directory. System processes use it to store temporary data for their own nefarious reasons. This is another one of those DO NOT TOUCH folders.</p>
+<p><strong>/usr</strong></p>
+<p>The /usr directory was where users’ home directories were originally kept back in the early days of UNIX. However, now /home is where users kept their stuff as we saw above. These days, /usr contains a mish-mash of directories which in turn contain applications, libraries, documentation, wallpapers, icons and a long list of other stuff that need to be shared by applications and services.</p>
+<p>You will also find bin, sbin and lib directories in /usr. What is the difference with their root-hanging cousins? Not much nowadays. Originally, the /bin directory (hanging off of root) would contain very basic commands, like ls, mv and rm; the kind of commands that would come pre-installed in all UNIX/Linux installations, the bare minimum to run and maintain a system. /usr/bin on the other hand would contain stuff the users would install and run to use the system as a work station, things like word processors, web browsers, and other apps.</p>
+<p>But many modern Linux distributions just put everything into /usr/bin and have /bin point to /usr/bin just in case erasing it completely would break something. So, while Debian, Ubuntu and Mint still keep /bin and /usr/bin (and /sbin and /usr/sbin) separate; others, like Arch and its derivatives just have one “real” directory for binaries, /usr/bin, and the rest or *bins are “fake” directories that point to /usr/bin.</p>
+<p><strong>/srv</strong></p>
+<p>The /srv directory contains data for servers. If you are running a web server from your Linux box, your HTML files for your sites would go into /srv/http (or /srv/www). If you were running an FTP server, your files would go into /srv/ftp.</p>
+<p><strong>/sys</strong></p>
+<p>/sys is another virtual directory like /proc and /dev and also contains information from devices connected to your computer.</p>
+<p><strong>/tmp</strong></p>
+<p>/tmp contains temporary files, usually placed there by applications that you are running. The files and directories often (not always) contain data that an application doesn’t need right now, but may need later on.</p>
+<p>You can also use /tmp to store your own temporary files — /tmp is one of the few directories hanging off / that you can actually interact with without becoming superuser.</p>
+<p><strong>/var</strong></p>
+<p>/var was originally given its name because its contents was deemed variable, in that it changed frequently. Today it is a bit of a misnomer because there are many other directories that also contain data that changes frequently, especially the virtual directories we saw above.</p>
+<p>Be that as it may, /var contains things like logs in the /var/log subdirectories. Logs are files that register events that happen on the system. If something fails in the kernel, it will be logged in a file in /var/log; if someone tries to break into your computer from outside, your firewall will also log the attempt here.</p>
+</div>
+<div class="section" id="linux-users-and-groups">
+<h2>Linux users and groups<a class="headerlink" href="#linux-users-and-groups" title="Permalink to this headline">¶</a></h2>
+<p>A Linux user is anyone who uses a computer. In this case, we are describing the names which represent those users. It may be Mary or Bill, and they may use the names Dragonlady or Pirate in place of their real name. All that matters is that the computer has a name for each account it creates, and it is this name by which a person gains access to use the computer. Some system services also run using restricted or privileged user accounts.</p>
+<p>All the users have directory with theyr username in the <strong>/home</strong> directory.</p>
+<p>To create a user in Ubuntu with the name <strong>bujokas</strong>, we can use the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">adduser</span> <span class="n">bujokas</span>
+</pre></div>
+</div>
+<p>The full flow is the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo adduser bujokas
+[sudo] password for eligijus: 
+Adding user `bujokas&#39; ...
+Adding new group `bujokas&#39; (1001) ...
+Adding new user `bujokas&#39; (1001) with group `bujokas&#39; ...
+Creating home directory `/home/bujokas&#39; ...
+Copying files from `/etc/skel&#39; ...
+New password: 
+Retype new password: 
+passwd: password updated successfully
+Changing the user information for bujokas
+Enter the new value, or press ENTER for the default
+        Full Name []: 
+        Room Number []: 
+        Work Phone []: 
+        Home Phone []: 
+        Other []: 
+Is the information correct? [Y/n] Y
+</pre></div>
+</div>
+<p>Now listing the directories in the /home directory we get the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">-</span><span class="n">l</span> <span class="o">/</span><span class="n">home</span>
+<span class="n">total</span> <span class="mi">8</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">2</span> <span class="n">bujokas</span>  <span class="n">bujokas</span>  <span class="mi">4096</span> <span class="n">lapkr</span><span class="o">.</span> <span class="mi">17</span> <span class="mi">13</span><span class="p">:</span><span class="mi">53</span> <span class="n">bujokas</span>
+<span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">35</span> <span class="n">eligijus</span> <span class="n">eligijus</span> <span class="mi">4096</span> <span class="n">lapkr</span><span class="o">.</span> <span class="mi">17</span> <span class="mi">13</span><span class="p">:</span><span class="mi">13</span> <span class="n">eligijus</span>
+</pre></div>
+</div>
+<p>Managing users is done for the purpose of security by limiting access in certain specific ways. The superuser (root) has complete access to the operating system and its configuration; it is intended for administrative use only.</p>
+<p>Any individual may have more than one account as long as they use a different name for each account they create. Further, there are some reserved names which may not be used such as “root”.</p>
+<p>Users may be grouped together into a “group”, and users may be added to an existing group to utilize the privileged access it grants.</p>
+<p>To add a new group we can use the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">groupadd</span> <span class="o">-</span><span class="n">g</span> <span class="mi">11</span> <span class="n">power_rangers</span>
+</pre></div>
+</div>
+<p>To add users to the group use the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">usermod</span> <span class="o">-</span><span class="n">a</span> <span class="o">-</span><span class="n">G</span> <span class="n">power_rangers</span> <span class="n">eligijus</span>
+<span class="n">sudo</span> <span class="n">usermod</span> <span class="o">-</span><span class="n">a</span> <span class="o">-</span><span class="n">G</span> <span class="n">power_rangers</span> <span class="n">bujokas</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="linux-permission-system">
+<h2>Linux permission system<a class="headerlink" href="#linux-permission-system" title="Permalink to this headline">¶</a></h2>
+<p>Linux has a powerfull and, at the same time, easy to use and understandable file and directory permission system.</p>
+<p>Lets create a directory in the /home/eligijus directory called <strong>misc</strong>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">eligijus</span>
+<span class="n">mkdir</span> <span class="n">misc</span>
+</pre></div>
+</div>
+<p>In the directory lets create a directory and a file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">misc</span> 
+<span class="n">mkdir</span> <span class="n">files</span>
+<span class="n">touch</span> <span class="n">file</span><span class="o">.</span><span class="n">md</span>
+</pre></div>
+</div>
+<p>We can list out the information about the created files with the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">-</span><span class="n">la</span>
+</pre></div>
+</div>
+<p>We get the output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span>  <span class="mi">1</span> <span class="n">eligijus</span> <span class="n">eligijus</span>    <span class="mi">0</span> <span class="n">lapkr</span><span class="o">.</span> <span class="mi">17</span> <span class="mi">13</span><span class="p">:</span><span class="mi">14</span> <span class="n">file</span><span class="o">.</span><span class="n">md</span>
+<span class="n">drwxrwxr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">2</span> <span class="n">eligijus</span> <span class="n">eligijus</span> <span class="mi">4096</span> <span class="n">lapkr</span><span class="o">.</span> <span class="mi">17</span> <span class="mi">13</span><span class="p">:</span><span class="mi">14</span> <span class="n">files</span>
+</pre></div>
+</div>
+<p>Everything needed to understand about the Linux permission system is coded in the first collumn of the output above.</p>
+<div class="section" id="symbolic-permission-representation">
+<h3>Symbolic permission representation<a class="headerlink" href="#symbolic-permission-representation" title="Permalink to this headline">¶</a></h3>
+<p>The first collumn encodes the permissions in a <strong>symbolic form</strong> with exactly 10 symbols:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">----------</span>
+</pre></div>
+</div>
+<p>The first symbol in the symbolic form indicates the Unix File Type:</p>
+<ul class="simple">
+<li><p><strong>-</strong> for file</p></li>
+<li><p><strong>d</strong> for directory</p></li>
+<li><p><strong>c</strong> for character special file</p></li>
+<li><p><strong>b</strong> for block special file</p></li>
+<li><p><strong>l</strong> for symbolic link</p></li>
+<li><p><strong>p</strong> for named pipe</p></li>
+<li><p><strong>s</strong> for socket</p></li>
+</ul>
+<p>The 9 following symbols are grouped into 3 triads. The first triad indicates what the owner can do, the second triad indicates what the group members can do and the third triad indicates what other users can do.</p>
+<p>The first symbol in the triad can be either - or r (readable).</p>
+<p>The second symbol in the triad can be either - or w (writable).</p>
+<p>The third symbol in the triad can be either - or x (executable).</p>
+<p>Thus, the symbolic permission form of <strong>-rw-rw-r–</strong> indicates that:</p>
+<p>The object is a regular file.</p>
+<p>The owner has read and write permission (the first triad is <strong>rw-</strong>).</p>
+<p>The group has read and write permission (the second triad is <strong>rw-</strong>).</p>
+<p>All the other users which are not <em>eligijus</em> and do not belong in the group <em>eligijus</em> have only the read permissions (the third triad is <strong>r–</strong>).</p>
+</div>
+<div class="section" id="octal-permission-specification">
+<h3>Octal permission specification<a class="headerlink" href="#octal-permission-specification" title="Permalink to this headline">¶</a></h3>
+<p>The permissions in symbolic form can be represented in octal form as well. Each letter represents a number:</p>
+<p><strong>r</strong> = 4</p>
+<p><strong>w</strong> = 2</p>
+<p><strong>x</strong> = 1</p>
+<p><strong>-</strong> = 0</p>
+<p>Each triad can be represented by the sum of each of the letter. For example,</p>
+<p><strong>rw-</strong> = 4 + 2 + 0 = 6</p>
+<p><strong>—</strong> = 0 + 0 + 0 = 0</p>
+<p><strong>rwx</strong> = 4 + 2 + 1 = 7</p>
+<p>Thus a symbolic form of <strong>-rw-rw-r–</strong> = (ignore the first symbol) [4 + 2 + 0] [4 + 2 + 0] [4 + 0 + 0] = 660.</p>
+<p>An octal representation of 700 means taht the owner can read, write and execute the file, the group members and other users cannot do anything with the file.</p>
+<p>To change the permisions of the file we can use the <strong>chmod</strong> (change mode):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chmod</span> <span class="mi">776</span> <span class="n">file</span><span class="o">.</span><span class="n">md</span> 
+</pre></div>
+</div>
+<p>Now the permissions of the file changed to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">rwxrwxrw</span><span class="o">-</span>  <span class="mi">1</span> <span class="n">eligijus</span> <span class="n">eligijus</span>    <span class="mi">0</span> <span class="n">lapkr</span><span class="o">.</span> <span class="mi">17</span> <span class="mi">13</span><span class="p">:</span><span class="mi">14</span> <span class="n">file</span><span class="o">.</span><span class="n">md</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="linux-processes">
+<h2>Linux processes<a class="headerlink" href="#linux-processes" title="Permalink to this headline">¶</a></h2>
+<p>An instance of a running program is called a <strong>process</strong>. Every time you run a shell command, a program is run and a process is created for it. Each process in Linux has a process id (PID) and it is associated with a particular user and user group.</p>
+<p>One of the commands to list out the running processes is <strong>ps</strong>. For a tidy output use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">-</span><span class="n">eo</span> <span class="n">pid</span><span class="p">,</span><span class="n">ppid</span><span class="p">,</span><span class="n">cmd</span><span class="p">,</span><span class="n">user</span><span class="p">,</span><span class="n">group</span><span class="p">,</span><span class="o">%</span><span class="n">mem</span><span class="p">,</span><span class="o">%</span><span class="n">cpu</span> <span class="o">--</span><span class="n">sort</span><span class="o">=-%</span><span class="n">mem</span> <span class="o">|</span> <span class="n">head</span>
+</pre></div>
+</div>
+<p>An example output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">PID</span>    <span class="n">PPID</span> <span class="n">CMD</span>                         <span class="n">USER</span>     <span class="n">GROUP</span>    <span class="o">%</span><span class="n">MEM</span> <span class="o">%</span><span class="n">CPU</span>
+   <span class="mi">6175</span>    <span class="mi">6142</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">google</span><span class="o">/</span><span class="n">chrome</span><span class="o">/</span><span class="n">chrome</span> <span class="o">-</span> <span class="n">eligijus</span> <span class="n">eligijus</span>  <span class="mf">0.7</span>  <span class="mf">2.0</span>
+   <span class="mi">1469</span>    <span class="mi">1200</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">gnome</span><span class="o">-</span><span class="n">shell</span>        <span class="n">eligijus</span> <span class="n">eligijus</span>  <span class="mf">0.7</span>  <span class="mf">1.3</span>
+   <span class="mi">7044</span>    <span class="mi">6148</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">google</span><span class="o">/</span><span class="n">chrome</span><span class="o">/</span><span class="n">chrome</span> <span class="o">-</span> <span class="n">eligijus</span> <span class="n">eligijus</span>  <span class="mf">0.6</span>  <span class="mf">0.3</span>
+   <span class="mi">6123</span>    <span class="mi">1200</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">google</span><span class="o">/</span><span class="n">chrome</span><span class="o">/</span><span class="n">chrome</span> <span class="o">-</span> <span class="n">eligijus</span> <span class="n">eligijus</span>  <span class="mf">0.6</span>  <span class="mf">1.2</span>
+ <span class="mi">306300</span>    <span class="mi">6148</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">google</span><span class="o">/</span><span class="n">chrome</span><span class="o">/</span><span class="n">chrome</span> <span class="o">-</span> <span class="n">eligijus</span> <span class="n">eligijus</span>  <span class="mf">0.5</span>  <span class="mf">5.1</span>
+   <span class="mi">6077</span>    <span class="mi">6013</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">code</span><span class="o">/</span><span class="n">code</span> <span class="o">--</span><span class="nb">type</span> <span class="n">eligijus</span> <span class="n">eligijus</span>  <span class="mf">0.5</span>  <span class="mf">3.4</span>
+   <span class="mi">6386</span>    <span class="mi">6148</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">google</span><span class="o">/</span><span class="n">chrome</span><span class="o">/</span><span class="n">chrome</span> <span class="o">-</span> <span class="n">eligijus</span> <span class="n">eligijus</span>  <span class="mf">0.4</span>  <span class="mf">0.4</span>
+ <span class="mi">107606</span>    <span class="mi">6148</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">google</span><span class="o">/</span><span class="n">chrome</span><span class="o">/</span><span class="n">chrome</span> <span class="o">-</span> <span class="n">eligijus</span> <span class="n">eligijus</span>  <span class="mf">0.4</span>  <span class="mf">0.2</span>
+   <span class="mi">7056</span>    <span class="mi">6148</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">google</span><span class="o">/</span><span class="n">chrome</span><span class="o">/</span><span class="n">chrome</span> <span class="o">-</span> <span class="n">eligijus</span> <span class="n">eligijus</span>  <span class="mf">0.4</span>  <span class="mf">0.1</span>
+</pre></div>
+</div>
+<p>The <strong>PID</strong> is the most granural ID for a process.</p>
+<p>The <strong>PPID</strong> is the parent process ID that spawned the child process.</p>
+<p>The <strong>CMD</strong> column indicates the exact command which invoked a process.</p>
+<p>The <strong>USER</strong> and <strong>GROUP</strong> represent the user and user group that initiated a process.</p>
+<p>The <strong>%MEM</strong> and <strong>%CPU</strong> fields represent the amount of total available RAM and CPU resources that a process takes.</p>
+<div class="section" id="process-priority">
+<h3>Process priority<a class="headerlink" href="#process-priority" title="Permalink to this headline">¶</a></h3>
+<p>The priority or importance of a job is defined by it’s nice number. <span id="id8">[<a class="reference internal" href="../references/references.html#id16">Garrels, 2008</a>]</span></p>
+<p>A program with a high nice number is friendly to other programs, other users and the system; it is not an important job. The lower the nice number, the more important a job is and the more resources it will take without sharing them.</p>
+<p>To see the nice number of process you can use the same <strong>ps</strong> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">-</span><span class="n">eo</span> <span class="n">pid</span><span class="p">,</span><span class="n">ppid</span><span class="p">,</span><span class="n">cmd</span><span class="p">,</span><span class="n">nice</span><span class="p">,</span><span class="o">%</span><span class="n">mem</span><span class="p">,</span><span class="o">%</span><span class="n">cpu</span> <span class="o">--</span><span class="n">sort</span><span class="o">=-</span><span class="n">nice</span> <span class="o">|</span> <span class="n">head</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PID</span>    <span class="n">PPID</span> <span class="n">CMD</span>                          <span class="n">NI</span> <span class="o">%</span><span class="n">MEM</span> <span class="o">%</span><span class="n">CPU</span>
+    <span class="mi">119</span>       <span class="mi">2</span> <span class="p">[</span><span class="n">khugepaged</span><span class="p">]</span>                 <span class="mi">19</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
+   <span class="mi">1209</span>    <span class="mi">1200</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">libexec</span><span class="o">/</span><span class="n">tracker</span><span class="o">-</span><span class="n">miner</span><span class="o">-</span>   <span class="o">-</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
+    <span class="mi">118</span>       <span class="mi">2</span> <span class="p">[</span><span class="n">ksmd</span><span class="p">]</span>                        <span class="mi">5</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
+   <span class="mi">1222</span>       <span class="mi">1</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">libexec</span><span class="o">/</span><span class="n">rtkit</span><span class="o">-</span><span class="n">daemon</span>     <span class="mi">1</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
+      <span class="mi">1</span>       <span class="mi">0</span> <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">init</span> <span class="n">splash</span>             <span class="mi">0</span>  <span class="mf">0.0</span>  <span class="mf">0.3</span>
+      <span class="mi">2</span>       <span class="mi">0</span> <span class="p">[</span><span class="n">kthreadd</span><span class="p">]</span>                    <span class="mi">0</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
+     <span class="mi">10</span>       <span class="mi">2</span> <span class="p">[</span><span class="n">rcu_tasks_rude_</span><span class="p">]</span>             <span class="mi">0</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
+     <span class="mi">11</span>       <span class="mi">2</span> <span class="p">[</span><span class="n">rcu_tasks_trace</span><span class="p">]</span>             <span class="mi">0</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
+     <span class="mi">12</span>       <span class="mi">2</span> <span class="p">[</span><span class="n">ksoftirqd</span><span class="o">/</span><span class="mi">0</span><span class="p">]</span>                 <span class="mi">0</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
+</pre></div>
+</div>
+<p>The <strong>NI</strong> column indicates the <em>nicesness</em> of the program.</p>
+<p>Making a job nicer by increasing its nice number is only useful for processes that use a lot of CPU time (compilers, math applications and the like). Processes that always use a lot of I/O time are automatically rewarded by the system and given a higher priority (a lower nice number), for example keyboard input always gets highest priority on a system.</p>
+</div>
+<div class="section" id="killing-and-stoping-the-processes">
+<h3>Killing and stoping the processes<a class="headerlink" href="#killing-and-stoping-the-processes" title="Permalink to this headline">¶</a></h3>
+<p>As a non-privileged user, you can only influence your own processes. When you see that one of your processes is eating too much of the system’s resources, there are two things
+that you can do:</p>
+<ol class="simple">
+<li><p>Make the process use less resources without interrupting it;</p></li>
+<li><p>Stop the process altogether.</p></li>
+</ol>
+<p>In the case that you want the process to continue to run, but you also want to give the other processes on the
+system a chance, you can <strong>renice</strong> the process. Appart from using the nice or renice commands, <strong>top</strong> is an easy
+way of spotting the troublesome process(es) and reducing priority.</p>
+<p>Identify the process in the “NI” column, it will most likely have a negative priority. Type r and enter the
+process ID of the process that you want to renice. Then enter the nice value, for instance “20”. That means
+that from now on, this process will take 1/5 of the CPU cycles at the most.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PID</span> <span class="n">to</span> <span class="n">renice</span> <span class="p">[</span><span class="n">default</span> <span class="n">pid</span> <span class="o">=</span> <span class="mi">361073</span><span class="p">]</span> <span class="mi">6077</span>
+    <span class="n">PID</span> <span class="n">USER</span>      <span class="n">PR</span>  <span class="n">NI</span>    <span class="n">VIRT</span>    <span class="n">RES</span>    <span class="n">SHR</span> <span class="n">S</span>  <span class="o">%</span><span class="n">CPU</span>  <span class="o">%</span><span class="n">MEM</span>     <span class="n">TIME</span><span class="o">+</span> <span class="n">COMMAND</span>                                                                                                                                                        
+ <span class="mi">361073</span> <span class="n">eligijus</span>  <span class="mi">20</span>   <span class="mi">0</span> <span class="mi">1720020</span> <span class="mi">298580</span> <span class="mi">137888</span> <span class="n">R</span> <span class="mi">100</span><span class="p">,</span><span class="mi">0</span>   <span class="mi">0</span><span class="p">,</span><span class="mi">5</span>   <span class="mi">0</span><span class="p">:</span><span class="mf">01.67</span> <span class="n">airflow</span> <span class="n">schedul</span>                                                                                                                                                
+   <span class="mi">6077</span> <span class="n">eligijus</span>  <span class="mi">20</span>   <span class="mi">0</span>   <span class="mi">50</span><span class="p">,</span><span class="mi">6</span><span class="n">g</span> <span class="mi">376092</span> <span class="mi">110136</span> <span class="n">S</span>  <span class="mi">12</span><span class="p">,</span><span class="mi">5</span>   <span class="mi">0</span><span class="p">,</span><span class="mi">6</span>  <span class="mi">11</span><span class="p">:</span><span class="mf">15.34</span> <span class="n">code</span>                                                                                                                                                           
+    <span class="mi">876</span> <span class="n">message</span><span class="o">+</span>  <span class="mi">20</span>   <span class="mi">0</span>    <span class="mi">9068</span>   <span class="mi">6252</span>   <span class="mi">3916</span> <span class="n">S</span>   <span class="mi">6</span><span class="p">,</span><span class="mi">2</span>   <span class="mi">0</span><span class="p">,</span><span class="mi">0</span>   <span class="mi">0</span><span class="p">:</span><span class="mf">58.79</span> <span class="n">dbus</span><span class="o">-</span><span class="n">daemon</span>                                                                                                                                                    
+   <span class="mi">1251</span> <span class="n">eligijus</span>  <span class="mi">20</span>   <span class="mi">0</span>  <span class="mi">325212</span>   <span class="mi">9232</span>   <span class="mi">7484</span> <span class="n">S</span>   <span class="mi">6</span><span class="p">,</span><span class="mi">2</span>   <span class="mi">0</span><span class="p">,</span><span class="mi">0</span>   <span class="mi">5</span><span class="p">:</span><span class="mf">31.98</span> <span class="n">gvfs</span><span class="o">-</span><span class="n">udisks2</span><span class="o">-</span><span class="n">vo</span>
+</pre></div>
+</div>
+<p>To kill a process, you can use the same top command, but instead of typing r type k (kill) and the process id:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PID</span> <span class="n">to</span> <span class="n">signal</span><span class="o">/</span><span class="n">kill</span> <span class="p">[</span><span class="n">default</span> <span class="n">pid</span> <span class="o">=</span> <span class="mi">6048</span><span class="p">]</span> <span class="mi">6077</span>
+    <span class="n">PID</span> <span class="n">USER</span>      <span class="n">PR</span>  <span class="n">NI</span>    <span class="n">VIRT</span>    <span class="n">RES</span>    <span class="n">SHR</span> <span class="n">S</span>  <span class="o">%</span><span class="n">CPU</span>  <span class="o">%</span><span class="n">MEM</span>     <span class="n">TIME</span><span class="o">+</span> <span class="n">COMMAND</span>                                                                                                                                                        
+   <span class="mi">6048</span> <span class="n">eligijus</span>  <span class="mi">20</span>   <span class="mi">0</span>  <span class="mi">734756</span> <span class="mi">185412</span>  <span class="mi">79628</span> <span class="n">S</span>  <span class="mi">12</span><span class="p">,</span><span class="mi">5</span>   <span class="mi">0</span><span class="p">,</span><span class="mi">3</span>   <span class="mi">3</span><span class="p">:</span><span class="mf">46.46</span> <span class="n">code</span>                                                                                                                                                           
+   <span class="mi">6077</span> <span class="n">eligijus</span>  <span class="mi">20</span>   <span class="mi">0</span>   <span class="mi">50</span><span class="p">,</span><span class="mi">6</span><span class="n">g</span> <span class="mi">389196</span> <span class="mi">111112</span> <span class="n">S</span>   <span class="mi">6</span><span class="p">,</span><span class="mi">2</span>   <span class="mi">0</span><span class="p">,</span><span class="mi">6</span>  <span class="mi">11</span><span class="p">:</span><span class="mf">23.19</span> <span class="n">code</span>                                                                                                                                                           
+ <span class="mi">362701</span> <span class="n">eligijus</span>  <span class="mi">20</span>   <span class="mi">0</span>   <span class="mi">23444</span>   <span class="mi">4412</span>   <span class="mi">3340</span> <span class="n">R</span>   <span class="mi">6</span><span class="p">,</span><span class="mi">2</span>   <span class="mi">0</span><span class="p">,</span><span class="mi">0</span>   <span class="mi">0</span><span class="p">:</span><span class="mf">00.01</span> <span class="n">top</span>                                                                                                                                                            
+      <span class="mi">1</span> <span class="n">root</span>      <span class="mi">20</span>   <span class="mi">0</span>  <span class="mi">169380</span>  <span class="mi">13284</span>   <span class="mi">8308</span> <span class="n">S</span>   <span class="mi">0</span><span class="p">,</span><span class="mi">0</span>   <span class="mi">0</span><span class="p">,</span><span class="mi">0</span>   <span class="mi">1</span><span class="p">:</span><span class="mf">04.12</span> <span class="n">systemd</span>  
+</pre></div>
+</div>
+<p>You can chose two ways to terminate a process: 15 (soft approach) and SIGTERM (the hard approach).</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter-1-computer"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="computer-specs.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Building blocks of a computer</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="../chapter-2-software/python-intro.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Python</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Eligijus Bujokas<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

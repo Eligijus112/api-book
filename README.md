@@ -26,6 +26,24 @@ One of the main types of pages in this book are jupyter notebooks. To start a ju
 jupyter notebook
 ```
 
+# Necesary command to run before building the book 
+
+There are some APIs that need to be running localy in order for the book to render. The commands to run the APIs: 
+
+## JWT token example
+
+```
+cd api-book/chapter-6-production-tools/jwt_token_example
+uvicorn app:app --port 8000
+```
+
+## Local ML API
+
+```
+cd api-book/chapter-7-final-serving/ML_API
+uvicorn app:app --port 8001
+```
+
 # Rendering the book localy 
 
 Before rendering the book be sure to activate the virtual environment! 
@@ -91,7 +109,7 @@ docker pull eligijusbujokas/ml-serving-book:latest
 To create the container with the access to the book use: 
 
 ```
-docker run -d -p 4000:80 eligijusbujokas/ml-serving-book
+`docker run -d -p 4000:80 eligijusbujokas/ml-serving-book`
 ```
 
 ## Accessing the book via the Digital Ocean server

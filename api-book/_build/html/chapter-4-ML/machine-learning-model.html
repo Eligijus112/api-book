@@ -1,0 +1,1968 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creating machine learning models &#8212; Machine Learning serving</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic ML serving" href="machine-learning-model-serving.html" />
+    <link rel="prev" title="Data structures" href="../chapter-3-python/data-structures.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning serving</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Hardware and Linux OS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-specs.html">
+   Building blocks of a computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-OS.html">
+   Linux operating system
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Software for an ML developer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/python-intro.html">
+   Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/virtual-envs.html">
+   Virtual environments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/docker.html">
+   Docker
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/object-oriented-programming.html">
+   Classes and objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-types.html">
+   Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-structures.html">
+   Data structures
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Creating machine learning models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine-learning-model-serving.html">
+   Basic ML serving
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-intro.html">
+   Application Programming Interface basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-server.html">
+   API server
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-DB.html">
+   Databases and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-example.html">
+   API and PSQL integration example
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Production Tools and Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/gunicorn.html">
+   Gunicorn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/docker.html">
+   Docker in production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/JWT.html">
+   JWT based authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-6-production-tools/migrations.html">
+   Migrations
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  ML serving API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/users.html">
+   ML users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/authentification.html">
+   ML users authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_model.html">
+   ML model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_db_models.html">
+   ML database models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api.html">
+   Machine learning API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api_production.html">
+   Wrapping the API into a production container
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Bibliography
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references/references.html">
+   Links and references
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chapter-4-ML/machine-learning-model.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Eligijus112/api-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Eligijus112/api-book/issues/new?title=Issue%20on%20page%20%2Fchapter-4-ML/machine-learning-model.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Eligijus112/api-book/master?urlpath=tree/docs/chapter-4-ML/machine-learning-model.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Creating machine learning models
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#high-level-ml-project-managment">
+     High level ML project managment
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#business-problem">
+     Business problem
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rules-of-the-game">
+     Rules of the game
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#machine-learning-problem">
+     Machine learning problem
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-package-imports">
+   Python package imports
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-data">
+   Reading data
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dropping-inconsistancies">
+     Dropping inconsistancies
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#feature-engineering">
+   Feature engineering
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#explanatory-data-analysis">
+   Explanatory Data Analysis
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bomb-planting-event">
+     Bomb planting event
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maps">
+     Maps
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tilting">
+     Tilting
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#health-armor-and-money-influence">
+     Health, armor and money influence
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#impact-of-alive-players">
+     Impact of alive players
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#defusal-kit-necesity">
+     Defusal kit necesity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluating-model-performance">
+   Evaluating model performance
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#confusion-matrix">
+     Confusion matrix
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-treshold">
+     Model treshold
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#receiver-operating-characteristic-curve-roc">
+     Receiver operating characteristic curve (ROC)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#auc-statistic">
+     AUC statistic
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-the-train-validation-and-test-sets">
+   Creating the train, validation and test sets
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overfitting-problem">
+     Overfitting problem
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#feature-list">
+     Feature list
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spliting-the-original-dataset">
+     Spliting the original dataset
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-the-x-and-y-matrices">
+     Creating the X and Y matrices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ml-model-creation">
+   ML model creation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#performance-metric-for-a-binary-classifier">
+     Performance metric for a binary classifier
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logistic-regression-model">
+     Logistic Regression model
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#fitting-logistic-regression">
+       Fitting logistic regression
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#hyper-parameter-tuning">
+         Hyper parameter tuning
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#testing-the-results-on-the-test-set">
+         Testing the results on the test set
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#logistic-regression-coefficients">
+       Logistic regression coefficients
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#xgboost-model">
+     Xgboost model
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#hyperparameter-tuning-for-xgboost">
+       Hyperparameter tuning for xgboost
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#xgb-auc-statistic-on-each-of-the-data-sets">
+       XGB auc statistic on each of the data sets
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#job-well-done-right">
+   Job well done. Right?
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="creating-machine-learning-models">
+<h1>Creating machine learning models<a class="headerlink" href="#creating-machine-learning-models" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="high-level-ml-project-managment">
+<h2>High level ML project managment<a class="headerlink" href="#high-level-ml-project-managment" title="Permalink to this headline">¶</a></h2>
+<p>The need and the steps taken when creating a machine learning model usually falls into the following steps:</p>
+<p><img alt="ml-flow" src="../_images/ml-flow.png" /></p>
+<ul class="simple">
+<li><p>The business first needs to define the problem and the potential value that a solution will bring.</p></li>
+<li><p>The second step is to transfer the business problem into a machine learning problem.</p></li>
+<li><p>The third step is to run alot of experiments: try out many ML algorithms, do feature engineering, debate with your colleagues and present the results.</p></li>
+<li><p>The final step is to decide which model to use and start thinking about deployment.</p></li>
+</ul>
+<p>The deployment part historicaly is not the part of an ML practioner but this is changing rapidly.</p>
+<p>If any problem is to big to overcome in a given step, then a team should go a step back and rethink the previous step.</p>
+</div>
+<div class="section" id="business-problem">
+<h2>Business problem<a class="headerlink" href="#business-problem" title="Permalink to this headline">¶</a></h2>
+<p><img alt="CSGO-logo" src="../_images/csgo-logo.jpeg" /></p>
+<p>Imagine that we are working in a huge analytics company and our new task is to model the probability of Counter Terrorist (<strong>CT</strong> for short) team winning a Counter Strike: Global Offensive (<strong>CSGO</strong> for short) game.</p>
+<p>The rules of the game are simple: there are two teams, named terrorists and counter-terrorists, each consisting of 5 players. At the start of the round each player buys weapons, armor and other equipment and the objective is to win the match.</p>
+<p>To read more about the game visit the official website: <a class="reference external" href="https://blog.counter-strike.net/index.php/about/">https://blog.counter-strike.net/index.php/about/</a></p>
+<p>This esport is very popular and our analytics company is trying to break into the gaming market with a very accurate model which will be shown on TV, on gaming streams and other places.</p>
+</div>
+<div class="section" id="rules-of-the-game">
+<h2>Rules of the game<a class="headerlink" href="#rules-of-the-game" title="Permalink to this headline">¶</a></h2>
+<p>The ultimate victory of a CSGO match is when a team, either CT or T, earn <strong>16 points</strong>. A point is earn when a match is won.</p>
+<p>Match winning criteria:</p>
+<ul class="simple">
+<li><p>A given team eliminates all 5 players of the oposite team.</p></li>
+<li><p>If the terrorists have planted the bomb, then the winning criteria for a CT team is to defuse the bomb and for the T team to win the match the bomb needs to explode.</p></li>
+</ul>
+<p>The maximum number of seconds in a match is <strong>175.00</strong>.</p>
+<p>There are 5 CT and 5 T players on match start. Each of them have <strong>100 hit points (HP)</strong> and can buy up to <strong>100 armor</strong> and a helmet.</p>
+<p>Players earn in game dollars during a match which can be spent on weapons, grenades, armor and other accesories.</p>
+</div>
+<div class="section" id="machine-learning-problem">
+<h2>Machine learning problem<a class="headerlink" href="#machine-learning-problem" title="Permalink to this headline">¶</a></h2>
+<p>After the business problem is defined and the rules of the game are clear, we now need to convert the business problem into a machine learning problem.</p>
+<p>If we define:</p>
+<div class="math notranslate nohighlight">
+\[ \mathbb{Y}_{i} = \{0, 1\}, \forall i = 1, ..., n\]</div>
+<div class="math notranslate nohighlight">
+\[ \mathbb{X}_{i} \in R^{p}, \forall i = 1, ..., n\]</div>
+<p>Where</p>
+<p><span class="math notranslate nohighlight">\(i\)</span> - observation i.</p>
+<p><span class="math notranslate nohighlight">\(n\)</span> - total number of observations.</p>
+<p><span class="math notranslate nohighlight">\(p\)</span> - number of features.</p>
+<p>Then we are trying to create a model for the probability to observe <span class="math notranslate nohighlight">\(\mathbb{Y}=1\)</span> event given <span class="math notranslate nohighlight">\(\mathbb{X}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbb{Y}=1|\mathbb{X}) \in (0, 1)\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbb{Y} = 1\)</span> means that the CT team have won and the <span class="math notranslate nohighlight">\(\mathbb{Y} = 0\)</span> means that CT team have lost.</p>
+<p>The function <span class="math notranslate nohighlight">\(f\)</span> that links <span class="math notranslate nohighlight">\(\mathbb{X}\)</span> to <span class="math notranslate nohighlight">\(\mathbb{Y}\)</span> is the machine learning model which are trying to build:</p>
+<div class="math notranslate nohighlight">
+\[ f: \mathbb{X} \rightarrow \mathbb{Y} \]</div>
+<p>Because we are trying to predict an observation falling into one of two classes (CT winning or losing) the machine learning model <span class="math notranslate nohighlight">\(f\)</span> can be called a <em>binary classifier</em>.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="python-package-imports">
+<h1>Python package imports<a class="headerlink" href="#python-package-imports" title="Permalink to this headline">¶</a></h1>
+<p>The first thing that any developer or a ML practioner does is load up packages which are installed into his/hers machine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data reading </span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="c1"># Main modeling class</span>
+<span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span> 
+
+<span class="c1"># Data spliting </span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="c1"># Plotting library</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span> 
+
+<span class="c1"># Array math </span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Modeling frameworks </span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span> 
+<span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span> 
+
+<span class="c1"># Accuracy metrics </span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">roc_curve</span>
+
+<span class="c1"># Hp parameter search </span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">ParameterGrid</span>
+
+<span class="c1"># Model saving </span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="c1"># Operating system functionalities</span>
+<span class="kn">import</span> <span class="nn">os</span> 
+
+<span class="c1"># JSON saving and loading </span>
+<span class="kn">import</span> <span class="nn">json</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="reading-data">
+<h1>Reading data<a class="headerlink" href="#reading-data" title="Permalink to this headline">¶</a></h1>
+<p>Finding, cleaning and labelling data is ussually a long and painfull process. This is not the main emphasis of this book so lets imagine that we have already spent months in creating the beautifull dataset which we will read.</p>
+<p>The original dataset can be found here: <a class="reference external" href="https://www.kaggle.com/christianlillelund/csgo-round-winner-classification">https://www.kaggle.com/christianlillelund/csgo-round-winner-classification</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using pandas to read a csv file </span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/data.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Printing the shape of data </span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of observations: </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of features: </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of observations: 122410
+Number of features: 97
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Getting the feature names </span>
+<span class="n">d</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;time_left&#39;, &#39;ct_score&#39;, &#39;t_score&#39;, &#39;map&#39;, &#39;bomb_planted&#39;,
+       &#39;ct_health&#39;, &#39;t_health&#39;, &#39;ct_armor&#39;, &#39;t_armor&#39;, &#39;ct_money&#39;,
+       &#39;t_money&#39;, &#39;ct_helmets&#39;, &#39;t_helmets&#39;, &#39;ct_defuse_kits&#39;,
+       &#39;ct_players_alive&#39;, &#39;t_players_alive&#39;, &#39;ct_weapon_ak47&#39;,
+       &#39;t_weapon_ak47&#39;, &#39;ct_weapon_aug&#39;, &#39;t_weapon_aug&#39;, &#39;ct_weapon_awp&#39;,
+       &#39;t_weapon_awp&#39;, &#39;ct_weapon_bizon&#39;, &#39;t_weapon_bizon&#39;,
+       &#39;ct_weapon_cz75auto&#39;, &#39;t_weapon_cz75auto&#39;, &#39;ct_weapon_elite&#39;,
+       &#39;t_weapon_elite&#39;, &#39;ct_weapon_famas&#39;, &#39;t_weapon_famas&#39;,
+       &#39;ct_weapon_g3sg1&#39;, &#39;t_weapon_g3sg1&#39;, &#39;ct_weapon_galilar&#39;,
+       &#39;t_weapon_galilar&#39;, &#39;ct_weapon_glock&#39;, &#39;t_weapon_glock&#39;,
+       &#39;ct_weapon_m249&#39;, &#39;t_weapon_m249&#39;, &#39;ct_weapon_m4a1s&#39;,
+       &#39;t_weapon_m4a1s&#39;, &#39;ct_weapon_m4a4&#39;, &#39;t_weapon_m4a4&#39;,
+       &#39;ct_weapon_mac10&#39;, &#39;t_weapon_mac10&#39;, &#39;ct_weapon_mag7&#39;,
+       &#39;t_weapon_mag7&#39;, &#39;ct_weapon_mp5sd&#39;, &#39;t_weapon_mp5sd&#39;,
+       &#39;ct_weapon_mp7&#39;, &#39;t_weapon_mp7&#39;, &#39;ct_weapon_mp9&#39;, &#39;t_weapon_mp9&#39;,
+       &#39;ct_weapon_negev&#39;, &#39;t_weapon_negev&#39;, &#39;ct_weapon_nova&#39;,
+       &#39;t_weapon_nova&#39;, &#39;ct_weapon_p90&#39;, &#39;t_weapon_p90&#39;,
+       &#39;ct_weapon_r8revolver&#39;, &#39;t_weapon_r8revolver&#39;,
+       &#39;ct_weapon_sawedoff&#39;, &#39;t_weapon_sawedoff&#39;, &#39;ct_weapon_scar20&#39;,
+       &#39;t_weapon_scar20&#39;, &#39;ct_weapon_sg553&#39;, &#39;t_weapon_sg553&#39;,
+       &#39;ct_weapon_ssg08&#39;, &#39;t_weapon_ssg08&#39;, &#39;ct_weapon_ump45&#39;,
+       &#39;t_weapon_ump45&#39;, &#39;ct_weapon_xm1014&#39;, &#39;t_weapon_xm1014&#39;,
+       &#39;ct_weapon_deagle&#39;, &#39;t_weapon_deagle&#39;, &#39;ct_weapon_fiveseven&#39;,
+       &#39;t_weapon_fiveseven&#39;, &#39;ct_weapon_usps&#39;, &#39;t_weapon_usps&#39;,
+       &#39;ct_weapon_p250&#39;, &#39;t_weapon_p250&#39;, &#39;ct_weapon_p2000&#39;,
+       &#39;t_weapon_p2000&#39;, &#39;ct_weapon_tec9&#39;, &#39;t_weapon_tec9&#39;,
+       &#39;ct_grenade_hegrenade&#39;, &#39;t_grenade_hegrenade&#39;,
+       &#39;ct_grenade_flashbang&#39;, &#39;t_grenade_flashbang&#39;,
+       &#39;ct_grenade_smokegrenade&#39;, &#39;t_grenade_smokegrenade&#39;,
+       &#39;ct_grenade_incendiarygrenade&#39;, &#39;t_grenade_incendiarygrenade&#39;,
+       &#39;ct_grenade_molotovgrenade&#39;, &#39;t_grenade_molotovgrenade&#39;,
+       &#39;ct_grenade_decoygrenade&#39;, &#39;t_grenade_decoygrenade&#39;,
+       &#39;round_winner&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Displaying a snippet of data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   time_left  ct_score  t_score       map  bomb_planted  ct_health  t_health  \
+0     175.00       0.0      0.0  de_dust2         False      500.0     500.0   
+1     156.03       0.0      0.0  de_dust2         False      500.0     500.0   
+2      96.03       0.0      0.0  de_dust2         False      391.0     400.0   
+3      76.03       0.0      0.0  de_dust2         False      391.0     400.0   
+4     174.97       1.0      0.0  de_dust2         False      500.0     500.0   
+
+   ct_armor  t_armor  ct_money  ...  t_grenade_flashbang  \
+0       0.0      0.0    4000.0  ...                  0.0   
+1     400.0    300.0     600.0  ...                  0.0   
+2     294.0    200.0     750.0  ...                  0.0   
+3     294.0    200.0     750.0  ...                  0.0   
+4     192.0      0.0   18350.0  ...                  0.0   
+
+   ct_grenade_smokegrenade  t_grenade_smokegrenade  \
+0                      0.0                     0.0   
+1                      0.0                     2.0   
+2                      0.0                     2.0   
+3                      0.0                     0.0   
+4                      0.0                     0.0   
+
+   ct_grenade_incendiarygrenade  t_grenade_incendiarygrenade  \
+0                           0.0                          0.0   
+1                           0.0                          0.0   
+2                           0.0                          0.0   
+3                           0.0                          0.0   
+4                           0.0                          0.0   
+
+   ct_grenade_molotovgrenade  t_grenade_molotovgrenade  \
+0                        0.0                       0.0   
+1                        0.0                       0.0   
+2                        0.0                       0.0   
+3                        0.0                       0.0   
+4                        0.0                       0.0   
+
+   ct_grenade_decoygrenade  t_grenade_decoygrenade  round_winner  
+0                      0.0                     0.0            CT  
+1                      0.0                     0.0            CT  
+2                      0.0                     0.0            CT  
+3                      0.0                     0.0            CT  
+4                      0.0                     0.0            CT  
+
+[5 rows x 97 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<p>A short description about the data from the kaggle source:</p>
+<p><em>The dataset consists of round snapshots from about 700 demos from high level tournament play in 2019 and 2020. Warmup rounds and restarts have been filtered, and for the remaining live rounds a round snapshot has been recorded every 20 seconds until the round is decided. Following its initial publication, It has been pre-processed and flattened to improve readability and make it easier for algorithms to process. The total number of snapshots is 122411. <strong>Snapshots are i.i.d and should be treated as individual data points</strong>, not as part of a match.</em></p>
+<p>The feature that will be used for the creation of <span class="math notranslate nohighlight">\(\mathbb{Y}\)</span> variable is <strong>round_winner</strong>. If CT have won, then the value of <span class="math notranslate nohighlight">\(\mathbb{Y}\)</span> will be 1 and 0 othervise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating the Y variable </span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;CT&#39;</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;round_winner&#39;</span><span class="p">]]</span>
+
+<span class="c1"># Inspecting the distribution of the classes</span>
+<span class="n">distribution</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+<span class="n">distribution</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">distribution</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">distribution</span><span class="p">[</span><span class="s1">&#39;share&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">distribution</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">distribution</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">distribution</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">],</span> 
+    <span class="n">distribution</span><span class="p">[</span><span class="s1">&#39;share&#39;</span><span class="p">],</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Share of binary responses in data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Share in data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Response value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine-learning-model_22_0.png" src="../_images/machine-learning-model_22_0.png" />
+</div>
+</div>
+<p>The classes are almost perfectly balanced.</p>
+<div class="section" id="dropping-inconsistancies">
+<h2>Dropping inconsistancies<a class="headerlink" href="#dropping-inconsistancies" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="p">[(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;t_players_alive&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;ct_players_alive&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">5</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="feature-engineering">
+<h1>Feature engineering<a class="headerlink" href="#feature-engineering" title="Permalink to this headline">¶</a></h1>
+<p>Feature engineering is the process of using domain knowledge to create additional features from the raw features in data. Alot of experimentation time is spent here and not all the features created end up improving the model. Nevertheless, if we create atlest one new feature from the given list of features which improves the performance of our classifier then we have added imense value to the original dataset without investing into new data collection.</p>
+<p>The AI expert Andrew Ng has proposed that the current ML industry should move from the model centric approach to the data centric approach <span id="id1">[<a class="reference internal" href="../references/references.html#id6">Ng, 2020</a>]</span>:</p>
+<p><em>“If 80 percent of our work is data preparation, then ensuring data quality is the important work of a machine learning team.”</em></p>
+<p>Andrew Ng urges to shift the focus from trying out new models while fixing a dataset and instead fix a model and then engineer new features, label new data points and do other data related experiments.</p>
+<p>Regardless of which school of thought wins out, developing new features is paramount in either case.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Boolean for the planting of the bomb event </span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;bomb_planted&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;bomb_planted&#39;</span><span class="p">]]</span>
+
+<span class="c1"># The differences between the team scores </span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;team_score_diff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;ct_score&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;t_score&#39;</span><span class="p">]</span>
+
+<span class="c1"># Putting the team_score_diff into buckets </span>
+<span class="n">cut_bins_score</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;team_score_diff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;team_score_diff&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">cut_bins_score</span><span class="p">)</span>
+
+<span class="c1"># Calculating the share of remaining health of CT</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;ct_health_share&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;ct_health&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;t_health&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;ct_health&#39;</span><span class="p">])</span>
+
+<span class="c1"># Calculating the armor share </span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;ct_armor_per_player&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;ct_armor&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;ct_players_alive&#39;</span><span class="p">]</span>
+
+<span class="c1"># Total money share owned by CT</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;ct_money_share&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;ct_money&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;t_money&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;ct_money&#39;</span><span class="p">])</span>
+
+<span class="c1"># Difference between alive CT players and T players </span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;ct_players_alive_diff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;ct_players_alive&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;t_players_alive&#39;</span><span class="p">]</span>
+
+<span class="c1"># Is there a defuse kit in CT team?</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;ct_defuse_kit_present&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;ct_defuse_kits&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="explanatory-data-analysis">
+<h1>Explanatory Data Analysis<a class="headerlink" href="#explanatory-data-analysis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="bomb-planting-event">
+<h2>Bomb planting event<a class="headerlink" href="#bomb-planting-event" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculating the probability of winning when a bomb is planted</span>
+<span class="n">prob_w</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;bomb_planted&#39;</span><span class="p">])[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">])</span>
+<span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;prob_of_win_CT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span>
+
+<span class="c1"># Adding a custom index </span>
+<span class="n">prob_w</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bomb not planted&#39;</span><span class="p">,</span> <span class="s1">&#39;bomb planted&#39;</span><span class="p">]</span>
+
+<span class="c1"># Ploting the results </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">prob_w</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> 
+    <span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;prob_of_win_CT&#39;</span><span class="p">],</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Probability of CT winning&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine-learning-model_31_0.png" src="../_images/machine-learning-model_31_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">prob_w</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                    sum    size  prob_of_win_CT
+bomb not planted  56904  108725        0.523375
+bomb planted       3100   13684        0.226542
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see, if a bomb is planted, the odds of winning for a CT squad is more than two times lower than if the bomb is not planted: <strong>0.52</strong> and <strong>0.22</strong> respectively.</p>
+</div>
+<div class="section" id="maps">
+<h2>Maps<a class="headerlink" href="#maps" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculating the probability of winning when a bomb is planted</span>
+<span class="n">prob_w</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;map&#39;</span><span class="p">])[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">])</span>
+<span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;prob_of_win_CT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span>
+
+<span class="c1"># Ploting the results </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">prob_w</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> 
+    <span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;prob_of_win_CT&#39;</span><span class="p">],</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Probability of CT winning&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine-learning-model_36_0.png" src="../_images/machine-learning-model_36_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">prob_w</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>               sum   size  prob_of_win_CT
+map                                      
+de_cache       103    145        0.710345
+de_dust2     10158  22144        0.458725
+de_inferno   10810  23811        0.453992
+de_mirage     9144  18576        0.492248
+de_nuke      10214  19025        0.536873
+de_overpass   7026  14081        0.498970
+de_train      7310  13491        0.541843
+de_vertigo    5239  11136        0.470456
+</pre></div>
+</div>
+</div>
+</div>
+<p>The map <strong>de_cache</strong> seems to be a clear outlier in the dataset: the CTs are winning in this map more than 70% of the maches.</p>
+</div>
+<div class="section" id="tilting">
+<h2>Tilting<a class="headerlink" href="#tilting" title="Permalink to this headline">¶</a></h2>
+<p>The definition of tilting in esports is <em><strong>state of mental or emotional confusion or frustration</strong></em>. We can measure that by the influence of the current score of matches in favor of CTs to the probablity of winning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculating the probability of winning when a bomb is planted</span>
+<span class="n">prob_w</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;team_score_diff&#39;</span><span class="p">])[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">])</span>
+<span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;prob_of_win_CT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span>
+
+<span class="c1"># Adjusting the index</span>
+<span class="n">prob_w</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">prob_w</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> 
+
+<span class="c1"># Ploting the results </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">prob_w</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> 
+    <span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;prob_of_win_CT&#39;</span><span class="p">],</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Probability of CT winning&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Difference between scores in favor of CT&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine-learning-model_41_0.png" src="../_images/machine-learning-model_41_0.png" />
+</div>
+</div>
+<p>There is a relationship between the matches won by CT and the probability of winning the current match: the bigger the difference between the match score in favor of CT, the higher the chances of winning.</p>
+</div>
+<div class="section" id="health-armor-and-money-influence">
+<h2>Health, armor and money influence<a class="headerlink" href="#health-armor-and-money-influence" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ploting the distributions of CT health share</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;ct_health_share&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CT won match&#39;</span><span class="p">,</span> 
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+    <span class="n">bins</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;ct_health_share&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CT won match&#39;</span><span class="p">,</span> 
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+    <span class="n">bins</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of CT health share of total HP pool by match win event&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of matches&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Share of total HP pool&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine-learning-model_44_0.png" src="../_images/machine-learning-model_44_0.png" />
+</div>
+</div>
+<p>As our intuition suggested, the more total health is comprised of CT HP, the bigger the probability of winning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;ct_armor_per_player&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;CT won match&#39;</span>
+    <span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;ct_armor_per_player&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;CT lost match&#39;</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of CT armor per player by match win event&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Share of matches&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Armor per player&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine-learning-model_46_0.png" src="../_images/machine-learning-model_46_0.png" />
+</div>
+</div>
+<p>The density of CT winning a match is “bigger” the more there is armor per player.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;ct_money_share&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CT won match&#39;</span><span class="p">,</span> 
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+    <span class="n">bins</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;ct_money_share&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CT lost match&#39;</span><span class="p">,</span> 
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+    <span class="n">bins</span><span class="o">=</span><span class="mi">20</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of all money owned by CT by match win event&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of matches&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Share of total money owned&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine-learning-model_48_0.png" src="../_images/machine-learning-model_48_0.png" />
+</div>
+</div>
+<p>As with the health case, having more of the total economy in the game helps positively to win a match.</p>
+</div>
+<div class="section" id="impact-of-alive-players">
+<h2>Impact of alive players<a class="headerlink" href="#impact-of-alive-players" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculating the probability of winning when a bomb is planted</span>
+<span class="n">prob_w</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;ct_players_alive&#39;</span><span class="p">,</span> <span class="s1">&#39;t_players_alive&#39;</span><span class="p">],</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">])</span>
+<span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;prob_of_win_CT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span>
+
+<span class="c1"># Droping the obvious cases of CT=0 and T=0</span>
+<span class="n">prob_w</span> <span class="o">=</span> <span class="n">prob_w</span><span class="p">[[</span><span class="kc">False</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mf">0.0</span> <span class="ow">or</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mf">0.0</span> <span class="k">else</span> <span class="kc">True</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">prob_w</span><span class="o">.</span><span class="n">index</span><span class="p">]]</span>
+
+<span class="c1"># Creating a dataframe for a heatmap </span>
+<span class="n">heatmap_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;ct_players_alive&#39;</span><span class="p">:</span> <span class="n">prob_w</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+    <span class="s1">&#39;t_players_alive&#39;</span><span class="p">:</span> <span class="n">prob_w</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;prob_of_win_CT&#39;</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">heatmap_df</span> <span class="o">=</span> <span class="n">heatmap_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;ct_players_alive&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;t_players_alive&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="c1"># Drawing the heatmap </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">heatmap_df</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlGnBu&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Heatmap of probability to win vs alive players&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine-learning-model_51_0.png" src="../_images/machine-learning-model_51_0.png" />
+</div>
+</div>
+<p>Even having one player advantage in a CSGO match leads to huge increases in probability of winning. The highest probability to win is where there are alot of alive CT players and not much alive T players.</p>
+</div>
+<div class="section" id="defusal-kit-necesity">
+<h2>Defusal kit necesity<a class="headerlink" href="#defusal-kit-necesity" title="Permalink to this headline">¶</a></h2>
+<p>If a bomb is planted in the game, the only way to defuse it is with a difusal kit.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculating the probability of winning when a bomb is planted</span>
+<span class="n">prob_w</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;ct_defuse_kit_present&#39;</span><span class="p">])[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">])</span>
+<span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;prob_of_win_CT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span>
+
+<span class="c1"># Adding a custom index </span>
+<span class="n">prob_w</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Defuse kit not present&#39;</span><span class="p">,</span> <span class="s1">&#39;Defuse kit present&#39;</span><span class="p">]</span>
+
+<span class="c1"># Ploting the results </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">prob_w</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> 
+    <span class="n">prob_w</span><span class="p">[</span><span class="s1">&#39;prob_of_win_CT&#39;</span><span class="p">],</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Probability of CT winning&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine-learning-model_55_0.png" src="../_images/machine-learning-model_55_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob_w</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sum</th>
+      <th>size</th>
+      <th>prob_of_win_CT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Defuse kit not present</th>
+      <td>12418</td>
+      <td>42094</td>
+      <td>0.295006</td>
+    </tr>
+    <tr>
+      <th>Defuse kit present</th>
+      <td>47586</td>
+      <td>80315</td>
+      <td>0.592492</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Having a defusal kit in a team really proves to be beneficial!</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="evaluating-model-performance">
+<h1>Evaluating model performance<a class="headerlink" href="#evaluating-model-performance" title="Permalink to this headline">¶</a></h1>
+<p>In order to compare algorithms with one another or to measure the impact of new data and features, we need to have a performance metric (or more than one). One of the most popular metrics in measuring binary classifiers is the <strong>Area Under the Curve metric (AUC)</strong>. In order to have a grasp on AUC we first need to make sense of some intermediate definitions.</p>
+<div class="section" id="confusion-matrix">
+<h2>Confusion matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this headline">¶</a></h2>
+<p>In the field of machine learning and specifically the problem of statistical classification, a confusion matrix is a specific table layout that allows visualization of the performance of an algorithm. Each row of the matrix represents the instances in an actual class while each column represents the instances in a predicted class, or vice versa – both variants are found in various textbooks and articles.</p>
+<p><img alt="confusion-matrix" src="../_images/confusion-matrix.jpg" /></p>
+<p>The abbreviations stand for:</p>
+<p><strong>TP</strong> - True Positives</p>
+<p><strong>FN</strong> - False Negatives</p>
+<p><strong>FP</strong> - False Positives</p>
+<p><strong>TN</strong> - True Negatives</p>
+<p>The <strong>actual values</strong> refer to the actual ending of the matches. In our case, if CT have won this is termed as a <em>positive</em> and if CT have lost then this is termed as a <em>negative</em>. The predicted values refer to the outcome predicted by the machine learning algorithm. Thus:</p>
+<ul class="simple">
+<li><p>If a match is actually won by CT and our algorithm predicted the same, then that observation is a True Positive.</p></li>
+<li><p>If a match is actually won by CT but our algorithm predicted that CT lost, then that observation is a False Negative.</p></li>
+<li><p>If a match is actually lost by CT but our algorithm predicted that CT won, then that observation is a False Positive.</p></li>
+<li><p>If a match is actually lost by CT and our algorithm predicted that CT have lost, then that observation is a True Negative.</p></li>
+</ul>
+<p>A perfect classifier would have only TPs and TNs in the confusion matrix and no FNs and FPs. Most of the time, this is not the case.</p>
+</div>
+<div class="section" id="model-treshold">
+<h2>Model treshold<a class="headerlink" href="#model-treshold" title="Permalink to this headline">¶</a></h2>
+<p>Most of the popular ML models do not just output 1 or 0 (meaning that CT have won or lost) given a set of features <span class="math notranslate nohighlight">\(\mathbb{X}\)</span>. Rather, they output a <strong>probability</strong>. Recall, that a binary classifier is just a probability model that:</p>
+<div class="math notranslate nohighlight">
+\[ f(\mathbb{X}) = P(\mathbb{Y} = 1| \mathbb{X}) \in (0, 1)\]</div>
+<p>So the output of the algorithm can be 0.0148, 0.5897, 0.998 and so on. By default, a label of 1 (CT winning a match) is given to an observation when <span class="math notranslate nohighlight">\(f(\mathbb{X}) \geqslant 0.5\)</span>. In other words, the treshold <strong>t</strong> = 0.5. In general terms:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} y_{predicted} = \begin{cases} 1, &amp; f(\mathbb{X}) \geqslant t \\
+0, &amp; f(\mathbb{X}) &lt; t \end{cases} t \in (0, 1)\end{split}\]</div>
+<p>Altough it is generaly advised to have the default treshold of 0.5, but in some cases a user can vary the treshold to achieve better results.</p>
+</div>
+<div class="section" id="receiver-operating-characteristic-curve-roc">
+<h2>Receiver operating characteristic curve (ROC)<a class="headerlink" href="#receiver-operating-characteristic-curve-roc" title="Permalink to this headline">¶</a></h2>
+<p>A receiver operating characteristic curve, or <strong>ROC</strong> curve, is a graphical plot that illustrates the performance of a binary classifier as the threshold is varied. It is a 2D plot where the X axis is the <strong>False Positive Rate (FPR)</strong> and the Y axis is the <strong>True Positive Rate (TPR)</strong>. FPR and TPR are defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[FPR = \dfrac{FP}{N}\]</div>
+<div class="math notranslate nohighlight">
+\[TPR = \dfrac{TP}{P}\]</div>
+<p>Here <strong>FP</strong> - number of false positives generated by the classifier, <strong>TP</strong> - number of true positives generated by the classifier and <strong>N</strong> and <strong>P</strong> are the total number of “negative” and “positive” class observations in the data respectively.</p>
+<p>An example ROC plot:</p>
+<p><img alt="roc-curve" src="../_images/roc-example.png" /></p>
+<p>Notice that the axis values are in the interval <strong>[0, 1]</strong>. Altough it may not look like it, but the orange curve is made up out of alot of points who are connected to make a line (hence the term “curve”). Every point was gotten using a different treshold <strong>t</strong>. We always want a classifier whose ROC curve spikes as much as possible to the top left corner. The more the curve is closer to the right bottom corner, the worse the classifier.</p>
+<p>If the curve shoots up rapidly that means that by adjusting the treshold by a little bit, the true positive rate (or the amount of “positive” class observations identified correctly) is very high while the errors that our model makes are minimal (FRP is near zero). Further adjusting the treshold may increase the total positive class observations identified but it will come with a cost of increasing the FPR.</p>
+<p>To put everything in an interactive way, please watch the video by the great StatQuest team about ROC curves: <a class="reference external" href="https://www.youtube.com/watch?v=4jRBRDbJemM">https://www.youtube.com/watch?v=4jRBRDbJemM</a></p>
+<p>Another great resource on this topic: <a class="reference external" href="https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc">https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc</a></p>
+</div>
+<div class="section" id="auc-statistic">
+<h2>AUC statistic<a class="headerlink" href="#auc-statistic" title="Permalink to this headline">¶</a></h2>
+<p>The area under the curve (AUC) statistic is the integral of a given ROC curve between the points (0,0) and (1,1):</p>
+<p><img alt="auc-plots" src="../_images/auc-example.png" /></p>
+<p>The perfect estimator has an are under the curve of 1.0, a bad estimator has the value of 0.5 and bellow. In practise, a classifier with the AUC statistic above 0.8 is consider to be good and AUC above 0.9 is considered to be very good.</p>
+<p>For the objective of creating an ML model for the winner of a CSGO match, we will use the AUC statistic as the main measure of the “goodness” of the model.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="creating-the-train-validation-and-test-sets">
+<h1>Creating the train, validation and test sets<a class="headerlink" href="#creating-the-train-validation-and-test-sets" title="Permalink to this headline">¶</a></h1>
+<p>When creating machine learning models it is very advised to split the data into a <strong>train</strong>, <strong>validation</strong> and <strong>test</strong> sets. A good general rule of thumb is to have ~80% of the data to train the algotithm, ~10% of the data to use in various parameter tuning and ~10% of the data to only use in final performance metric calculation.</p>
+<p>All of these datasets are needed to make sure that our model does not <strong>overfit</strong>.</p>
+<div class="section" id="overfitting-problem">
+<h2>Overfitting problem<a class="headerlink" href="#overfitting-problem" title="Permalink to this headline">¶</a></h2>
+<p>As stated beautifully in the book “Introduction to Statistical Learning”<span id="id2">[<a class="reference internal" href="../references/references.html#id7">Tibshirani, 2021</a>]</span>:</p>
+<p><strong>“When we overfit the training data, the test performance metrics will be very large because the supposed patterns that the method found in the training data simply don’t exist in the test data. Note that regardless of whether or not overfitting has occurred, we almost always expect the training errors to be smaller than the test errors because most statistical learning methods either directly or indirectly seek to minimize the training errors”</strong></p>
+<p>In other words, if we only use training data when creating ML models, we are blinded a bit and do not know how will the model perform with unseen data.</p>
+<p>As per <span id="id3">[<a class="reference internal" href="../references/references.html#id8">Solawetz, 2020</a>]</span>:</p>
+<p><strong>“The training set the largest corpus of your dataset that you reserve for training your model. After training, inference on these images will be taken with a grain of salt, since the model has already had a chance to look at and memorize the correct output.”</strong></p>
+<p><strong>“The validation set is a separate section of your dataset that you will use during training to get a sense of how well your model is doing on images that are not being used in training. During training, it is common to report validation metrics continually after each training epoch &lt;…&gt;. You use these metrics to get a sense of when your model has hit the best performance it can reach on your validation set. You may choose to cease training at this point &lt;…&gt; As you work on your model, you can continually iterate on your dataset, image augmentations, and model design to increase your model’s performance on the validation set.”</strong></p>
+<p><strong>“After all of the training experiments have concluded, you probably have gotten a sense on how your model might do on the validation set. But it is important to remember that the validation set metrics may have influenced you during the creation of the model, and in this sense you might, as a designer, overfit the new model to the validation set. Because the validation set is heavily used in model creation, it is important to hold back a completely separate stronghold of data - the test set. You can run evaluation metrics on the test set at the very end of your project, to get a sense of how well your model will do in production.”</strong></p>
+</div>
+<div class="section" id="feature-list">
+<h2>Feature list<a class="headerlink" href="#feature-list" title="Permalink to this headline">¶</a></h2>
+<p>After the feature engineering steps and EDA we can define the final feature list which we will use in our models:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initial list </span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;bomb_planted&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ct_health_share&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ct_players_alive&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;t_players_alive&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ct_defuse_kit_present&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ct_helmets&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;t_helmets&#39;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>NOTE:</strong> some of the features will be left out because of iterative inspection of model results and EDA.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating dummy vars for the map feature</span>
+<span class="n">map_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;map&#39;</span><span class="p">])</span>
+
+<span class="c1"># Map feature names </span>
+<span class="n">map_features</span> <span class="o">=</span> <span class="n">map_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="c1"># Concatenating the map_df to original dataframe </span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">d</span><span class="p">,</span> <span class="n">map_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Adding the map features to the original feature list </span>
+<span class="c1">#features += map_features</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating dummy vars for the team_score_diff features</span>
+<span class="n">score_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;team_score_diff&#39;</span><span class="p">])</span>
+
+<span class="c1"># Score feature names </span>
+<span class="n">score_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;team_score_diff_in_</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">score_df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+<span class="n">score_features</span> <span class="o">=</span> <span class="n">score_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="c1"># Concatenating the map_df to original dataframe </span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">d</span><span class="p">,</span> <span class="n">score_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Adding the map features to the original feature list </span>
+<span class="c1">#features += score_features</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;Final feature list: </span><span class="se">\n</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">features</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> Number of features: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final feature list: 
+ 
+ [&#39;bomb_planted&#39;, &#39;ct_health_share&#39;, &#39;ct_players_alive&#39;, &#39;t_players_alive&#39;, &#39;ct_defuse_kit_present&#39;, &#39;ct_helmets&#39;, &#39;t_helmets&#39;] 
+ 
+ Number of features: 7
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="spliting-the-original-dataset">
+<h2>Spliting the original dataset<a class="headerlink" href="#spliting-the-original-dataset" title="Permalink to this headline">¶</a></h2>
+<p>We will use 80% of the data to train the model, 10% for validating our model and search for hyper parameters and 10% of the data will be reserved for the test set.</p>
+<p>For reproducibility, we will set a random seed of <strong>123</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setting the seed </span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">123</span>
+
+<span class="c1"># Subseting the dataframe to the features needed + the target variable </span>
+<span class="n">dsubset</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Dropping missing values </span>
+<span class="n">dsubset</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Reseting the indexz </span>
+<span class="n">dsubset</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Spliting to train and test sets </span>
+<span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">dsubset</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+
+<span class="c1"># Further spliting the test to test and validation sets </span>
+<span class="n">test</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total number of rows of the dataset: </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rows in the train set: </span><span class="si">{</span><span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rows in the validation set: </span><span class="si">{</span><span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rows in the test set: </span><span class="si">{</span><span class="n">test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total number of rows of the dataset: 122409
+Rows in the train set: 97926
+Rows in the validation set: 12241
+Rows in the test set: 12241
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-the-x-and-y-matrices">
+<h2>Creating the X and Y matrices<a class="headerlink" href="#creating-the-x-and-y-matrices" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Final matrices for training and validating models </span>
+<span class="n">train_X</span><span class="p">,</span> <span class="n">train_Y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">features</span><span class="p">],</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span>
+<span class="n">val_X</span><span class="p">,</span> <span class="n">val_Y</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="n">features</span><span class="p">],</span> <span class="n">val</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span>
+<span class="n">test_X</span><span class="p">,</span> <span class="n">test_Y</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">features</span><span class="p">],</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span>
+
+<span class="c1"># Printing the stats about the distribution of Ys </span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Share of CT wins in training: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">train_Y</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_Y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Share of CT wins in validation: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">val_Y</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">val_Y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Share of CT wins in testing: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">test_Y</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_Y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Share of CT wins in training: 0.4892367706227151
+Share of CT wins in validation: 0.494812515317376
+Share of CT wins in testing: 0.4932603545461972
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="ml-model-creation">
+<h1>ML model creation<a class="headerlink" href="#ml-model-creation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="performance-metric-for-a-binary-classifier">
+<h2>Performance metric for a binary classifier<a class="headerlink" href="#performance-metric-for-a-binary-classifier" title="Permalink to this headline">¶</a></h2>
+<p>As was stated in the introduction of this book, when creating an ML model we need to have a performance metric to see how the model is performing and to measure how it improves over time.</p>
+<p>One of the most popular choice is the <strong>area under the curve (AUC)</strong> metric. The metric calculates the plot bellow the <strong>receiver operating curve (ROC)</strong>.</p>
+<p>The ROC curve plots the true positive (TP) and the false positive (FP) rates using different tresholds.</p>
+</div>
+<div class="section" id="logistic-regression-model">
+<h2>Logistic Regression model<a class="headerlink" href="#logistic-regression-model" title="Permalink to this headline">¶</a></h2>
+<p>Logistic regression <span id="id4">[<a class="reference internal" href="../references/references.html#id5">Burkov, 2019</a>]</span> is used when we want to model the probability:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbb{Y}|\mathbb{X})\]</div>
+<p>The above probability reads as “the probability of <span class="math notranslate nohighlight">\(\mathbb{Y}\)</span> given <span class="math notranslate nohighlight">\(\mathbb{X}\)</span>”. In other words, how do the features in <span class="math notranslate nohighlight">\(\mathbb{X}\)</span> influence the event of <span class="math notranslate nohighlight">\(\mathbb{Y}\)</span>?</p>
+<p>The full equation for the probability which we will be trying to fit to the given data is:</p>
+<div class="math notranslate nohighlight">
+\[ P(\mathbb{Y}|\mathbb{X}) = \dfrac{1}{1 + e^{-\mathbb{X} \beta }}\]</div>
+<p>Where</p>
+<p><span class="math notranslate nohighlight">\(\mathbb{X}\)</span> - a feature matrix of <span class="math notranslate nohighlight">\(n\)</span> observations and <span class="math notranslate nohighlight">\(p\)</span> features.</p>
+<p><span class="math notranslate nohighlight">\(\beta\)</span> - a vector of dimensions <span class="math notranslate nohighlight">\(p\)</span> x 1.</p>
+<p>In other words, we get a coefficient for each feature in the <span class="math notranslate nohighlight">\(\mathbb{X}\)</span> matrix.</p>
+<p>What is very helpful in logistic regression is that a negative coefficient for a given feature means that increasing the feature <span class="math notranslate nohighlight">\(x_{i}\)</span> will lower the probability of a CT win. If a coefficient is positive, then increasing the <span class="math notranslate nohighlight">\(x_{i}\)</span> value increases the probability of a CT win.</p>
+<p>This simple fact helps us in some quick sanity checks - the logic of the EDA analysis should hold in respect to coefficient values and signs.</p>
+<div class="section" id="fitting-logistic-regression">
+<h3>Fitting logistic regression<a class="headerlink" href="#fitting-logistic-regression" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="hyper-parameter-tuning">
+<h4>Hyper parameter tuning<a class="headerlink" href="#hyper-parameter-tuning" title="Permalink to this headline">¶</a></h4>
+<p>We will try and find a combination of best hyper parameters from a given grid of parameters using the validation set.</p>
+<p>The full list of logistic regression HPs can be found here: <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic%20regression#sklearn.linear_model.LogisticRegression">https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html?highlight=logistic regression#sklearn.linear_model.LogisticRegression</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining a list of hyperparameters </span>
+<span class="n">hp_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> 
+    <span class="s1">&#39;max_iter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1000</span><span class="p">],</span> 
+    <span class="s1">&#39;fit_intercept&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">],</span>
+    <span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;liblinear&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;penalty&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="s1">&#39;l2&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Creating the hp grid </span>
+<span class="n">hp_grid</span> <span class="o">=</span> <span class="n">ParameterGrid</span><span class="p">(</span><span class="n">hp_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Placeholders for the iteration</span>
+<span class="n">auc_val_best</span> <span class="o">=</span> <span class="mi">0</span> 
+<span class="n">best_hp</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({})</span>
+
+<span class="c1"># Iterating through all the parameters and evaluating the results </span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">hp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hp_grid</span><span class="p">):</span> 
+    <span class="c1"># Initiating the empty model/classifier </span>
+    <span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="o">**</span><span class="n">hp</span><span class="p">)</span>
+
+    <span class="c1"># Fitting on data </span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_Y</span><span class="p">)</span>
+
+    <span class="c1"># Predicting on the validation set </span>
+    <span class="n">yhat_val</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">val_X</span><span class="p">)]</span>
+
+    <span class="c1"># Calculating the AUC metric </span>
+    <span class="n">auc_val</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">val_Y</span><span class="p">,</span> <span class="n">yhat_val</span><span class="p">)</span>
+
+    <span class="c1"># Adding to the results frame </span>
+    <span class="n">hp_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">hp</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">hp_results</span><span class="p">[</span><span class="s1">&#39;auc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">auc_val</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hp_results</span><span class="p">)</span>
+
+    <span class="c1"># Checking if this is the highest auc </span>
+    <span class="k">if</span> <span class="n">auc_val</span> <span class="o">&gt;</span> <span class="n">auc_val_best</span><span class="p">:</span>
+        <span class="n">auc_val_best</span> <span class="o">=</span> <span class="n">auc_val</span> 
+        <span class="n">best_hp</span> <span class="o">=</span> <span class="n">hp</span> 
+
+<span class="c1"># Sorting by the AUC score </span>
+<span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;auc&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Printing out the results frame </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     C  fit_intercept  max_iter penalty     solver       auc
+9  2.0           True      1000      l2  liblinear  0.826646
+2  0.5           True      1000      l1  liblinear  0.826645
+7  1.5           True      1000      l2  liblinear  0.826626
+6  1.5           True      1000      l1  liblinear  0.826625
+4  1.0           True      1000      l1  liblinear  0.826621
+0  0.1           True      1000      l1  liblinear  0.826613
+8  2.0           True      1000      l1  liblinear  0.826610
+5  1.0           True      1000      l2  liblinear  0.826608
+3  0.5           True      1000      l2  liblinear  0.826595
+1  0.1           True      1000      l2  liblinear  0.826324
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Printing out the best hyper parameter dictionary</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best hp: </span><span class="si">{</span><span class="n">best_hp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>                                               
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best hp: {&#39;C&#39;: 2, &#39;fit_intercept&#39;: True, &#39;max_iter&#39;: 1000, &#39;penalty&#39;: &#39;l2&#39;, &#39;solver&#39;: &#39;liblinear&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="testing-the-results-on-the-test-set">
+<h4>Testing the results on the test set<a class="headerlink" href="#testing-the-results-on-the-test-set" title="Permalink to this headline">¶</a></h4>
+<p>Now that we have the best parameters according to the validation set, we can checkout the performance on the test set.</p>
+<p>The test set should be used as the final performance evaluation before deciding whether the model is sufficient or not.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating the final logistic regression classifier</span>
+<span class="n">clf_lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="o">**</span><span class="n">best_hp</span><span class="p">)</span>
+<span class="n">clf_lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_Y</span><span class="p">)</span>
+
+<span class="c1"># Getting the AUC statistics for train, validation and test sets </span>
+<span class="n">yhat_train</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">clf_lr</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">train_X</span><span class="p">)]</span>
+<span class="n">yhat_val</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">clf_lr</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">val_X</span><span class="p">)]</span>
+<span class="n">yhat_test</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">clf_lr</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">test_X</span><span class="p">)]</span>
+
+<span class="n">train_auc</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">train_Y</span><span class="p">,</span> <span class="n">yhat_train</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">val_auc</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">val_Y</span><span class="p">,</span> <span class="n">yhat_val</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">test_auc</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">test_Y</span><span class="p">,</span> <span class="n">yhat_test</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Creating a dataframe for ploting </span>
+<span class="n">auc_lr_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;auc_lr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">train_auc</span><span class="p">,</span> <span class="n">val_auc</span><span class="p">,</span> <span class="n">test_auc</span><span class="p">]</span>
+<span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">])</span>
+
+<span class="c1"># Ploting the results </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">auc_lr_results</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> 
+    <span class="n">auc_lr_results</span><span class="p">[</span><span class="s1">&#39;auc_lr&#39;</span><span class="p">],</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;AUC statistics&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;AUC value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Data type&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine-learning-model_99_0.png" src="../_images/machine-learning-model_99_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">auc_lr_results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            auc_lr
+train       0.8250
+validation  0.8266
+test        0.8304
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculating the false positive rate and true positive rate for all the tresholds</span>
+<span class="n">fpr_logistic</span><span class="p">,</span> <span class="n">tpr_logistic</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">test_Y</span><span class="p">,</span> <span class="n">yhat_test</span><span class="p">)</span>
+
+<span class="c1"># Plot the roc curve for the model</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr_logistic</span><span class="p">,</span> <span class="n">tpr_logistic</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Logistic&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Random guessing&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine-learning-model_101_0.png" src="../_images/machine-learning-model_101_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="logistic-regression-coefficients">
+<h3>Logistic regression coefficients<a class="headerlink" href="#logistic-regression-coefficients" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating the coefficient frame </span>
+<span class="n">coef_frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;feature&#39;</span><span class="p">:</span> <span class="n">clf_lr</span><span class="o">.</span><span class="n">feature_names_in_</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;intercept&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;coefficient&#39;</span><span class="p">:</span> <span class="n">clf_lr</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="n">clf_lr</span><span class="o">.</span><span class="n">intercept_</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="p">})</span>
+
+<span class="c1"># Sorting by coefficient value </span>
+<span class="n">coef_frame</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;coefficient&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Printing the coef frame </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">coef_frame</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                 feature  coefficient
+7              intercept    -3.222694
+0           bomb_planted    -1.286496
+3        t_players_alive    -0.622889
+6              t_helmets    -0.328168
+5             ct_helmets     0.291658
+4  ct_defuse_kit_present     0.599155
+2       ct_players_alive     0.737419
+1        ct_health_share     5.188518
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">coef_frame</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">],</span> <span class="n">coef_frame</span><span class="p">[</span><span class="s1">&#39;coefficient&#39;</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Coefficient value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Feature&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Logistic regression coefficients&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine-learning-model_104_0.png" src="../_images/machine-learning-model_104_0.png" />
+</div>
+</div>
+<p>As we can see, all the coefficient values have the same logic as in the EDA phase. This proves that the feature engineering we have done and the model fitting phase was correct.</p>
+</div>
+</div>
+<div class="section" id="xgboost-model">
+<h2>Xgboost model<a class="headerlink" href="#xgboost-model" title="Permalink to this headline">¶</a></h2>
+<p>Xgboost stands for extreme gradient boosting. It is not as interpratable as logistic regression but is much more flexible and in practise has proven time and time again that it gives better results than logistic regression.</p>
+<div class="section" id="hyperparameter-tuning-for-xgboost">
+<h3>Hyperparameter tuning for xgboost<a class="headerlink" href="#hyperparameter-tuning-for-xgboost" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining a list of hyperparameters </span>
+<span class="n">hp_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">120</span><span class="p">],</span> 
+    <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> 
+    <span class="s1">&#39;eval_metric&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;logloss&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;use_label_encoder&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Creating the hp grid </span>
+<span class="n">hp_grid</span> <span class="o">=</span> <span class="n">ParameterGrid</span><span class="p">(</span><span class="n">hp_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Placeholders for the iteration</span>
+<span class="n">auc_val_best</span> <span class="o">=</span> <span class="mi">0</span> 
+<span class="n">best_hp</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({})</span>
+
+<span class="c1"># Iterating through all the parameters and evaluating the results </span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">hp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hp_grid</span><span class="p">):</span> 
+    <span class="c1"># Initiating the empty model/classifier </span>
+    <span class="n">clf</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBClassifier</span><span class="p">(</span><span class="o">**</span><span class="n">hp</span><span class="p">)</span>
+
+    <span class="c1"># Fitting on data </span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_Y</span><span class="p">)</span>
+
+    <span class="c1"># Predicting on the validation set </span>
+    <span class="n">yhat_val</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">val_X</span><span class="p">)]</span>
+
+    <span class="c1"># Calculating the AUC metric </span>
+    <span class="n">auc_val</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">val_Y</span><span class="p">,</span> <span class="n">yhat_val</span><span class="p">)</span>
+
+    <span class="c1"># Adding to the results frame </span>
+    <span class="n">hp_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">hp</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">hp_results</span><span class="p">[</span><span class="s1">&#39;auc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">auc_val</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hp_results</span><span class="p">)</span>
+
+    <span class="c1"># Checking if this is the highest auc </span>
+    <span class="k">if</span> <span class="n">auc_val</span> <span class="o">&gt;</span> <span class="n">auc_val_best</span><span class="p">:</span>
+        <span class="n">auc_val_best</span> <span class="o">=</span> <span class="n">auc_val</span> 
+        <span class="n">best_hp</span> <span class="o">=</span> <span class="n">hp</span> 
+
+<span class="c1"># Sorting by the AUC score </span>
+<span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;auc&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Printing out the results frame </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  eval_metric  max_depth  n_estimators  use_label_encoder       auc
+8     logloss          8           120              False  0.845637
+7     logloss          8            90              False  0.845031
+6     logloss          8            60              False  0.844215
+4     logloss          6            90              False  0.843509
+5     logloss          6           120              False  0.843014
+3     logloss          6            60              False  0.842822
+2     logloss          4           120              False  0.841861
+1     logloss          4            90              False  0.841591
+0     logloss          4            60              False  0.840987
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Printing out the best hyper parameter dictionary</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best hp: </span><span class="si">{</span><span class="n">best_hp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best hp: {&#39;eval_metric&#39;: &#39;logloss&#39;, &#39;max_depth&#39;: 8, &#39;n_estimators&#39;: 120, &#39;use_label_encoder&#39;: False}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="xgb-auc-statistic-on-each-of-the-data-sets">
+<h3>XGB auc statistic on each of the data sets<a class="headerlink" href="#xgb-auc-statistic-on-each-of-the-data-sets" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf_xgb</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBClassifier</span><span class="p">(</span><span class="o">**</span><span class="n">best_hp</span><span class="p">)</span>
+<span class="n">clf_xgb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_Y</span><span class="p">)</span>
+
+<span class="c1"># Getting the AUC statistics for train, validation and test sets </span>
+<span class="n">yhat_train</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">clf_xgb</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">train_X</span><span class="p">)]</span>
+<span class="n">yhat_val</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">clf_xgb</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">val_X</span><span class="p">)]</span>
+<span class="n">yhat_test</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">clf_xgb</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">test_X</span><span class="p">)]</span>
+
+<span class="n">train_auc</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">train_Y</span><span class="p">,</span> <span class="n">yhat_train</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">val_auc</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">val_Y</span><span class="p">,</span> <span class="n">yhat_val</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">test_auc</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">test_Y</span><span class="p">,</span> <span class="n">yhat_test</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Creating a dataframe for ploting </span>
+<span class="n">auc_xgb_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;auc_xgb&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">train_auc</span><span class="p">,</span> <span class="n">val_auc</span><span class="p">,</span> <span class="n">test_auc</span><span class="p">]</span>
+<span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">])</span>
+
+<span class="c1"># Ploting the results </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">auc_xgb_results</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> 
+    <span class="n">auc_xgb_results</span><span class="p">[</span><span class="s1">&#39;auc_xgb&#39;</span><span class="p">],</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;AUC statistics&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;AUC value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Data type&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine-learning-model_114_0.png" src="../_images/machine-learning-model_114_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">auc_xgb_results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            auc_xgb
+train        0.8727
+validation   0.8456
+test         0.8474
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculating the false positive rate and true positive rate for all the tresholds</span>
+<span class="n">fpr_xgb</span><span class="p">,</span> <span class="n">tpr_xgb</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">test_Y</span><span class="p">,</span> <span class="n">yhat_test</span><span class="p">)</span>
+
+<span class="c1"># Plot the roc curve for the model</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr_logistic</span><span class="p">,</span> <span class="n">tpr_logistic</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Logistic&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr_xgb</span><span class="p">,</span> <span class="n">tpr_xgb</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Xgboost&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Random guessing&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine-learning-model_116_0.png" src="../_images/machine-learning-model_116_0.png" />
+</div>
+</div>
+<p>All the metrics, both in the validation set and test set, are better for xgboost. Thus, we will save the model and use it for later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating a directory to save the model objects </span>
+<span class="n">_dir_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="s2">&quot;ml_models&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">_dir_name</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">_dir_name</span><span class="p">)</span>
+
+<span class="n">_model_path_xgb</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_dir_name</span><span class="p">,</span> <span class="s2">&quot;ml-model-xgb.pkl&quot;</span><span class="p">)</span>
+<span class="n">_model_path_lr</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_dir_name</span><span class="p">,</span> <span class="s2">&quot;ml-model-lr.pkl&quot;</span><span class="p">)</span>
+
+<span class="c1"># Saving the model </span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">clf_xgb</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">_model_path_xgb</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">))</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">clf_lr</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">_model_path_lr</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">))</span>
+
+<span class="c1"># Saving the features for future use </span>
+<span class="n">_feature_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_dir_name</span><span class="p">,</span> <span class="s2">&quot;ml-features.json&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">_feature_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">train_X</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="job-well-done-right">
+<h1>Job well done. Right?<a class="headerlink" href="#job-well-done-right" title="Permalink to this headline">¶</a></h1>
+<p>So we have done our analysis, did a bunch of feature engineering, compared the baseline model to a more powerful one and saved the best model to a file. Alot of data scientists would pat themselves on the back and call it a day. But a true data engineer would ask the following questions:</p>
+<ul class="simple">
+<li><p>How will anybody reproduce these results in the future?</p></li>
+<li><p>How can my colleagues use this model?</p></li>
+<li><p>How can the business clients use this model?</p></li>
+<li><p>How to add new features to the model, if everyone is already using it?</p></li>
+<li><p>How to know, how many times and what kind of inputs were given to the created model?</p></li>
+</ul>
+<p>And much more.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter-4-ML"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../chapter-3-python/data-structures.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Data structures</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="machine-learning-model-serving.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Basic ML serving</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Eligijus Bujokas<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

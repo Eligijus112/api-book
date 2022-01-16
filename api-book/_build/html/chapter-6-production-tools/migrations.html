@@ -1,0 +1,791 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Migrations &#8212; Machine Learning serving</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ML users" href="../chapter-7-final-serving/users.html" />
+    <link rel="prev" title="JWT based authentification" href="JWT.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning serving</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Hardware and Linux OS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-specs.html">
+   Building blocks of a computer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-1-computer/computer-OS.html">
+   Linux operating system
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Software for an ML developer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/python-intro.html">
+   Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/virtual-envs.html">
+   Virtual environments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-2-software/docker.html">
+   Docker
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/object-oriented-programming.html">
+   Classes and objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-types.html">
+   Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-3-python/data-structures.html">
+   Data structures
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model.html">
+   Creating machine learning models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-4-ML/machine-learning-model-serving.html">
+   Basic ML serving
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-intro.html">
+   Application Programming Interface basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-server.html">
+   API server
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-DB.html">
+   Databases and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-5-API/API-example.html">
+   API and PSQL integration example
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Production Tools and Concepts
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="gunicorn.html">
+   Gunicorn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="docker.html">
+   Docker in production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="JWT.html">
+   JWT based authentification
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Migrations
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  ML serving API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/users.html">
+   ML users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/authentification.html">
+   ML users authentification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_model.html">
+   ML model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_db_models.html">
+   ML database models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api.html">
+   Machine learning API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter-7-final-serving/machine_learning_api_production.html">
+   Wrapping the API into a production container
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Bibliography
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references/references.html">
+   Links and references
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/chapter-6-production-tools/migrations.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Eligijus112/api-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Eligijus112/api-book/issues/new?title=Issue%20on%20page%20%2Fchapter-6-production-tools/migrations.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Eligijus112/api-book/master?urlpath=tree/docs/chapter-6-production-tools/migrations.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Migrations
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#migrations-in-python-alembic">
+   Migrations in Python - Alembic
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alembic-in-action">
+   Alembic in action
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#alembic-ini-file">
+     alembic.ini file
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#models-py-file">
+     models.py file
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#env-py-file">
+     env.py file
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initial-migration">
+     Initial migration
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#migrating-to-database">
+     Migrating to database
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applying-changes">
+     Applying changes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alembic-workflow-summary">
+   Alembic workflow summary
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="migrations">
+<h1>Migrations<a class="headerlink" href="#migrations" title="Permalink to this headline">¶</a></h1>
+<p>A <code class="docutils literal notranslate"><span class="pre">schema</span> <span class="pre">migration</span></code> (or populary termed just <code class="docutils literal notranslate"><span class="pre">migration</span></code>) is a process of changing the database schema in a trackable and reversible way. To put it simpler, every time we make a change to a table or tables in a database, we make a <code class="docutils literal notranslate"><span class="pre">migration</span></code>. Under the hood, each migration is just an SQL script that is run against the database. What is very important, howerer, is that every migration needs to know what has happened before it. If we lose history of migrations, we will run into huge productions problems and will probably need to start from scratch.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="migrations-in-python-alembic">
+<h1>Migrations in Python - Alembic<a class="headerlink" href="#migrations-in-python-alembic" title="Permalink to this headline">¶</a></h1>
+<p>Python has a very simple yet powerfull framework for managing database migrations - <code class="docutils literal notranslate"><span class="pre">Alembic</span></code>. As the authors put it:</p>
+<p><em>“Alembic is a lightweight database migration tool for usage with the SQLAlchemy Database Toolkit for Python”</em>. One can read on the <a class="reference external" href="https://alembic.sqlalchemy.org/en/latest/">Alembic website</a> for more information.</p>
+<p>To initialize the root folder for alembic, type the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alembic</span> <span class="n">init</span> <span class="n">alembic</span><span class="o">-</span><span class="n">migrations</span>
+</pre></div>
+</div>
+<p>This will create a folder <code class="docutils literal notranslate"><span class="pre">alembic-migrations</span></code> in the current directory along with a <code class="docutils literal notranslate"><span class="pre">alembic.ini</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── alembic.ini
+├── alembic-migrations/
+│   ├── env.py
+│   ├── README
+│   ├── script.py.mako
+│   └── versions/
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">alembic.ini</span></code> file contains the configuration for the database connection and general alembic behaviour.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">env.py</span></code> file holds the environmental variables for the database connection and where the objects from other Python scripts get impoerted.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">script.py.mako</span></code> file is the template for the migration scripts.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">versions</span></code> folder is where the migration scripts are stored.</p>
+<p>For now, let us imagine that we have a running database in a container on localhost port 5429. The database name is postgres.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="alembic-in-action">
+<h1>Alembic in action<a class="headerlink" href="#alembic-in-action" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="alembic-ini-file">
+<h2>alembic.ini file<a class="headerlink" href="#alembic-ini-file" title="Permalink to this headline">¶</a></h2>
+<p>The alembic.ini file holds the URI to connect to a database in question. It is a best practise to use on alembic.ini file per database. By default it is populated with some variables. The most important one is <code class="docutils literal notranslate"><span class="pre">sqlalchemy.url</span></code> one. By default, the value is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">driver</span><span class="p">:</span><span class="o">//</span><span class="n">user</span><span class="p">:</span><span class="k">pass</span><span class="nd">@localhost</span><span class="o">/</span><span class="n">dbname</span>
+</pre></div>
+</div>
+<p>We will change it to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">postgresql</span><span class="p">:</span><span class="o">//</span><span class="n">user</span><span class="p">:</span><span class="n">password</span><span class="nd">@localhost</span><span class="p">:</span><span class="mi">5429</span><span class="o">/</span><span class="n">postgres</span>
+</pre></div>
+</div>
+<p>Now every time we run a command <code class="docutils literal notranslate"><span class="pre">alembic</span> <span class="pre">...</span></code> it will try to connect via the URL we specified and make changes there.</p>
+</div>
+<div class="section" id="models-py-file">
+<h2><a class="reference external" href="http://models.py">models.py</a> file<a class="headerlink" href="#models-py-file" title="Permalink to this headline">¶</a></h2>
+<p>This is a user created file holding all the database models (tables). We define the tables with the already seen SQLAlchemy declarative base class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat alembic-migrations/models.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># ORM functions for the database 
+from sqlalchemy.orm import declarative_base
+
+# Model creation 
+from sqlalchemy import Column, Integer, String, DateTime
+
+# Dates and times
+import datetime
+
+# Initiating the Base class
+Base = declarative_base()
+
+# Defining the models - Request and Response
+class User(Base):
+    # Table name in database
+    __tablename__ = &#39;users&#39;
+    
+    # If any changes are made to the columns, allow the database to know about it
+    __table_args__ = {&#39;extend_existing&#39;: True} 
+
+    id = Column(Integer, primary_key=True)
+    username = Column(String)
+    password = Column(String)
+    create_datetime = Column(DateTime)
+    
+
+    def __init__(self, username: str, password: str):
+        self.username = username 
+        self.password = password
+        self.create_datetime = datetime.datetime.now()
+</pre></div>
+</div>
+</div>
+</div>
+<p>The initial table will have the following columns: <code class="docutils literal notranslate"><span class="pre">username</span></code>, <code class="docutils literal notranslate"><span class="pre">password</span></code>, <code class="docutils literal notranslate"><span class="pre">create_datetime</span></code>. Now we need to somehow tell alembic about this table.</p>
+</div>
+<div class="section" id="env-py-file">
+<h2><a class="reference external" href="http://env.py">env.py</a> file<a class="headerlink" href="#env-py-file" title="Permalink to this headline">¶</a></h2>
+<p>We will be importing all of our created database tables into this file.</p>
+<p>On the top of the file, add the following line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="n">Base</span>
+</pre></div>
+</div>
+<p>Alembic will infere (when it is invoked) information about all the classes that extend the <code class="docutils literal notranslate"><span class="pre">Base</span></code> class and will now about all the wanted collumns and relationships.</p>
+<p>The second line that needs to be changed is to change:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">target_metadata</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">target_metadata</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span>
+</pre></div>
+</div>
+<p>We tell alembic which tables we want to track. Every table that is extended from the <code class="docutils literal notranslate"><span class="pre">Base</span></code> class will be tracked.</p>
+</div>
+<div class="section" id="initial-migration">
+<h2>Initial migration<a class="headerlink" href="#initial-migration" title="Permalink to this headline">¶</a></h2>
+<p>Have done the above steps, we are ready for our very first migration! As of right now, the directory /versions is empty because we have not made any migrations.</p>
+<p>To do a migration, we run the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alembic</span> <span class="n">revision</span> <span class="o">--</span><span class="n">autogenerate</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Initial migration&quot;</span>
+</pre></div>
+</div>
+<p>The –autogenerate flag tells alembic to generate the SQL code automatically for us based on the code in the <code class="docutils literal notranslate"><span class="pre">models.py</span></code> script.</p>
+<p>The -m flag tells alembic what the migration is called. The info in the terminal should look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span>  <span class="p">[</span><span class="n">alembic</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">migration</span><span class="p">]</span> <span class="n">Context</span> <span class="n">impl</span> <span class="n">PostgresqlImpl</span><span class="o">.</span>
+<span class="n">INFO</span>  <span class="p">[</span><span class="n">alembic</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">migration</span><span class="p">]</span> <span class="n">Will</span> <span class="n">assume</span> <span class="n">transactional</span> <span class="n">DDL</span><span class="o">.</span>
+<span class="n">INFO</span>  <span class="p">[</span><span class="n">alembic</span><span class="o">.</span><span class="n">autogenerate</span><span class="o">.</span><span class="n">compare</span><span class="p">]</span> <span class="n">Detected</span> <span class="n">added</span> <span class="n">table</span> <span class="s1">&#39;users&#39;</span>
+  <span class="n">Generating</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">eligijus</span><span class="o">/</span><span class="n">api</span><span class="o">-</span><span class="n">book</span><span class="o">/</span><span class="n">api</span><span class="o">-</span><span class="n">book</span><span class="o">/</span><span class="n">chapter</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="n">production</span><span class="o">-</span><span class="n">tools</span><span class="o">/</span><span class="n">alembic</span><span class="o">-</span><span class="n">migrations</span><span class="o">/</span><span class="n">alembic</span><span class="o">-</span><span class="n">migrations</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mi">8</span><span class="n">b3bc20f068e_initial_migration</span><span class="o">.</span><span class="n">py</span> <span class="o">...</span>  <span class="n">done</span>
+</pre></div>
+</div>
+<p>Now the versions/ directory is not empty and contains the following file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat alembic-migrations/alembic-migrations/versions/8b3bc20f068e_initial_migration.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;&quot;&quot;Initial migration
+
+Revision ID: 8b3bc20f068e
+Revises: 
+Create Date: 2021-12-28 18:04:52.819691
+
+&quot;&quot;&quot;
+from alembic import op
+import sqlalchemy as sa
+
+
+# revision identifiers, used by Alembic.
+revision = &#39;8b3bc20f068e&#39;
+down_revision = None
+branch_labels = None
+depends_on = None
+
+
+def upgrade():
+    # ### commands auto generated by Alembic - please adjust! ###
+    op.create_table(&#39;users&#39;,
+    sa.Column(&#39;id&#39;, sa.Integer(), nullable=False),
+    sa.Column(&#39;username&#39;, sa.String(), nullable=True),
+    sa.Column(&#39;password&#39;, sa.String(), nullable=True),
+    sa.Column(&#39;create_datetime&#39;, sa.DateTime(), nullable=True),
+    sa.PrimaryKeyConstraint(&#39;id&#39;)
+    )
+    # ### end Alembic commands ###
+
+
+def downgrade():
+    # ### commands auto generated by Alembic - please adjust! ###
+    op.drop_table(&#39;users&#39;)
+    # ### end Alembic commands ###
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each revision has a unique id. The id is generated by alembic and is used to identify the migration. The id of the initial migration is <code class="docutils literal notranslate"><span class="pre">8b3bc20f068e</span></code>.</p>
+<p>The upgrade() method will be called when we will run the migration.</p>
+<p>The downgrade() method will be called when we want to revert the migration.</p>
+</div>
+<div class="section" id="migrating-to-database">
+<h2>Migrating to database<a class="headerlink" href="#migrating-to-database" title="Permalink to this headline">¶</a></h2>
+<p>Up untill this point, everything was happening locally. To actually run and apply the migration to the database, we run the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alembic</span> <span class="n">upgrade</span> <span class="n">head</span>
+</pre></div>
+</div>
+<p>The <em>upgrade</em> command will invoke the <code class="docutils literal notranslate"><span class="pre">upgrade()</span></code> method defined in the Python file.</p>
+<p>The <em>head</em> means to upgrade the latest version that is currently in the database.</p>
+<p>The output in the terminal should look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span>  <span class="p">[</span><span class="n">alembic</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">migration</span><span class="p">]</span> <span class="n">Context</span> <span class="n">impl</span> <span class="n">PostgresqlImpl</span><span class="o">.</span>
+<span class="n">INFO</span>  <span class="p">[</span><span class="n">alembic</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">migration</span><span class="p">]</span> <span class="n">Will</span> <span class="n">assume</span> <span class="n">transactional</span> <span class="n">DDL</span><span class="o">.</span>
+<span class="n">INFO</span>  <span class="p">[</span><span class="n">alembic</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">migration</span><span class="p">]</span> <span class="n">Running</span> <span class="n">upgrade</span>  <span class="o">-&gt;</span> <span class="mi">8</span><span class="n">b3bc20f068e</span><span class="p">,</span> <span class="n">Initial</span> <span class="n">migration</span>
+</pre></div>
+</div>
+<p>Now in the database, along with the table <code class="docutils literal notranslate"><span class="pre">users</span></code>, we have another table called <code class="docutils literal notranslate"><span class="pre">alembic</span> <span class="pre">version</span></code> which just indicates what is the current version of the database (in our case its <code class="docutils literal notranslate"><span class="pre">8b3bc20f068e</span></code>).</p>
+</div>
+<div class="section" id="applying-changes">
+<h2>Applying changes<a class="headerlink" href="#applying-changes" title="Permalink to this headline">¶</a></h2>
+<p>Lets say we want to add a collumn called email to the database. The User class in the <code class="docutils literal notranslate"><span class="pre">models.py</span></code> file will be modified to include the new collumn:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="c1"># Table name in database</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;users&#39;</span>
+    
+    <span class="c1"># If any changes are made to the columns, allow the database to know about it</span>
+    <span class="n">__table_args__</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;extend_existing&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span> 
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">create_datetime</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">)</span>
+    
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">username</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_datetime</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To create the local migration files, we once again type the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alembic</span> <span class="n">revision</span> <span class="o">--</span><span class="n">autogenerate</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Added user email&quot;</span>
+</pre></div>
+</div>
+<p>The output should look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span>  <span class="p">[</span><span class="n">alembic</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">migration</span><span class="p">]</span> <span class="n">Context</span> <span class="n">impl</span> <span class="n">PostgresqlImpl</span><span class="o">.</span>
+<span class="n">INFO</span>  <span class="p">[</span><span class="n">alembic</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">migration</span><span class="p">]</span> <span class="n">Will</span> <span class="n">assume</span> <span class="n">transactional</span> <span class="n">DDL</span><span class="o">.</span>
+<span class="n">INFO</span>  <span class="p">[</span><span class="n">alembic</span><span class="o">.</span><span class="n">ddl</span><span class="o">.</span><span class="n">postgresql</span><span class="p">]</span> <span class="n">Detected</span> <span class="n">sequence</span> <span class="n">named</span> <span class="s1">&#39;users_id_seq&#39;</span> <span class="k">as</span> <span class="n">owned</span> <span class="n">by</span> <span class="n">integer</span> <span class="n">column</span> <span class="s1">&#39;users(id)&#39;</span><span class="p">,</span> <span class="n">assuming</span> <span class="n">SERIAL</span> <span class="ow">and</span> <span class="n">omitting</span>
+<span class="n">INFO</span>  <span class="p">[</span><span class="n">alembic</span><span class="o">.</span><span class="n">autogenerate</span><span class="o">.</span><span class="n">compare</span><span class="p">]</span> <span class="n">Detected</span> <span class="n">added</span> <span class="n">column</span> <span class="s1">&#39;users.email&#39;</span>
+  <span class="n">Generating</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">eligijus</span><span class="o">/</span><span class="n">api</span><span class="o">-</span><span class="n">book</span><span class="o">/</span><span class="n">api</span><span class="o">-</span><span class="n">book</span><span class="o">/</span><span class="n">chapter</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="n">production</span><span class="o">-</span><span class="n">tools</span><span class="o">/</span><span class="n">alembic</span><span class="o">-</span><span class="n">migrations</span><span class="o">/</span><span class="n">alembic</span><span class="o">-</span><span class="n">migrations</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="n">cd1911ec4399_added_user_email</span><span class="o">.</span><span class="n">py</span> <span class="o">...</span>  <span class="n">done</span>
+</pre></div>
+</div>
+<p>A new revision is created in the versions/ directory. The id of the new revision is <code class="docutils literal notranslate"><span class="pre">cd1911ec4399</span></code>. The contents of the Python file is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat alembic-migrations/alembic-migrations/versions/cd1911ec4399_added_user_email.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;&quot;&quot;Added user email
+
+Revision ID: cd1911ec4399
+Revises: 8b3bc20f068e
+Create Date: 2021-12-28 18:22:31.484426
+
+&quot;&quot;&quot;
+from alembic import op
+import sqlalchemy as sa
+
+
+# revision identifiers, used by Alembic.
+revision = &#39;cd1911ec4399&#39;
+down_revision = &#39;8b3bc20f068e&#39;
+branch_labels = None
+depends_on = None
+
+
+def upgrade():
+    # ### commands auto generated by Alembic - please adjust! ###
+    op.add_column(&#39;users&#39;, sa.Column(&#39;email&#39;, sa.String(), nullable=True))
+    # ### end Alembic commands ###
+
+
+def downgrade():
+    # ### commands auto generated by Alembic - please adjust! ###
+    op.drop_column(&#39;users&#39;, &#39;email&#39;)
+    # ### end Alembic commands ###
+</pre></div>
+</div>
+</div>
+</div>
+<p>To apply these changes to the database we run the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alembic</span> <span class="n">upgrade</span> <span class="n">head</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="alembic-workflow-summary">
+<h1>Alembic workflow summary<a class="headerlink" href="#alembic-workflow-summary" title="Permalink to this headline">¶</a></h1>
+<p>In summary, the changing of the database schema most of the time falls into this pattern:</p>
+<p><img alt="alembic-flow" src="../_images/alembic-flow.png" /></p>
+<p>Any time a user modifies any table code in the <a class="reference external" href="http://models.py">models.py</a> file (or anywhere else) the same flow is followed:</p>
+<ul class="simple">
+<li><p>Alembic is used to generate the python script in the <strong>versions/</strong> directory.</p></li>
+<li><p>The user then initiates the migration to the database which sqlalchemy applies.</p></li>
+<li><p>In the database, the latest version of the migrations is saved in the table called <strong>alembic_version</strong>.</p></li>
+</ul>
+<p>When managing a database with Alembic we can always review the history of migrations, rollback to previous versions and very easily apply changes to the database.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter-6-production-tools"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="JWT.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">JWT based authentification</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="../chapter-7-final-serving/users.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">ML users</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Eligijus Bujokas<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
