@@ -6,6 +6,12 @@ The framework to create the book is **jupyter books**: https://jupyterbook.org/i
 
 The full rendered book can be viewed via: https://eligijus112.github.io/api-book/
 
+# Contributions 
+
+If you enjoyed the book and feel like donating, feel free to do so. The link to do a one time donation is [via Stripe](https://buy.stripe.com/14k17A6lQ8lAat2aEI). 
+
+Additionaly, if you want me to add another chapter or to expand an existing one, please create an issue on [Github](https://github.com/Eligijus112/api-book).
+
 # Creating the virtual environment 
 
 ```
@@ -31,6 +37,13 @@ jupyter notebook
 # Necesary command to run before building the book 
 
 There are some APIs that need to be running localy in order for the book to render. The commands to run the APIs: 
+
+## Root calculation API example
+
+```
+cd api-book/chapter-5-API/api_full_example
+uvicorn app:app --port 7999
+```
 
 ## JWT token example
 
