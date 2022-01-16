@@ -10,6 +10,6 @@ secrets:
 connection: 
   username: user
   password: password
-  port: 5439
+  port: 5432
   database: postgres
-  host: localhost
+  host: psql_db
