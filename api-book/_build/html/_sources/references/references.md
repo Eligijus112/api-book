@@ -1,4 +1,0 @@
-# Links and references
-
-```{bibliography}
-```
