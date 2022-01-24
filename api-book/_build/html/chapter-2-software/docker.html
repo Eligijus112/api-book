@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Docker &#8212; Machine Learning serving</title>
+    <title>Docker &#8212; Machine Learning Serving API</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -73,7 +73,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">Machine Learning serving</h1>
+      <h1 class="site-logo" id="site-title">Machine Learning Serving API</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -387,6 +387,13 @@
      Installing docker on Ubuntu
     </a>
    </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#problem-to-solve">
+   Problem to solve
+  </a>
+  <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#docker-images">
      Docker images
@@ -481,6 +488,74 @@
 </pre></div>
 </div>
 </div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="problem-to-solve">
+<h1>Problem to solve<a class="headerlink" href="#problem-to-solve" title="Permalink to this headline">¶</a></h1>
+<p>We will try to analyze the top bigrams in Netflix movie titles. The code which we want to isolate and run is in <code class="docutils literal notranslate"><span class="pre">docker-example/get_top_bigrams.py</span></code> file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat docker-example/get_top_bigrams.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Importing the necesary packages 
+import os 
+import pandas as pd 
+import numpy as np
+from sklearn.feature_extraction.text import CountVectorizer
+
+# Extracting the current directory 
+_cur_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Defining the path to data 
+_data_path = os.path.join(_cur_dir, &#39;netflix_titles.csv&#39;)
+
+# Reading the descriptions of movies
+d = pd.read_csv(_data_path, usecols=[&quot;description&quot;])
+
+# Making a list of decsriptions
+descriptions = d.values.flatten().tolist()
+
+# Defining the stop words which will be emmited from the desctriptions
+STOP_WORDS = [
+    &#39;in&#39;,
+    &#39;to&#39;,
+    &#39;on&#39;,
+    &#39;of&#39;,
+    &#39;by&#39;,
+    &#39;and&#39;,
+    &#39;with&#39;,
+    &#39;the&#39;,
+    &#39;as&#39;
+]
+
+# Initializing the CountVectorizer
+cv = CountVectorizer(ngram_range=(2,2), max_features=1000, stop_words=STOP_WORDS) 
+
+# Fitting the cv on text
+cv_fit = cv.fit_transform(descriptions)
+
+# Extracting the feature names
+feature_names = cv.get_feature_names_out()
+
+# Calculating the number of occurance of features
+feature_occurance = cv_fit.toarray().sum(axis=0)
+
+# Creating a dataframe with the vocabulary
+vocab_df = pd.DataFrame({
+    &quot;term&quot;: feature_names,
+    &quot;count&quot;: feature_occurance
+})
+vocab_df.sort_values(by=&#39;count&#39;, ascending=False, inplace=True)
+
+# Printing out the top 20 phrases
+print(vocab_df.head(20))
+</pre></div>
+</div>
+</div>
+</div>
+<p>We want the above code to run without errors and in the same way regardless of the underlying machine or OS. The only thing that is needed is docker.</p>
 <div class="section" id="docker-images">
 <h2>Docker images<a class="headerlink" href="#docker-images" title="Permalink to this headline">¶</a></h2>
 <p>Docker images are like recipes and docker containers are the cakes made out of those recipes. There can be alot of cakes, but only one recipe.</p>

@@ -28,27 +28,31 @@ The term **serving** refers to the process of transfering user requests to the M
 
 "An API is a set of programming code that enables data transmission between one software product and another. It also contains the terms of this data exchange." {cite}`api_definition`
 
-## Putting it all together 
+This book aims to combine all of the above concepts and use contemporary tools to create a production level machine learning serving API.
 
-To build a better definition, we can put all the three above definitions into a hipothetical example:
+# By the end of the book
 
-Imagine a waiter and a client at the restaurant:
+The final product of this book is to help the reader create the following flow in his/hers daily workflow:
 
-![waiter](media/waiter.jpg)
+![Final API](media/api-final.png)
 
-The restaurant clients are sitting near the table and transfer their requests to the kitchen by using the waiter. The waiter tries to understand their requests as best as possible and rushes to the kitchen to get the pizze that everybody wanted. The final output of a waiter is a delicious pizza brought to the table as fast as possible and happy customers. 
+The technologies covered: 
 
-The exact same logic can be applied to machine learning model serving: 
+* Python and object oriented programming 
+* API creation using FastAPI
+* Database managment with PostgreSQL and SQLAlchemy
+* Machine learning models with scikit-learn
+* API servers with Uvicorn and Gunicorn
+* Deployment with Docker
+* And more!
 
-The kitchen is where the models are beeing made. 
+This book is an ideal starting point to anyone who wants to learn how to create production ready APIs in a fast and secure way and bring value really quickly.
 
-The waiter is an API which does all the serving. 
+# How to read this book 
 
-The pizza is the response gotten from one of the many models available in the kitchen.
+This book is an open source book with all the codes stored in [Github](https://github.com/Eligijus112/api-book). All the chapters are created using Python and Jupyter notebooks. Feel free to fork the repository and start reading the book, editing code and making merge requests!
 
-The whole restaurant is a personal PC or a cloud service where all the objects are stored and are ready to be used.
-
-# Motivation for writting 
+# Motivation for writting
 
 My journey started as a mathematician who was given clean data and the only objective was to select a good ML model, fit the model on data and then interpret the results. For all this I was using the programming language called **R**. During the start of my career, the output of my work was either a **.csv** file or uploading data to a given database.   
 
@@ -68,4 +72,4 @@ I hope that after reading this, alot of statistical folks will get rid of their 
 
 If you enjoyed the book and feel like donating, feel free to do so. The link to do a one time donation is [via Stripe](https://buy.stripe.com/14k17A6lQ8lAat2aEI). 
 
-Additionaly, if you want me to add another chapter or to expand an existing one, please create an issue on [Github](https://github.com/Eligijus112/api-book)
+Additionaly, if you want me to add another chapter or to expand an existing one, please create an issue on [Github](https://github.com/Eligijus112/api-book).

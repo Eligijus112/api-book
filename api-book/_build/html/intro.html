@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Introduction &#8212; Machine Learning serving</title>
+    <title>Introduction &#8212; Machine Learning Serving API</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -74,7 +74,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">Machine Learning serving</h1>
+      <h1 class="site-logo" id="site-title">Machine Learning Serving API</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -360,13 +360,16 @@
   <a class="reference internal nav-link" href="#">
    Introduction
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#putting-it-all-together">
-     Putting it all together
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#by-the-end-of-the-book">
+   By the end of the book
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-to-read-this-book">
+   How to read this book
+  </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#motivation-for-writting">
@@ -414,18 +417,27 @@
 </ul>
 <p>The term <strong>serving</strong> refers to the process of transfering user requests to the ML model, get the outputs from the model and return the outputs to the user as a response. The process of serving is a very similar process to that of an <strong>API</strong> - Application Programming Interface. The definition of an API is:</p>
 <p>“An API is a set of programming code that enables data transmission between one software product and another. It also contains the terms of this data exchange.” <span id="id3">[<a class="reference internal" href="references/references.html#id3">altexsoft, 2021</a>]</span></p>
-<div class="section" id="putting-it-all-together">
-<h2>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permalink to this headline">¶</a></h2>
-<p>To build a better definition, we can put all the three above definitions into a hipothetical example:</p>
-<p>Imagine a waiter and a client at the restaurant:</p>
-<p><img alt="waiter" src="_images/waiter.jpg" /></p>
-<p>The restaurant clients are sitting near the table and transfer their requests to the kitchen by using the waiter. The waiter tries to understand their requests as best as possible and rushes to the kitchen to get the pizze that everybody wanted. The final output of a waiter is a delicious pizza brought to the table as fast as possible and happy customers.</p>
-<p>The exact same logic can be applied to machine learning model serving:</p>
-<p>The kitchen is where the models are beeing made.</p>
-<p>The waiter is an API which does all the serving.</p>
-<p>The pizza is the response gotten from one of the many models available in the kitchen.</p>
-<p>The whole restaurant is a personal PC or a cloud service where all the objects are stored and are ready to be used.</p>
+<p>This book aims to combine all of the above concepts and use contemporary tools to create a production level machine learning serving API.</p>
 </div>
+<div class="tex2jax_ignore mathjax_ignore section" id="by-the-end-of-the-book">
+<h1>By the end of the book<a class="headerlink" href="#by-the-end-of-the-book" title="Permalink to this headline">¶</a></h1>
+<p>The final product of this book is to help the reader create the following flow in his/hers daily workflow:</p>
+<p><img alt="Final API" src="_images/api-final.png" /></p>
+<p>The technologies covered:</p>
+<ul class="simple">
+<li><p>Python and object oriented programming</p></li>
+<li><p>API creation using FastAPI</p></li>
+<li><p>Database managment with PostgreSQL and SQLAlchemy</p></li>
+<li><p>Machine learning models with scikit-learn</p></li>
+<li><p>API servers with Uvicorn and Gunicorn</p></li>
+<li><p>Deployment with Docker</p></li>
+<li><p>And more!</p></li>
+</ul>
+<p>This book is an ideal starting point to anyone who wants to learn how to create production ready APIs in a fast and secure way and bring value really quickly.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="how-to-read-this-book">
+<h1>How to read this book<a class="headerlink" href="#how-to-read-this-book" title="Permalink to this headline">¶</a></h1>
+<p>This book is an open source book with all the codes stored in <a class="reference external" href="https://github.com/Eligijus112/api-book">Github</a>. All the chapters are created using Python and Jupyter notebooks. Feel free to fork the repository and start reading the book, editing code and making merge requests!</p>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="motivation-for-writting">
 <h1>Motivation for writting<a class="headerlink" href="#motivation-for-writting" title="Permalink to this headline">¶</a></h1>
@@ -440,7 +452,7 @@
 <div class="tex2jax_ignore mathjax_ignore section" id="contributions">
 <h1>Contributions<a class="headerlink" href="#contributions" title="Permalink to this headline">¶</a></h1>
 <p>If you enjoyed the book and feel like donating, feel free to do so. The link to do a one time donation is <a class="reference external" href="https://buy.stripe.com/14k17A6lQ8lAat2aEI">via Stripe</a>.</p>
-<p>Additionaly, if you want me to add another chapter or to expand an existing one, please create an issue on <a class="reference external" href="https://github.com/Eligijus112/api-book">Github</a></p>
+<p>Additionaly, if you want me to add another chapter or to expand an existing one, please create an issue on <a class="reference external" href="https://github.com/Eligijus112/api-book">Github</a>.</p>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">

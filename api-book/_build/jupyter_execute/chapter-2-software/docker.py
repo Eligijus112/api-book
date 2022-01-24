@@ -73,6 +73,18 @@
 # docker run hello-world
 # ```
 
+# # Problem to solve 
+# 
+# We will try to analyze the top bigrams in Netflix movie titles. The code which we want to isolate and run is in `docker-example/get_top_bigrams.py` file. 
+
+# In[1]:
+
+
+get_ipython().system('cat docker-example/get_top_bigrams.py')
+
+
+# We want the above code to run without errors and in the same way regardless of the underlying machine or OS. The only thing that is needed is docker. 
+
 # ## Docker images 
 # 
 # Docker images are like recipes and docker containers are the cakes made out of those recipes. There can be alot of cakes, but only one recipe. 
@@ -83,7 +95,7 @@
 # 
 # Docker images are built with commands in **Dockerfiles**. An example dockerfile: 
 
-# In[1]:
+# In[2]:
 
 
 get_ipython().system('cat docker-example/Dockerfile')
@@ -95,7 +107,7 @@ get_ipython().system('cat docker-example/Dockerfile')
 # docker build -t <image name> -f <path to Dockerfile directory>
 # ```
 
-# In[2]:
+# In[3]:
 
 
 get_ipython().system('docker build -t netflix-bigrams docker-example')
@@ -113,7 +125,7 @@ get_ipython().system('docker build -t netflix-bigrams docker-example')
 # docker run <image name>
 # ```
 
-# In[3]:
+# In[4]:
 
 
 get_ipython().system('docker run netflix-bigrams')
