@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Machine Learning serving
+title: Machine Learning Serving API
 author: Eligijus Bujokas 
 
 # Force re-execution of notebooks on each build.
